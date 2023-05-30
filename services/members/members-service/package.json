@@ -30,6 +30,7 @@
     "@types/aws-lambda": "^8.10.114",
     "@types/lambda-log": "^3.0.0",
     "@types/uuid": "^9.0.1",
+    "@types/jest": "^29.5.0",
     "undici": "^5.22.1"
   }
 }

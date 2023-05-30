@@ -14,7 +14,8 @@
         "moduleResolution": "node",
         "declaration": false,
         "types": [
-            "node"
+            "node",
+            "jest"
         ]
     },
     "exclude": [
