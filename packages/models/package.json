@@ -1,0 +1,15 @@
+{
+  "name": "@inside-out-bank/models",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "Mark Tranter <mark.a.tranter@gmail.com>",
+  "homepage": "",
+  "license": "ISC",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "zod": "^3.21.4"
+  }
+}

@@ -1,0 +1,88 @@
+name: Publish Package to npmjs
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy-global:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          cd infra/environment
+          terraform init
+          terraform apply -auto-approve -var-file ./prod.tfvars
+        name: Deploy
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} 
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} 
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm install -g lerna
+      - run: npm ci
+      - run: lerna bootstrap
+      - run: lerna run build
+        name: Build
+      - run: lerna run test
+        name: Test
+      - run: lerna run gen-avro
+        name: Generate Avro
+      - name: Upload member data gen
+        uses: actions/upload-artifact@v2
+        with:
+          name: membder-data-gen
+          path: |
+            services/member-data-gen/dist
+            services/member-data-gen/infra
+            services/member-data-gen/avro
+            infra/modules
+      - name: Upload member search
+        uses: actions/upload-artifact@v2
+        with:
+          name: member-search
+          path: |
+            services/**/dist
+            services/**/infra
+            infra/*
+
+  deploy-data-gen:
+    needs: [build, deploy-global] 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: membder-data-gen
+      - run: |
+          cd services/member-data-gen/infra
+          terraform init
+          terraform apply -auto-approve
+        name: Deploy
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} 
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} 
+
+
+  # deploy-member-search:
+  #   needs: [build, deploy-global]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Download artifact
+  #       uses: actions/download-artifact@v2
+  #       with:
+  #         name: member-search
+  #     - run: |
+  #         cd services/member-search/infra
+  #         terraform init
+  #         terraform apply -auto-approve
+  #       name: Deploy
+  #       env:
+  #         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} 
+  #         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} 
