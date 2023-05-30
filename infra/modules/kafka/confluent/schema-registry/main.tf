@@ -26,7 +26,7 @@ resource "confluent_schema_registry_cluster" "essentials" {
 
 
 resource "confluent_service_account" "schema_manager" {
-  display_name = "${var.project-name}-${var.environment}-schema-manager"
+  display_name = "${var.project_name}-${var.environment}-schema-manager"
   description  = "Service account to manage schema"
 }
 
