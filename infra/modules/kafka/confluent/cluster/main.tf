@@ -50,9 +50,11 @@ module "user" {
 }
 
 module "schema_registry" {
-  source         = "./../schema-registry"
-  environment_id = var.create_environment ? confluent_environment.env[0].id : data.confluent_environment.env[0].id
-  region         = var.region
-  cloud          = var.cloud
-  enable_prod_features        = var.enable_prod_features
+  source               = "./../schema-registry"
+  project_name         = var.project_name
+  environment_name     = var.environment_name
+  environment_id       = var.create_environment ? confluent_environment.env[0].id : data.confluent_environment.env[0].id
+  region               = var.region
+  cloud                = var.cloud
+  enable_prod_features = var.enable_prod_features
 }

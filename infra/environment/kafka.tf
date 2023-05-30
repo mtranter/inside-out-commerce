@@ -4,6 +4,7 @@ module "kafka_cluster" {
   region                     = "ap-southeast-2"
   admin_service_account_name = "${var.project_name}-admin"
   environment_name           = "${var.project_name}-${var.environment}"
+  project_name               = var.project_name
   enable_prod_features       = false
 }
 
