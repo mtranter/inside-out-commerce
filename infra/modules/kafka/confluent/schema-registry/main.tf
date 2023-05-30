@@ -37,7 +37,7 @@ resource "confluent_role_binding" "schema_manager_environment_admin" {
 }
 
 resource "confluent_api_key" "schema_manager_api_key" {
-  display_name = "${var.project-name}-${var.environment}-schema-manager-schema-registry-api-key"
+  display_name = "${var.project_name}-${var.environment_name}-schema-manager-schema-registry-api-key"
   description  = "Schema Registry API Key that is owned by 'schema-manager' service account"
   owner {
     id          = confluent_service_account.schema_manager.id
