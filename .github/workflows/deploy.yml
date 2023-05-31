@@ -34,15 +34,6 @@ jobs:
         name: Test
       - run: lerna run gen-avro
         name: Generate Avro
-      - name: Upload member data gen
-        uses: actions/upload-artifact@v2
-        with:
-          name: membder-data-gen
-          path: |
-            services/member-data-gen/dist
-            services/member-data-gen/infra
-            services/member-data-gen/avro
-            infra/modules
       - name: Upload member service artifacts
         uses: actions/upload-artifact@v2
         with:
@@ -50,6 +41,7 @@ jobs:
           path: |
             services/**/dist
             services/**/infra
+            services/**/avro
             infra/*
 
 
