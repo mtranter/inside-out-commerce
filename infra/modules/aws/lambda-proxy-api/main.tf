@@ -29,7 +29,7 @@ resource "aws_api_gateway_method" "this" {
   http_method          = "ANY"
   resource_id          = aws_api_gateway_resource.this.id
   rest_api_id          = data.aws_api_gateway_rest_api.this.id
-  authorizer_id        = var.authorizer == null ? null : var.authorizer.id
+  authorizer_id        = var.authorizer == null ? null : var.authorizer.authorizer_id
   authorization_scopes = var.authorizer == null ? null : var.authorizer.oauth_scopes
 }
 

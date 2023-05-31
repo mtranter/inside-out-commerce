@@ -29,7 +29,7 @@ variable "oauth_scopes" {
 variable "authorizer" {
   type = object({
     type = string
-    authorizaer_id = optional(string) 
+    authorizer_id = optional(string) 
     oauth_scopes = optional(list(string))
   })
 }

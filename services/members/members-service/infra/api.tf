@@ -107,7 +107,7 @@ module "api_integration" {
   function_name = module.api_function.function.id
   authorizer = {
     type           = "COGNITO_USER_POOLS"
-    authorizaer_id = aws_api_gateway_authorizer.this.id
+    authorizer_id = aws_api_gateway_authorizer.this.id
     oauth_scopes   = ["${aws_cognito_resource_server.api.identifier}/${local.execute_scope}"]
   }
 
