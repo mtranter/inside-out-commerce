@@ -43,10 +43,10 @@ jobs:
             services/member-data-gen/infra
             services/member-data-gen/avro
             infra/modules
-      - name: Upload member search
+      - name: Upload member service artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: member-search
+          name: member-service
           path: |
             services/**/dist
             services/**/infra
@@ -70,19 +70,19 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} 
 
 
-  # deploy-member-search:
-  #   needs: [build, deploy-global]
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Download artifact
-  #       uses: actions/download-artifact@v2
-  #       with:
-  #         name: member-search
-  #     - run: |
-  #         cd services/member-search/infra
-  #         terraform init
-  #         terraform apply -auto-approve
-  #       name: Deploy
-  #       env:
-  #         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} 
-  #         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} 
+  deploy-member-service:
+    needs: [build, deploy-global]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: member-service
+      - run: |
+          cd services/members/members-service/infra
+          terraform init
+          terraform apply -auto-approve
+        name: Deploy
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} 
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} 
