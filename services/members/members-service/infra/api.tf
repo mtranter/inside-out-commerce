@@ -1,5 +1,6 @@
 locals {
   execute_scope = "api.execute"
+  stage_name = "live"
 }
 
 resource "aws_api_gateway_rest_api" "this" {
@@ -11,6 +12,22 @@ data "archive_file" "api" {
   source_file = "${path.module}/../dist/api.js"
   type        = "zip"
 }
+
+
+data "aws_ssm_parameter" "schema_registry_endpoint" {
+  name = "/${var.project_name}/kafka/${var.environment}/schema_registry/rest/endpoint"
+}
+
+data "aws_ssm_parameter" "schema_registry_username" {
+  name = "/${var.project_name}/kafka/${var.environment}/schema_registry/api/key/id"
+}
+
+data "aws_ssm_parameter" "schema_registry_password" {
+  name = "/${var.project_name}/kafka/${var.environment}/schema_registry/api/key/secret"
+}
+
+data "aws_region" "current" {}
+
 
 module "api_function" {
   source           = "github.com/mtranter/platform-in-a-box-aws//modules/terraform-aws-piab-lambda"
@@ -24,7 +41,18 @@ module "api_function" {
   layers           = []
   create_dlq       = false
   tags             = {}
-  environment_vars = {}
+  environment_vars = {
+    API_STAGE = local.stage_name
+    TABLE_NAME = module.dynamodb.table.id
+    MEMBERS_TOPIC = local.topic_name
+    KEY_SCHEMA_ID = module.member_data_topic.key_schema_id
+    VALUE_SCHEMA_ID = module.member_data_topic.value_schema_id
+    SCHEMA_REGISTRY_ENDPOINT = data.aws_ssm_parameter.schema_registry_endpoint.value
+    SCHEMA_REGISTRY_USERNAME = data.aws_ssm_parameter.schema_registry_username.value
+    SCHEMA_REGISTRY_PASSWORD = data.aws_ssm_parameter.schema_registry_password.value
+    ID_TOKEN_ENDPOINT = "https://${var.project_name}-${var.environment}.auth.${data.aws_region.current.name}.amazoncognito.com/oauth2/token"
+
+  }
 }
 
 data "aws_cognito_user_pools" "this" {
@@ -86,4 +114,22 @@ module "api_integration" {
 
 
   depends_on = [aws_api_gateway_rest_api.this]
+}
+
+resource "aws_api_gateway_deployment" "this" {
+  rest_api_id = aws_api_gateway_rest_api.this.id
+
+  triggers = {
+    redeployment = sha1(jsonencode(concat([module.api_integration.deployment_triggers], [data.archive_file.api.output_base64sha256])))
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "aws_api_gateway_stage" "this" {
+  deployment_id = aws_api_gateway_deployment.this.id
+  rest_api_id   = aws_api_gateway_rest_api.this.id
+  stage_name    = local.stage_name
 }

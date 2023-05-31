@@ -46,9 +46,11 @@ const routes = ({
     valueSchemaId,
   });
   return RouteBuilder.withMiddleware(LoggingMiddleware())
+    .withMiddleware(JsonParserMiddlerware())
+    .route("GET", "/healthcheck")
+    .handle((r) => Ok({ status: "OK" }))
     .withMiddleware(JwtMiddleware())
     .withMiddleware(IdTokenMiddleware(idTokenEndpoint))
-    .withMiddleware(JsonParserMiddlerware())
     .route("POST", "/members", ZodMiddleware(CreateMemberSchema))
     .handle(async (req) => {
       const id = uuidv4();
@@ -119,5 +121,5 @@ export const handler = restApiHandler(
       },
     }),
   }),
-  "live"
+  stage
 );

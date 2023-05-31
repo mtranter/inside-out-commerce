@@ -13,11 +13,11 @@ type IdTokenClaims = {
   "cognito:roles"?: string[];
   email: string;
 };
-export const IdTokenMiddleware = <A extends { jwt: JwtClaims }>(
+export const IdTokenMiddleware = <A extends { jwt: JwtClaims }, B>(
   userInfoEndpoint: string
 ) => {
-  return Middleware.from<A, { userInfo: IdTokenClaims }>(
-    (handler) => async (req) => {
+  return Middleware.of<A, { userInfo: IdTokenClaims }, B>(
+    async (req, handler) => {
       const response = await fetch(userInfoEndpoint, {
         headers: {
           Authorization: req.headers.authorization as string,
@@ -34,16 +34,15 @@ type JwtClaims = {
   sub: string;
 } & {};
 export const JwtMiddleware = <A extends {}>() =>
-  Middleware.from<A, { jwt: JwtClaims }>((handler) => async (req) => {
+  Middleware.of<A, { jwt: JwtClaims }, unknown>(async (req, handler) => {
     const authHeader = req.headers["Authorization"] as string;
     if (!authHeader) {
-      return Unauthorized(
-        JSON.stringify({ message: "Missing Authorization header" })
+      return Unauthorized({ message: "Missing Authorization header" }
       );
     }
     const [_, token] = authHeader.split(" ");
     if (!token) {
-      return Unauthorized(JSON.stringify({ message: "Missing token" }));
+      return Unauthorized({ message: "Missing token" });
     }
     try {
       const [header, payload, signature] = token.split(".");
@@ -51,6 +50,6 @@ export const JwtMiddleware = <A extends {}>() =>
       const payloadObj = JSON.parse(decodedPayload) as JwtClaims;
       return handler({ ...req, ...{ jwt: payloadObj } });
     } catch (e) {
-      return Unauthorized(JSON.stringify({ message: "Invalid token" }));
+      return Unauthorized({ message: "Invalid token" });
     }
   });

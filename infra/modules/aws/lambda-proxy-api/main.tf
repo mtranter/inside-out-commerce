@@ -57,24 +57,3 @@ resource "aws_lambda_permission" "apigw_lambda" {
   source_arn = "arn:aws:execute-api:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:${data.aws_api_gateway_rest_api.this.id}/*/*"
 }
 
-resource "aws_api_gateway_deployment" "this" {
-  rest_api_id = data.aws_api_gateway_rest_api.this.id
-
-  triggers = {
-    redeployment = sha1(jsonencode(concat([
-      aws_api_gateway_resource.this.id,
-      aws_api_gateway_method.this.id,
-      aws_api_gateway_integration.this.id
-    ], var.deployment_triggers)))
-  }
-
-  lifecycle {
-    create_before_destroy = true
-  }
-}
-
-resource "aws_api_gateway_stage" "this" {
-  deployment_id = aws_api_gateway_deployment.this.id
-  rest_api_id   = data.aws_api_gateway_rest_api.this.id
-  stage_name    = "live"
-}
