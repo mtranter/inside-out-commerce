@@ -18,36 +18,36 @@ data "aws_ssm_parameter" "conflient_api_secret" {
 }
 
 data "aws_ssm_parameter" "kafka_cluster_id" {
-  name = "/super-in-a-box/kafka/cluster/id"
+  name = "/${var.project_name}/kafka/${var.environment}/cluster/id"
 }
 
 data "aws_ssm_parameter" "kafka_rest_endpoint" {
-  name = "/super-in-a-box/kafka/rest/endpoint"
+  name = "/${var.project_name}/kafka/${var.environment}/rest/endpoint"
 }
 
 data "aws_ssm_parameter" "schema_registry_cluster_id" {
-  name = "/super-in-a-box/kafka/schema_registry/cluster/id"
+  name = "/${var.project_name}/kafka/${var.environment}/schema_registry/cluster/id"
 }
 
 data "aws_ssm_parameter" "schema_registry_rest_endpoint" {
-  name = "/super-in-a-box/kafka/schema_registry/rest/endpoint"
+  name = "/${var.project_name}/kafka/${var.environment}/schema_registry/rest/endpoint"
 }
 
 data "aws_ssm_parameter" "kafka_admin_key_id" {
-  name = "/super-in-a-box/kafka/admin/key/id"
+  name = "/${var.project_name}/kafka/${var.environment}/admin/key/id"
 }
 
 data "aws_ssm_parameter" "kafka_admin_key_secret" {
-  name = "/super-in-a-box/kafka/admin/key/secret"
+  name = "/${var.project_name}/kafka/${var.environment}/admin/key/secret"
 }
 
 
 data "aws_ssm_parameter" "schema_registry_api_key_id" {
-  name = "/super-in-a-box/kafka/schema_registry/api/key/id"
+  name = "/${var.project_name}/kafka/${var.environment}/schema_registry/api/key/id"
 }
 
 data "aws_ssm_parameter" "schema_registry_api_key_secret" {
-  name = "/super-in-a-box/kafka/schema_registry/api/key/secret"
+  name = "/${var.project_name}/kafka/${var.environment}/schema_registry/api/key/secret"
 }
 
 
