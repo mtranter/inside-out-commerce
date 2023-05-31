@@ -10,8 +10,8 @@ terraform {
     }
   }
   backend "s3" {
-      bucket = "super-in-a-box-tfstate"
-      key    = "siab-aws-confluent/services/public-member-api/terraform.tfstate"
+      bucket = "inside-out-bank-tfstate"
+      key    = "services/member-service/terraform.tfstate"
       region = "ap-southeast-2"
   }
 }
