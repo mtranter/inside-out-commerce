@@ -42,10 +42,6 @@ jobs:
             services/**/dist
             services/**/infra
             services/**/avro
-            services/**/package.json
-            services/**/package-lock.json
-            services/**/tsconfig.json
-            services/**/*.ispec.ts
             infra/*
 
 
@@ -70,17 +66,18 @@ jobs:
     needs: [deploy-member-service]
     runs-on: ubuntu-latest
     steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: src
+      - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: '18.x'
           registry-url: 'https://registry.npmjs.org'
-      - run: npm install && npm run itest
-        name: Acceptance Test
-        working-directory: services/members/members-service
+      - run: npm install -g lerna
+      - run: npm ci
+      - run: lerna bootstrap
+      - run: lerna run build
+        name: Build
+      - run: lerna run itest
+        name: Test
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} 
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} 
