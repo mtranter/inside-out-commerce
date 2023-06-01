@@ -1,7 +1,9 @@
 import { SSM } from "@aws-sdk/client-ssm";
 
 jest.setTimeout(10000);
-const ssm = new SSM({});
+const ssm = new SSM({
+  region: "ap-southeast-2",
+});
 const getSSMValue = async (name: string) =>
   await ssm
     .getParameter({
