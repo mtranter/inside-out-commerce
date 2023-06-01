@@ -9,6 +9,7 @@
   "scripts": {
     "build": "rollup -c",
     "test": "jest ./src",
+    "itest": "jest -c ./jest.int.config.js ./src",
     "gen-avro": "node -r ts-node/register ./scripts/gen-avro.ts"
   },
   "dependencies": {
