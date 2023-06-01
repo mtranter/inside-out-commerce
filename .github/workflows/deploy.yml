@@ -46,7 +46,6 @@ jobs:
             services/**/package-lock.json
             services/**/tsconfig.json
             services/**/*.ispec.ts
-            node_modules
             infra/*
 
 
@@ -79,7 +78,7 @@ jobs:
         with:
           node-version: '18.x'
           registry-url: 'https://registry.npmjs.org'
-      - run: npm run itest
+      - run: npm install && npm run itest
         name: Acceptance Test
         working-directory: services/members/members-service
         env:
