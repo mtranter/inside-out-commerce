@@ -94,6 +94,19 @@ resource "aws_cognito_user_pool_client" "this" {
   ]
 }
 
+// store client id and secret in SSM
+resource "aws_ssm_parameter" "test_client_id" {
+  name  = "/${var.project_name}/cognito/${var.environment}/members_service_test_client_id"
+  type  = "SecureString"
+  value = aws_cognito_user_pool_client.this.id
+}
+
+resource "aws_ssm_parameter" "test_client_secret" {
+  name  = "/${var.project_name}/cognito/${var.environment}/members_service_test_client_secret"
+  type  = "SecureString"
+  value = aws_cognito_user_pool_client.this.client_secret
+}
+
 resource "aws_api_gateway_authorizer" "this" {
   name          = "InsideOutBankMembersApi"
   rest_api_id   = aws_api_gateway_rest_api.this.id
