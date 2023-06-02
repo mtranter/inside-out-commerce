@@ -1,6 +1,6 @@
 locals {
   topic_prefix = "com.insideoutbank.members."
-  topic_name   = "${local.topic_prefix}member-created"
+  topic_name   = "${local.topic_prefix}MemberData"
 }
 
 data "confluent_schema_registry_cluster" "schema_registry" {
@@ -44,4 +44,44 @@ module "producer" {
   environment_id             = data.aws_ssm_parameter.kafka_environment_id.value
   topic_prefix               = local.topic_prefix
   schema_registry_cluster_id = data.aws_ssm_parameter.schema_registry_cluster_id.value
+}
+
+
+module "kafka_test_user" {
+  source         = "../../../../infra/modules/kafka/confluent/user"
+  environment_id = data.aws_ssm_parameter.kafka_environment_id.value
+  cluster_id     = data.aws_ssm_parameter.kafka_cluster_id.value
+  username       = "member-api-tester"
+}
+
+module "test_consumer" {
+  source                     = "../../../../infra/modules/kafka/confluent/producer"
+  user_id                    = module.kafka_test_user.service_account.id
+  cluster_id                 = data.aws_ssm_parameter.kafka_cluster_id.value
+  environment_id             = data.aws_ssm_parameter.kafka_environment_id.value
+  topics                     = [local.topic_name]
+  consumer_group_id          = "members-service-tester"
+  schema_registry_cluster_id = data.aws_ssm_parameter.schema_registry_cluster_id.value
+}
+
+// store Kafka brokers and credentials in a JSON encoded SSM Secret
+resource "aws_ssm_parameter" "kafka_brokers" {
+  name = "/${var.project_name}/members-service/test-user/kafka-config"
+  type = "SecureString"
+  value = jsonencode({
+    brokers  = data.confluent_kafka_cluster.kafka_cluster.brokers
+    username = module.kafka_test_user.api_key_id
+    password = module.kafka_test_user.api_key_secret
+  })
+}
+
+// store JSON encoded Schema Registry credentials in SSM
+resource "aws_ssm_parameter" "kafka_brokers" {
+  name = "/${var.project_name}/members-service/test-user/schema-registry-config"
+  type = "SecureString"
+  value = jsonencode({
+    host     = data.confluent_schema_registry_cluster.schema_registry.rest_endpoint
+    username = module.kafka_test_user.schema_registry_api_key_id
+    password = module.kafka_test_user.schema_registry_api_key_secret
+  })
 }

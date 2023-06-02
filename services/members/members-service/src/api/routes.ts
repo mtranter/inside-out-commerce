@@ -47,5 +47,7 @@ export const routes = ({
     .withMiddleware(IdTokenMiddleware(idTokenEndpoint))
     .route("POST", "/members", ZodMiddleware(CreateMemberSchema))
     .handle(_handlers.newMemberHandler)
+    .route("GET", "/members/{id}")
+    .handle(_handlers.getMember)
     .build();
 };

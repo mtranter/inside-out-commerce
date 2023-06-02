@@ -1,5 +1,5 @@
-import { handlers } from "./api-handlers";
-import { CreateMemberSchema } from "./../schema";
+import { MemberDto, handlers } from "./api-handlers";
+import { CreateMemberSchema, Member } from "./../schema";
 import { TxOutboxMessageFactory } from "./../tx-outbox/tx-outbox";
 import { generateMock } from "@anatine/zod-mock";
 
@@ -27,6 +27,9 @@ describe("handlers", () => {
 
   const mockTable = {
     transactPut,
+    get: ({ hk, sk }: { hk: string; sk: string }) =>
+    // @ts-ignore
+      Promise.resolve(db[hk + "-" + sk] as any),
   };
 
   const txOutboxMessageFactory = TxOutboxMessageFactory({
@@ -51,7 +54,8 @@ describe("handlers", () => {
       headers: {},
     };
     const result = await sut.newMemberHandler(request);
-    expect(result.statusCode).toEqual(200);
+    expect(result.statusCode).toEqual(201);
+    const createdMember = result.body as Member;
     const ids = Object.keys(db);
     expect(ids.length).toEqual(2);
     const memberId = ids.find((id) => id.startsWith("MEMBER#"));
@@ -71,5 +75,18 @@ describe("handlers", () => {
       eventId: expect.any(String),
       eventType: "MEMBER_CREATED",
     });
+    const getRequest = {
+      safeBody: generateMock(CreateMemberSchema),
+      jwt: { sub: "123", client_id: "123" },
+      userInfo: { email: "johnsmith@gmail.com" },
+      pathParams: { id: createdMember.id },
+      url: `/members/{id}` as const,
+      method: "GET" as const,
+      queryParams: {},
+      headers: {},
+    };
+    const fetchedMember = await sut.getMember(getRequest);
+    expect(fetchedMember.statusCode).toEqual(200);
+    expect(fetchedMember.body).toEqual(member);
   });
 });

@@ -1724,10 +1724,10 @@
   dependencies:
     "@aws-sdk/client-dynamodb" "^3.341.0"
     "@aws-sdk/util-dynamodb" "^3.341.0"
-    "@ezapi/aws-rest-api-backend" "^1.2.3"
-    "@ezapi/json-middleware" "^1.2.3"
-    "@ezapi/router-core" "^1.2.3"
-    "@ezapi/zod-middleware" "^1.2.3"
+    "@ezapi/aws-rest-api-backend" "^1.2.5"
+    "@ezapi/json-middleware" "^1.2.5"
+    "@ezapi/router-core" "^1.2.5"
+    "@ezapi/zod-middleware" "^1.2.5"
     "@inside-out-bank/models" "*"
     "@kafkajs/confluent-schema-registry" "^3.3.0"
     "funamots" "^3.4.2"
@@ -7758,6 +7758,11 @@
   "version" "5.0.0"
   dependencies:
     "builtins" "^5.0.0"
+
+"wait-for-expect@^3.0.2":
+  "integrity" "sha512-cfS1+DZxuav1aBYbaO/kE06EOS8yRw7qOFoD3XtjTkYvCvh3zUvNST8DXK/nPaeqIzIv3P3kL3lRJn8iwOiSag=="
+  "resolved" "https://registry.npmjs.org/wait-for-expect/-/wait-for-expect-3.0.2.tgz"
+  "version" "3.0.2"
 
 "walk-up-path@^1.0.0":
   "integrity" "sha512-hwj/qMDUEjCU5h0xr90KGCf0tg0/LgJbmOWgrWKYlcJZM7XvquvUJZ0G/HMGr7F7OQMOUuPHWP9JpriinkAlkg=="

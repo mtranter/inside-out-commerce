@@ -1,4 +1,4 @@
-import { Ok, Handler } from "@ezapi/router-core";
+import { Ok, Handler, Created, NotFound } from "@ezapi/router-core";
 import { CreateMember, Member } from "./../schema";
 import { Table } from "funamots";
 import { v4 as uuidv4 } from "uuid";
@@ -17,7 +17,7 @@ export type MemberDto = {
 
 export const handlers = (
   txOutboxMessageFactory: TxOutboxMessageFactory,
-  table: Pick<Table<MemberDto, "hk", "sk", {}>, "transactPut">,
+  table: Pick<Table<MemberDto, "hk", "sk", {}>, "transactPut" | "get">,
   testClientId: string
 ): {
   newMemberHandler: Handler<
@@ -29,6 +29,8 @@ export const handlers = (
     },
     unknown
   >;
+
+  getMember: Handler<`/members/{id}`, {}, Member | { message: string }>;
 } => ({
   newMemberHandler: async (req) => {
     const id = uuidv4();
@@ -69,6 +71,18 @@ export const handlers = (
         },
       },
     ]);
-    return Ok({ status: "OK" });
+    return Created(member, `/members/${id}`);
+  },
+  getMember: async (req) => {
+    const memberId = req.pathParams.id;
+    const member = await table.get({
+      hk: `MEMBER#${memberId}`,
+      sk: `#METADATA#`,
+    });
+    if (member) {
+      return Ok(member.data as Member);
+    } else {
+      return NotFound({ message: `Member ${memberId} not found` });
+    }
   },
 });
