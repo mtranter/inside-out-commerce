@@ -65,7 +65,7 @@ module "test_consumer" {
 }
 
 // store Kafka brokers and credentials in a JSON encoded SSM Secret
-resource "aws_ssm_parameter" "kafka_brokers" {
+resource "aws_ssm_parameter" "kafka_test_config" {
   name = "/${var.project_name}/members-service/test-user/kafka-config"
   type = "SecureString"
   value = jsonencode({
@@ -76,7 +76,7 @@ resource "aws_ssm_parameter" "kafka_brokers" {
 }
 
 // store JSON encoded Schema Registry credentials in SSM
-resource "aws_ssm_parameter" "kafka_brokers" {
+resource "aws_ssm_parameter" "schema_registry_test_config" {
   name = "/${var.project_name}/members-service/test-user/schema-registry-config"
   type = "SecureString"
   value = jsonencode({
