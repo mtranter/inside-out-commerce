@@ -6,11 +6,8 @@ import { generateMock } from "@anatine/zod-mock";
 describe("handlers", () => {
   const encode = (registryId: number, payload: any): Promise<Buffer> => {
     return new Promise<Buffer>((resolve, reject) => {
-      // Perform the encoding logic here
       try {
-        // Assuming some encoding logic is performed and the result is stored in `encodedData`
         const encodedData = Buffer.from(JSON.stringify(payload));
-
         resolve(encodedData);
       } catch (error) {
         reject(error);
@@ -24,7 +21,7 @@ describe("handlers", () => {
   const transactPut = async (items: ReadonlyArray<any>) => {
     items.map((i: any) => {
       // @ts-ignore
-      db[i.item.hk + '-' + i.item.sk] = i.item;
+      db[i.item.hk + "-" + i.item.sk] = i.item;
     });
   };
 
@@ -42,10 +39,10 @@ describe("handlers", () => {
     db = {};
   });
   it("should work", async () => {
-    const sut = handlers(txOutboxMessageFactory, mockTable);
+    const sut = handlers(txOutboxMessageFactory, mockTable, "1");
     const request = {
       safeBody: generateMock(CreateMemberSchema),
-      jwt: { sub: "123" },
+      jwt: { sub: "123", client_id: "123" },
       userInfo: { email: "johnsmith@gmail.com" },
       pathParams: {},
       url: "/members" as const,
@@ -61,16 +58,18 @@ describe("handlers", () => {
     expect(memberId).toBeDefined();
     // @ts-ignore
     const member = db[memberId!].data;
-    expect(member).toMatchObject(request.safeBody);
+    expect(member).toMatchObject({ ...request.safeBody, isTestMember: false });
     const eventId = ids.find((id) => id.startsWith("MEMBER_CREATED_EVENT#"));
     expect(eventId).toBeDefined();
     // @ts-ignore
     expect(db[eventId!].data.topic).toEqual("membersTopic");
-    // @ts-ignore
-    const event =  JSON.parse(Buffer.from(db[eventId!].data.value, 'base64').toString('ascii'));
+    const event = JSON.parse(
+      // @ts-ignore
+      Buffer.from(db[eventId!].data.value, "base64").toString("ascii")
+    );
     expect(event).toMatchObject({
       eventId: expect.any(String),
       eventType: "MEMBER_CREATED",
-    })
+    });
   });
 });
