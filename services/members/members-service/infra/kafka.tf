@@ -55,7 +55,7 @@ module "kafka_test_user" {
 }
 
 module "test_consumer" {
-  source                     = "../../../../infra/modules/kafka/confluent/producer"
+  source                     = "../../../../infra/modules/kafka/confluent/consumer"
   user_id                    = module.kafka_test_user.service_account.id
   cluster_id                 = data.aws_ssm_parameter.kafka_cluster_id.value
   environment_id             = data.aws_ssm_parameter.kafka_environment_id.value
