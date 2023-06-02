@@ -10,13 +10,15 @@ export type TxOutboxMessage = {
   value: string;
 };
 
+export type TxOutboxMessageFactory = ReturnType<typeof TxOutboxMessageFactory>;
+
 export const TxOutboxMessageFactory = ({
   registry,
   topic,
   keySchemaId,
   valueSchemaId,
 }: {
-  registry: SchemaRegistry;
+  registry: Pick<SchemaRegistry, "encode">;
   topic: string;
   keySchemaId: number;
   valueSchemaId: number;

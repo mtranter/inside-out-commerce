@@ -34,7 +34,7 @@ module "api_function" {
   name             = "InsideOutBankMembersApi-${var.environment}"
   service_name     = "InsideOutBankMembers"
   runtime          = "nodejs18.x"
-  handler          = "api.handler"
+  handler          = "api-handler.handler"
   filename         = data.archive_file.api.output_path
   source_code_hash = data.archive_file.api.output_base64sha256
   timeout          = 10

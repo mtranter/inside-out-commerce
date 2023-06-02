@@ -1,6 +1,6 @@
 import { Middleware, Unauthorized } from "@ezapi/router-core";
 
-type IdTokenClaims = {
+export type IdTokenClaims = {
   sub: string;
   "cognito:groups"?: string[];
   email_verified?: boolean;
@@ -30,9 +30,9 @@ export const IdTokenMiddleware = <A extends { jwt: JwtClaims }, B>(
   );
 };
 
-type JwtClaims = {
+export type JwtClaims = {
   sub: string;
-} & {};
+};
 export const JwtMiddleware = <A extends {}>() =>
   Middleware.of<A, { jwt: JwtClaims }, unknown>(async (req, handler) => {
     const authHeader = req.headers["Authorization"] as string;
