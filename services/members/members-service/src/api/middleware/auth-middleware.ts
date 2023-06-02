@@ -32,7 +32,9 @@ export const IdTokenMiddleware = <A extends { jwt: JwtClaims }, B>(
 
 export type JwtClaims = {
   sub: string;
+  client_id: string;
 };
+
 export const JwtMiddleware = <A extends {}>() =>
   Middleware.of<A, { jwt: JwtClaims }, unknown>(async (req, handler) => {
     const authHeader = req.headers["Authorization"] as string;

@@ -3,7 +3,10 @@ import { CreateMember, Member } from "./../schema";
 import { Table } from "funamots";
 import { v4 as uuidv4 } from "uuid";
 import { IdTokenClaims, JwtClaims } from "./middleware/auth-middleware";
-import { TxOutboxMessage, TxOutboxMessageFactory } from "./../tx-outbox/tx-outbox";
+import {
+  TxOutboxMessage,
+  TxOutboxMessageFactory,
+} from "./../tx-outbox/tx-outbox";
 
 export type MemberDto = {
   hk: string;
@@ -14,11 +17,16 @@ export type MemberDto = {
 
 export const handlers = (
   txOutboxMessageFactory: TxOutboxMessageFactory,
-  table: Pick<Table<MemberDto, "hk", "sk", {}>, "transactPut">
+  table: Pick<Table<MemberDto, "hk", "sk", {}>, "transactPut">,
+  testClientId: string
 ): {
   newMemberHandler: Handler<
     "/members",
-    { userInfo: Pick<IdTokenClaims, 'email'>; safeBody: CreateMember; jwt: JwtClaims },
+    {
+      userInfo: Pick<IdTokenClaims, "email">;
+      safeBody: CreateMember;
+      jwt: JwtClaims;
+    },
     unknown
   >;
 } => ({
@@ -27,6 +35,7 @@ export const handlers = (
     const member: Member = {
       id,
       ...req.safeBody,
+      isTestMember: req.jwt.client_id === testClientId,
       email: req.userInfo.email,
     };
     const dto: MemberDto = {

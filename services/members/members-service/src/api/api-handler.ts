@@ -13,6 +13,7 @@ const schemaRegistryHost = envOrThrow("SCHEMA_REGISTRY_HOST");
 const schemaRegistryUsername = envOrThrow("SCHEMA_REGISTRY_USERNAME");
 const schemaRegistryPassword = envOrThrow("SCHEMA_REGISTRY_PASSWORD");
 const idTokenEndpoint = envOrThrow("ID_TOKEN_ENDPOINT");
+const testClientId = envOrThrow("TEST_CLIENT_ID");
 
 export const handler = restApiHandler(
   routes({
@@ -29,6 +30,7 @@ export const handler = restApiHandler(
         password: schemaRegistryPassword,
       },
     }),
+    testClientId,
   }),
   stage
 );

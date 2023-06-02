@@ -18,6 +18,7 @@ export const routes = ({
   keySchemaId,
   valueSchemaId,
   schemaRegistry,
+  testClientId
 }: {
   idTokenEndpoint: string;
   tableName: string;
@@ -26,6 +27,7 @@ export const routes = ({
   keySchemaId: number;
   valueSchemaId: number;
   schemaRegistry: SchemaRegistry;
+  testClientId: string;
 }) => {
   const table = tableBuilder<MemberDto>(tableName)
     .withKey("hk", "sk")
@@ -36,7 +38,7 @@ export const routes = ({
     keySchemaId,
     valueSchemaId,
   });
-  const _handlers = handlers(txOutboxMessageFactory, table);
+  const _handlers = handlers(txOutboxMessageFactory, table, testClientId);
   return RouteBuilder.withMiddleware(LoggingMiddleware())
     .withMiddleware(JsonParserMiddlerware())
     .route("GET", "/healthcheck")

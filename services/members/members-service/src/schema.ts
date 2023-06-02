@@ -290,6 +290,7 @@ export const MemberSchema = z.object({
     residentialAddress: AddressSchema.optional(),
     correspondenceAddress: AddressSchema.optional(),
     phone: PhoneNumbersSchema,
+    isTestMember: z.boolean()
 });
 export type Member = z.infer<typeof MemberSchema>;
 
