@@ -12,7 +12,7 @@ data "aws_ssm_parameter" "kafka_cluster_endpoint" {
 module "streams_handler" {
   source       = "github.com/mtranter/platform-in-a-box-aws//modules/terraform-aws-piab-lambda"
   name         = "${var.project_name}-${var.environment}-DynamoEventDispatcher"
-  service_name = var.service_name
+  service_name = var.project_name
   runtime      = "nodejs18.x"
   handler      = "tx-outbox-handler.handler"
   filename     = data.archive_file.tx_outbox.output_path
@@ -20,8 +20,8 @@ module "streams_handler" {
   create_dlq = true
   environment_vars = {
     KAFKA_BROKERS  = data.aws_ssm_parameter.kafka_cluster_endpoint.value
-    KAFKA_USERNAME = module.kafka.api_key_id
-    KAFKA_PASSWORD = module.kafka.api_key_secret
+    KAFKA_USERNAME = module.kafka_user.api_key_id
+    KAFKA_PASSWORD = module.kafka_user.api_key_secret
   }
 }
 
@@ -51,7 +51,7 @@ resource "aws_iam_role_policy" "events_handler_can_dynamo" {
                 "dynamodb:DescribeStream",
                 "dynamodb:ListStreams"
             ],
-            "Resource": "${data.aws_dynamodb_table.table.arn}/stream/*"
+            "Resource": "${module.dynamodb.table.arn}/stream/*"
         }
     ]
 }
