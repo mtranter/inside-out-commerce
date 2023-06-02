@@ -1,6 +1,6 @@
 
 data "archive_file" "tx_outbox" {
-  output_path = "${path.module}/api.zip"
+  output_path = "${path.module}/tx-outbox-handler.zip"
   source_file = "${path.module}/../dist/tx-outbox-handler.js"
   type        = "zip"
 }
