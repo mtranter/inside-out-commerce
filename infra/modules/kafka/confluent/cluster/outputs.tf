@@ -32,5 +32,5 @@ output "environment_id" {
 }
 
 output "bootstrap_endpoint" {
-  value = module.kafka_cluster.bootstrap_endpoint 
+  value = confluent_kafka_cluster.cluster.bootstrap_endpoint 
 }
