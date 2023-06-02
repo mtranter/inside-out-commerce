@@ -1,7 +1,5 @@
 import { z } from "zod";
 
-export const SalutationTitleSchema = z.enum(["MR", "MRS", "MS", "MISS", "DR"]);
-export type SalutationTitle = z.infer<typeof SalutationTitleSchema>;
 export const DateStringSchema = z.string();
 export type DateString = z.infer<typeof DateStringSchema>;
 export const EmailSchema = z.string().email();
@@ -268,8 +266,6 @@ export const AddressSchema = z.object({
     country: CountryCodeSchema,
 });
 export type Address = z.infer<typeof AddressSchema>;
-export const GenderSchema = z.enum(["M", "F", "U", "X"]);
-export type Gender = z.infer<typeof GenderSchema>;
 export const PhoneNumberSchema = z.string();
 export type PhoneNumber = z.infer<typeof PhoneNumberSchema>;
 export const MobilePhoneNumberSchema = z.string();
@@ -284,41 +280,26 @@ export const PhoneNumbersSchema = z
     })
     .partial();
 export type PhoneNumbers = z.infer<typeof PhoneNumbersSchema>;
-export const EmployerSchema = z
-    .object({
-        companyName: z.string().max(50).optional(),
-        ABN: z.string().regex(/^\d{2}(\s\d{3}){3}$/).optional(),
-        contactNumber: PhoneNumberSchema.regex(/^(\d{6}|\d{10}|\d{11})$/),
-        contactName: z.string().max(50).optional(),
-    })
-    .partial();
-export type Employer = z.infer<typeof EmployerSchema>;
 export const MemberSchema = z.object({
     id: z.string(),
-    salutationTitle: SalutationTitleSchema.optional(),
     firstName: z.string().min(1).max(40),
     lastName: z.string().min(1).max(25),
     dateOfBirth: DateStringSchema.regex(/^(19|20)\d\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/),
     tfn: z.string().regex(/^\d{8,9}$/).optional(),
     email: EmailSchema,
     residentialAddress: AddressSchema.optional(),
-    correspondenceAddress: AddressSchema,
-    gender: GenderSchema,
+    correspondenceAddress: AddressSchema.optional(),
     phone: PhoneNumbersSchema,
-    employer: EmployerSchema.optional(),
 });
 export type Member = z.infer<typeof MemberSchema>;
 
 export const CreateMemberSchema = z.object({
-    salutationTitle: SalutationTitleSchema.optional(),
     firstName: z.string().min(1).max(40),
     lastName: z.string().min(1).max(25),
     dateOfBirth: DateStringSchema.regex(/^(19|20)\d\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/),
     tfn: z.string().regex(/^\d{8,9}$/).optional(),
     residentialAddress: AddressSchema.optional(),
-    correspondenceAddress: AddressSchema,
-    gender: GenderSchema,
-    phone: PhoneNumbersSchema,
-    employer: EmployerSchema.optional(),
+    correspondenceAddress: AddressSchema.optional(),
+    phone: PhoneNumbersSchema
 });
 export type CreateMember = z.infer<typeof CreateMemberSchema>;

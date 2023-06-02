@@ -1,7 +1,7 @@
 import { DynamoDB } from "@aws-sdk/client-dynamodb";
 import { restApiHandler } from "@ezapi/aws-rest-api-backend";
 import { SchemaRegistry } from "@kafkajs/confluent-schema-registry";
-import { envOrThrow } from "./env";
+import { envOrThrow } from "../env";
 import { routes } from "./routes";
 
 const stage = envOrThrow("API_STAGE");

@@ -1,6 +1,6 @@
 import { handlers } from "./api-handlers";
-import { CreateMemberSchema } from "./schema";
-import { TxOutboxMessageFactory } from "./tx-outbox";
+import { CreateMemberSchema } from "./../schema";
+import { TxOutboxMessageFactory } from "./../tx-outbox";
 import { generateMock } from "@anatine/zod-mock";
 
 describe("handlers", () => {

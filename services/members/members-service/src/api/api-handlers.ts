@@ -1,9 +1,9 @@
 import { Ok, Handler } from "@ezapi/router-core";
-import { CreateMember, Member } from "./schema";
+import { CreateMember, Member } from "./../schema";
 import { Table } from "funamots";
 import { v4 as uuidv4 } from "uuid";
 import { IdTokenClaims, JwtClaims } from "./middleware/auth-middleware";
-import { TxOutboxMessage, TxOutboxMessageFactory } from "./tx-outbox";
+import { TxOutboxMessage, TxOutboxMessageFactory } from "./../tx-outbox/tx-outbox";
 
 export type MemberDto = {
   hk: string;

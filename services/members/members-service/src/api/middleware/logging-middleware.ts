@@ -1,5 +1,5 @@
 import { Middleware } from "@ezapi/router-core";
-import log from "./../logging";
+import log from "./../../logging";
 
 export const LoggingMiddleware = <A extends {}, B>() =>
   Middleware.of<A, A, B>(async (req, handler) => {

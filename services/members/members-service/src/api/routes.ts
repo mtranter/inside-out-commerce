@@ -1,12 +1,12 @@
 import { RouteBuilder, Ok } from "@ezapi/router-core";
 import { JsonParserMiddlerware } from "@ezapi/json-middleware";
 import { ZodMiddleware } from "@ezapi/zod-middleware";
-import { CreateMemberSchema } from "./schema";
+import { CreateMemberSchema } from "./../schema";
 import { tableBuilder } from "funamots";
 import { DynamoDB } from "@aws-sdk/client-dynamodb";
 import { LoggingMiddleware } from "./middleware/logging-middleware";
 import { IdTokenMiddleware, JwtMiddleware } from "./middleware/auth-middleware";
-import { TxOutboxMessageFactory } from "./tx-outbox";
+import { TxOutboxMessageFactory } from "./../tx-outbox/tx-outbox";
 import { SchemaRegistry } from "@kafkajs/confluent-schema-registry";
 import { MemberDto, handlers } from "./api-handlers";
 

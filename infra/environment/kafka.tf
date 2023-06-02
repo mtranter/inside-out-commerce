@@ -20,6 +20,11 @@ resource "aws_ssm_parameter" "kafka_cluster_id" {
   type  = "SecureString"
   value = module.kafka_cluster.kafka_cluster.id
 }
+resource "aws_ssm_parameter" "kafka_cluster_endpoint" {
+  name  = "/${var.project_name}/kafka/${var.environment}/cluster/endpoint"
+  type  = "SecureString"
+  value = module.kafka_cluster.kafka_cluster.bootstrap_endpoint
+}
 
 resource "aws_ssm_parameter" "kafka_rest_endpoint" {
   name  = "/${var.project_name}/kafka/${var.environment}/rest/endpoint"

@@ -13,7 +13,6 @@ data "archive_file" "api" {
   type        = "zip"
 }
 
-
 data "aws_ssm_parameter" "schema_registry_endpoint" {
   name = "/${var.project_name}/kafka/${var.environment}/schema_registry/rest/endpoint"
 }

@@ -30,3 +30,7 @@ output "schema_manager_api_key_secret" {
 output "environment_id" {
   value = var.create_environment ? confluent_environment.env[0].id : data.confluent_environment.env[0].id
 }
+
+output "bootstrap_endpoint" {
+  value = module.kafka_cluster.bootstrap_endpoint 
+}
