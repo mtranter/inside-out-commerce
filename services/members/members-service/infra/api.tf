@@ -9,7 +9,7 @@ resource "aws_api_gateway_rest_api" "this" {
 
 data "archive_file" "api" {
   output_path = "${path.module}/api.zip"
-  source_file = "${path.module}/../dist/api.js"
+  source_file = "${path.module}/../dist/api-handler.js"
   type        = "zip"
 }
 
