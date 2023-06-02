@@ -40,3 +40,23 @@ variable "value_schema" {
   type        = string
   description = "Value schema"
 }
+
+variable "key_schema_compatability" {
+  type        = string
+  description = "Key schema compatability"
+  default     = "FULL_TRANSITIVE"
+  validation {
+    condition = can(regex("^(BACKWARD|BACKWARD_TRANSITIVE|FORWARD|FORWARD_TRANSITIVE|FULL|FULL_TRANSITIVE|NONE)$", var.key_schema_compatability))
+    error_message = "Invalid key schema compatability."
+  }
+}
+
+variable "value_schema_compatability" {
+  type        = string
+  description = "Value schema compatability"
+  default     = "FULL_TRANSITIVE"
+  validation {
+    condition = can(regex("^(BACKWARD|BACKWARD_TRANSITIVE|FORWARD|FORWARD_TRANSITIVE|FULL|FULL_TRANSITIVE|NONE)$", var.value_schema_compatability))
+    error_message = "Invalid value schema compatability."
+  }
+}

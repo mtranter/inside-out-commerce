@@ -27,3 +27,12 @@ resource "confluent_schema" "value_schema" {
   schema       = var.value_schema
 }
 
+resource "confluent_subject_config" "key_schema_compatability" {
+  subject_name        = split("/", confluent_schema.key_schema.id)[1]
+  compatibility_level = var.key_schema_compatability
+}
+
+resource "confluent_subject_config" "value_schema_compatability" {
+  subject_name        = split("/", confluent_schema.value_schema.id)[1]
+  compatibility_level = var.value_schema_compatability
+}
