@@ -69,7 +69,7 @@ resource "aws_ssm_parameter" "kafka_test_config" {
   name = "/${var.project_name}/members-service/test-user/kafka-config"
   type = "SecureString"
   value = jsonencode({
-    brokers  = data.confluent_kafka_cluster.kafka_cluster.brokers
+    brokers  = data.confluent_kafka_cluster.kafka_cluster.bootstrap_endpoint
     username = module.kafka_test_user.api_key_id
     password = module.kafka_test_user.api_key_secret
   })
@@ -81,7 +81,7 @@ resource "aws_ssm_parameter" "schema_registry_test_config" {
   type = "SecureString"
   value = jsonencode({
     host     = data.confluent_schema_registry_cluster.schema_registry.rest_endpoint
-    username = module.kafka_test_user.schema_registry_api_key_id
-    password = module.kafka_test_user.schema_registry_api_key_secret
+    username = module.test_consumer.schema_registry_api_key_id
+    password = module.test_consumer.schema_registry_api_key_secret
   })
 }
