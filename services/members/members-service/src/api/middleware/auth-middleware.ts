@@ -60,7 +60,7 @@ export const JwtMiddleware = <A extends {}>(testClientId: string) =>
       return handler({
         ...req,
         ...{ jwt: payloadObj },
-        ...{ isTestId: payloadObj.client_id === testClientId },
+        ...{ isTestClient: payloadObj.client_id === testClientId },
       });
     } catch (e) {
       return Unauthorized({ message: "Invalid token" });
