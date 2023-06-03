@@ -69,7 +69,7 @@ resource "aws_ssm_parameter" "kafka_test_config" {
   name = "/${var.project_name}/members-service/test-user/kafka-config"
   type = "SecureString"
   value = jsonencode({
-    brokers  = data.confluent_kafka_cluster.kafka_cluster.bootstrap_endpoint
+    brokers  = split("://", data.confluent_kafka_cluster.kafka_cluster.bootstrap_endpoint)[1]
     username = module.kafka_test_user.api_key_id
     password = module.kafka_test_user.api_key_secret
   })

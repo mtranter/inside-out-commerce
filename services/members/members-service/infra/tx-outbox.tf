@@ -19,7 +19,8 @@ module "streams_handler" {
 
   create_dlq = true
   environment_vars = {
-    KAFKA_BROKERS  = data.aws_ssm_parameter.kafka_cluster_endpoint.value
+    // kafka broker host. Split by :// to remove the protocol
+    KAFKA_BROKERS  = split("://", data.aws_ssm_parameter.kafka_cluster_endpoint.value)[1]
     KAFKA_USERNAME = module.kafka_user.api_key_id
     KAFKA_PASSWORD = module.kafka_user.api_key_secret
   }
