@@ -6,12 +6,12 @@ import { LoggingMiddleware } from "./middleware/logging-middleware";
 import { IdTokenMiddleware, JwtMiddleware } from "./middleware/auth-middleware";
 import { Handlers } from "./api-handlers";
 
-export const routes = (handers: Handlers, idTokenEndpoint: string) => {
+export const routes = (handers: Handlers, idTokenEndpoint: string, testCognitoClientId: string) => {
   return RouteBuilder.withMiddleware(LoggingMiddleware())
     .withMiddleware(JsonParserMiddlerware())
     .route("GET", "/healthcheck")
     .handle(() => Ok({ status: "OK" }))
-    .withMiddleware(JwtMiddleware())
+    .withMiddleware(JwtMiddleware(testCognitoClientId))
     .withMiddleware(IdTokenMiddleware(idTokenEndpoint))
     .route("POST", "/members", ZodMiddleware(CreateMemberSchema))
     .handle(handers.newMemberHandler)

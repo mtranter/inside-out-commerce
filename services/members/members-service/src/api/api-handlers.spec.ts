@@ -42,10 +42,10 @@ describe("handlers", () => {
     db = {};
   });
   it("should work", async () => {
-    const sut = handlers(txOutboxMessageFactory, mockTable, "1");
+    const sut = handlers(txOutboxMessageFactory, mockTable);
     const request = {
       safeBody: generateMock(CreateMemberSchema),
-      jwt: { sub: "123", client_id: "123" },
+      jwt: { sub: "123", client_id: "123", isTestClient: true },
       userInfo: { email: "johnsmith@gmail.com" },
       pathParams: {},
       url: "/members" as const,
@@ -62,7 +62,7 @@ describe("handlers", () => {
     expect(memberId).toBeDefined();
     // @ts-ignore
     const member = db[memberId!].data;
-    expect(member).toMatchObject({ ...request.safeBody, isTestMember: false });
+    expect(member).toMatchObject({ ...request.safeBody, isTestMember: true });
     const eventId = ids.find((id) => id.startsWith("MEMBER_CREATED_EVENT#"));
     expect(eventId).toBeDefined();
     // @ts-ignore

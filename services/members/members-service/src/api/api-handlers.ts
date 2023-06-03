@@ -19,8 +19,7 @@ export type Handlers = ReturnType<typeof handlers>;
 
 export const handlers = (
   txOutboxMessageFactory: TxOutboxMessageFactory,
-  table: Pick<Table<MemberDto, "hk", "sk", {}>, "transactPut" | "get">,
-  testClientId: string
+  table: Pick<Table<MemberDto, "hk", "sk", {}>, "transactPut" | "get">
 ): {
   newMemberHandler: Handler<
     "/members",
@@ -39,7 +38,7 @@ export const handlers = (
     const member: Member = {
       id,
       ...req.safeBody,
-      isTestMember: req.jwt.client_id === testClientId,
+      isTestMember: req.jwt.isTestClient,
       email: req.userInfo.email,
     };
     const dto: MemberDto = {

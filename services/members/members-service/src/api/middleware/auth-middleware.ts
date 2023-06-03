@@ -5,7 +5,7 @@ export type IdTokenClaims = {
   "cognito:groups"?: string[];
   email_verified?: boolean;
   "cognito:preferred_role"?: string;
-  iss: string;
+  iss?: string;
   "cognito:username"?: string;
   middle_name?: string;
   nonce?: string;
@@ -18,8 +18,11 @@ export const IdTokenMiddleware = <A extends { jwt: JwtClaims }, B>(
 ) => {
   return Middleware.of<A, { userInfo: IdTokenClaims }, B>(
     async (req, handler) => {
-      if (userInfoEndpoint === "test") {
-        return handler({ ...req, ...{ userInfo: {email: 'test@test.com'} } } as any);
+      if (userInfoEndpoint === "test" || req.jwt.isTestClient) {
+        return handler({
+          ...req,
+          ...{ userInfo: { sub: req.jwt.sub, email: "test@test.com" } },
+        });
       } else {
         const response = await fetch(userInfoEndpoint, {
           headers: {
@@ -37,9 +40,10 @@ export const IdTokenMiddleware = <A extends { jwt: JwtClaims }, B>(
 export type JwtClaims = {
   sub: string;
   client_id: string;
+  isTestClient: boolean;
 };
 
-export const JwtMiddleware = <A extends {}>() =>
+export const JwtMiddleware = <A extends {}>(testClientId: string) =>
   Middleware.of<A, { jwt: JwtClaims }, unknown>(async (req, handler) => {
     const authHeader = req.headers["Authorization"] as string;
     if (!authHeader) {
@@ -53,7 +57,11 @@ export const JwtMiddleware = <A extends {}>() =>
       const [header, payload, signature] = token.split(".");
       const decodedPayload = Buffer.from(payload, "base64").toString("utf-8");
       const payloadObj = JSON.parse(decodedPayload) as JwtClaims;
-      return handler({ ...req, ...{ jwt: payloadObj } });
+      return handler({
+        ...req,
+        ...{ jwt: payloadObj },
+        ...{ isTestId: payloadObj.client_id === testClientId },
+      });
     } catch (e) {
       return Unauthorized({ message: "Invalid token" });
     }

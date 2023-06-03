@@ -33,6 +33,6 @@ const txOutboxMessageFactory = TxOutboxMessageFactory({
   keySchemaId,
   valueSchemaId,
 });
-const _handers = handlers(txOutboxMessageFactory, table, testClientId);
+const _handers = handlers(txOutboxMessageFactory, table);
 
-export const handler = restApiHandler(routes(_handers, idTokenEndpoint), stage);
+export const handler = restApiHandler(routes(_handers, idTokenEndpoint, testClientId), stage);

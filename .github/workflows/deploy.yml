@@ -74,8 +74,6 @@ jobs:
       - run: npm install -g lerna
       - run: npm ci
       - run: lerna bootstrap
-      - run: lerna run build
-        name: Build
       - run: lerna run itest
         name: Test
         env:
