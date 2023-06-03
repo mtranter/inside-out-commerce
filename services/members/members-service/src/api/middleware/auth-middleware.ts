@@ -18,14 +18,18 @@ export const IdTokenMiddleware = <A extends { jwt: JwtClaims }, B>(
 ) => {
   return Middleware.of<A, { userInfo: IdTokenClaims }, B>(
     async (req, handler) => {
-      const response = await fetch(userInfoEndpoint, {
-        headers: {
-          Authorization: req.headers.authorization as string,
-        },
-      });
-      const userInfo: IdTokenClaims =
-        await (response.json() as Promise<IdTokenClaims>);
-      return handler({ ...req, ...{ userInfo: userInfo } });
+      if (userInfoEndpoint === "test") {
+        return handler({ ...req, ...{ userInfo: {email: 'test@test.com'} } } as any);
+      } else {
+        const response = await fetch(userInfoEndpoint, {
+          headers: {
+            Authorization: req.headers.authorization as string,
+          },
+        });
+        const userInfo: IdTokenClaims =
+          await (response.json() as Promise<IdTokenClaims>);
+        return handler({ ...req, ...{ userInfo: userInfo } });
+      }
     }
   );
 };
@@ -39,8 +43,7 @@ export const JwtMiddleware = <A extends {}>() =>
   Middleware.of<A, { jwt: JwtClaims }, unknown>(async (req, handler) => {
     const authHeader = req.headers["Authorization"] as string;
     if (!authHeader) {
-      return Unauthorized({ message: "Missing Authorization header" }
-      );
+      return Unauthorized({ message: "Missing Authorization header" });
     }
     const [_, token] = authHeader.split(" ");
     if (!token) {

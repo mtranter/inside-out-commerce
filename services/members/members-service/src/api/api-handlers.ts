@@ -15,6 +15,8 @@ export type MemberDto = {
   isEvent?: true;
 };
 
+export type Handlers = ReturnType<typeof handlers>;
+
 export const handlers = (
   txOutboxMessageFactory: TxOutboxMessageFactory,
   table: Pick<Table<MemberDto, "hk", "sk", {}>, "transactPut" | "get">,

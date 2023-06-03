@@ -3,6 +3,9 @@ import { restApiHandler } from "@ezapi/aws-rest-api-backend";
 import { SchemaRegistry } from "@kafkajs/confluent-schema-registry";
 import { envOrThrow } from "../env";
 import { routes } from "./routes";
+import { tableBuilder } from "funamots";
+import { MemberDto, handlers } from "./api-handlers";
+import { TxOutboxMessageFactory } from "../tx-outbox/tx-outbox";
 
 const stage = envOrThrow("API_STAGE");
 const tableName = envOrThrow("TABLE_NAME");
@@ -15,22 +18,21 @@ const schemaRegistryPassword = envOrThrow("SCHEMA_REGISTRY_PASSWORD");
 const idTokenEndpoint = envOrThrow("ID_TOKEN_ENDPOINT");
 const testClientId = envOrThrow("TEST_CLIENT_ID");
 
-export const handler = restApiHandler(
-  routes({
-    tableName,
-    client: new DynamoDB({}),
-    idTokenEndpoint,
-    membersTopic,
-    keySchemaId,
-    valueSchemaId,
-    schemaRegistry: new SchemaRegistry({
-      host: schemaRegistryHost,
-      auth: {
-        username: schemaRegistryUsername,
-        password: schemaRegistryPassword,
-      },
-    }),
-    testClientId,
+const table = tableBuilder<MemberDto>(tableName)
+  .withKey("hk", "sk")
+  .build({ client: new DynamoDB({}) });
+const txOutboxMessageFactory = TxOutboxMessageFactory({
+  registry: new SchemaRegistry({
+    host: schemaRegistryHost,
+    auth: {
+      username: schemaRegistryUsername,
+      password: schemaRegistryPassword,
+    },
   }),
-  stage
-);
+  topic: membersTopic,
+  keySchemaId,
+  valueSchemaId,
+});
+const _handers = handlers(txOutboxMessageFactory, table, testClientId);
+
+export const handler = restApiHandler(routes(_handers, idTokenEndpoint), stage);

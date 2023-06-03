@@ -50,18 +50,15 @@ const makeAuthedRequest = async (
       throw e;
     })) as { access_token: string };
   const idToken = token.access_token;
-  return await fetch(
-    "https://84t0e5o34j.execute-api.ap-southeast-2.amazonaws.com/live/healthcheck",
-    {
-      method,
-      headers: {
-        Authorization: `Bearer ${idToken}`,
-        "content-type": "application/json",
-        accept: "application/json",
-      },
-      body: data ? JSON.stringify(data) : undefined,
-    }
-  );
+  return await fetch(url, {
+    method,
+    headers: {
+      Authorization: `Bearer ${idToken}`,
+      "content-type": "application/json",
+      accept: "application/json",
+    },
+    body: data ? JSON.stringify(data) : undefined,
+  });
 };
 
 const setupKafkaConsumer = async () => {
