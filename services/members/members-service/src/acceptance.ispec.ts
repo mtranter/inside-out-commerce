@@ -53,6 +53,7 @@ const makeAuthedRequest = async (
   return await fetch(
     "https://84t0e5o34j.execute-api.ap-southeast-2.amazonaws.com/live/healthcheck",
     {
+      method,
       headers: {
         Authorization: `Bearer ${idToken}`,
         "content-type": "application/json",
