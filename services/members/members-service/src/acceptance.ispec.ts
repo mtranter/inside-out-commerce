@@ -4,7 +4,7 @@ import { generateMock } from "@anatine/zod-mock";
 import { Consumer, Kafka } from "kafkajs";
 import { SchemaRegistry } from "@kafkajs/confluent-schema-registry";
 import { KafkaPayload } from "@inside-out-bank/models";
-import waitForExpect from "../../../../node_modules/wait-for-expect/lib/index.d";
+import waitForExpect from "wait-for-expect";
 
 jest.setTimeout(10000);
 const ssm = new SSM({
