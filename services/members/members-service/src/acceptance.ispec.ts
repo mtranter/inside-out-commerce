@@ -120,7 +120,8 @@ describe("Members API", () => {
     let consumer: Consumer;
     let kafkaMessages: unknown[];
     beforeAll(async () => {
-      const {consumer: _consumer} = await setupKafkaConsumer();
+      const {consumer: _consumer, messages} = await setupKafkaConsumer();
+      kafkaMessages = messages;
       consumer = _consumer
       response = await makeAuthedRequest(
         "https://84t0e5o34j.execute-api.ap-southeast-2.amazonaws.com/live/members",
