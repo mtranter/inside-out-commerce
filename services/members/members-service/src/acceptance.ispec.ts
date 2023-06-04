@@ -130,21 +130,15 @@ describe("Members API", () => {
     it("should return 200", () => {
       expect(response.status).toEqual(201);
     });
-    it("should have returned a member", async () => {
-      const member = await response.json();
-      expect(member).toMatchObject(user);
-    });
-    it("should have persisted member for API query", async () => {
+    it("should have returned a member and published it to kafka", async () => {
       const returnedMember = (await response.json()) as Member;
+      expect(returnedMember).toMatchObject(user);
       const getResponse = await makeAuthedRequest(
         `https://84t0e5o34j.execute-api.ap-southeast-2.amazonaws.com/live/members/${returnedMember.id}`,
         "GET"
       );
       const fetchedMember = await getResponse.json();
       expect(fetchedMember).toEqual(returnedMember);
-    });
-    it("Should have published member created event to kafka", async () => {
-      const returnedMember = (await response.json()) as Member;
       const findMember = () => {
         return kafkaMessages.find((e) => {
           const event = e as KafkaPayload;
