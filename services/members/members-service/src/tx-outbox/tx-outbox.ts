@@ -46,8 +46,8 @@ export const _handler =
       [topic: string]: { key: Buffer | undefined; value: Buffer }[];
     }>((batch, next) => {
       const { NewImage } = next.dynamodb!;
-      const object = unmarshall(NewImage as any) as TxOutboxMessage;
-      const { topic, key, value } = object;
+      const object = unmarshall(NewImage as any) as  {data: TxOutboxMessage};
+      const { topic, key, value } = object.data;
       const existingBatch = batch[topic] || [];
       const newBatch = {
         ...batch,
