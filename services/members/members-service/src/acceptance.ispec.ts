@@ -120,15 +120,16 @@ describe("Members API", () => {
     let consumer: Consumer;
     let kafkaMessages: unknown[];
     beforeAll(async () => {
-      await setupKafkaConsumer();
+      const {consumer: _consumer} = await setupKafkaConsumer();
+      consumer = _consumer
       response = await makeAuthedRequest(
         "https://84t0e5o34j.execute-api.ap-southeast-2.amazonaws.com/live/members",
         "POST",
         user
       );
     });
-    afterAll(() => {
-      return consumer.disconnect();
+    afterAll(async () => {
+      await consumer?.disconnect();
     })
     it("should return 200", () => {
       expect(response.status).toEqual(201);
