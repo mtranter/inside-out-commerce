@@ -57,6 +57,7 @@ export const handlers = (
         metadata: {
           traceId: process.env._X_AMZN_TRACE_ID!,
           originator: req.jwt.sub,
+          parentEventId: null as any
         },
       });
     await table.transactPut([
