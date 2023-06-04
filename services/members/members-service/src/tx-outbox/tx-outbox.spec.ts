@@ -24,14 +24,18 @@ describe("tx-outbox", () => {
     const dynamoSerializedTxMsg = {
       dynamodb: {
         NewImage: {
-          topic: {
-            S: msg.topic,
-          },
-          key: {
-            S: msg.key,
-          },
-          value: {
-            S: msg.value,
+          data: {
+            M: {
+              topic: {
+                S: msg.topic,
+              },
+              key: {
+                S: msg.key,
+              },
+              value: {
+                S: msg.value,
+              },
+            },
           },
         },
       },
