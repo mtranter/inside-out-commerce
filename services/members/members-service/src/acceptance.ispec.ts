@@ -97,7 +97,9 @@ const setupKafkaConsumer = async () => {
   const runPromise = consumer.run({
     autoCommit: true,
     eachMessage: async ({ message }) => {
+      console.log("Got a message")
       const response = await schemaRegistry.decode(message.value!);
+      console.log(`Got message: ${JSON.stringify(response)}`)
       messages.push(response);
     },
   });
@@ -121,7 +123,7 @@ describe("Members API", () => {
     let kafkaMessages: unknown[];
     beforeAll(async () => {
       const {consumer: _consumer, messages} = await setupKafkaConsumer();
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      await new Promise((resolve) => setTimeout(resolve, 3000))
       kafkaMessages = messages;
       consumer = _consumer
       response = await makeAuthedRequest(
