@@ -59,12 +59,19 @@ export const JwtMiddleware = <A extends {}>(testClientId: string) =>
     try {
       const [header, payload, signature] = token.split(".");
       const decodedPayload = Buffer.from(payload, "base64").toString("utf-8");
-      const payloadObj = JSON.parse(decodedPayload) as JwtClaims;
+      const payloadObj = JSON.parse(decodedPayload) as Omit<
+        JwtClaims,
+        "isTestClient"
+      >;
       log.info("JWT claims", payloadObj);
       return handler({
         ...req,
-        ...{ jwt: payloadObj },
-        ...{ isTestClient: payloadObj.client_id === testClientId },
+        ...{
+          jwt: {
+            ...payloadObj,
+            ...{ isTestClient: payloadObj.client_id === testClientId },
+          },
+        },
       });
     } catch (e) {
       return Unauthorized({ message: "Invalid token" });
