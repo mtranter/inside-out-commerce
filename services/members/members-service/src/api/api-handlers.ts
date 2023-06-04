@@ -1,7 +1,7 @@
 import { Ok, Handler, Created, NotFound } from "@ezapi/router-core";
 import { CreateMember, Member } from "./../schema";
 import { Table } from "funamots";
-import { uuid } from 'uuidv4';
+import { v4 as uuidv4 } from "uuid";
 import { IdTokenClaims, JwtClaims } from "./middleware/auth-middleware";
 import {
   TxOutboxMessage,
@@ -34,7 +34,7 @@ export const handlers = (
   getMember: Handler<`/members/{id}`, {}, Member | { message: string }>;
 } => ({
   newMemberHandler: async (req) => {
-    const id = uuid();
+    const id = uuidv4();
     const member: Member = {
       id,
       ...req.safeBody,
@@ -47,7 +47,7 @@ export const handlers = (
       data: member,
     };
 
-    const eventId = uuid();
+    const eventId = uuidv4();
     const event: TxOutboxMessage =
       await txOutboxMessageFactory.createOutboxMessage(id, {
         eventId: eventId,

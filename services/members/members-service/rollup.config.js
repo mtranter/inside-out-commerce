@@ -11,7 +11,9 @@ const configs = entryPoints.map((entryPoint) => ({
     dir: "dist",
     format: "cjs",
     sourcemap: true,
+    globals: {crypto: 'crypto'},
   },
-  plugins: [typescript(), commonJs(), nodeResolve(), json()],
+  external: ['crypto'],
+  plugins: [typescript(), commonJs(), nodeResolve({ preferBuiltins: true }), json()],
 }));
 module.exports = configs;
