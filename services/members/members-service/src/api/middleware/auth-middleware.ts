@@ -60,6 +60,7 @@ export const JwtMiddleware = <A extends {}>(testClientId: string) =>
       const [header, payload, signature] = token.split(".");
       const decodedPayload = Buffer.from(payload, "base64").toString("utf-8");
       const payloadObj = JSON.parse(decodedPayload) as JwtClaims;
+      log.info("JWT claims", payloadObj);
       return handler({
         ...req,
         ...{ jwt: payloadObj },
