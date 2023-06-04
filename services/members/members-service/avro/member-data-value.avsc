@@ -25,24 +25,6 @@
             "type": "string"
           },
           {
-            "name": "salutationTitle",
-            "type": [
-              "null",
-              {
-                "name": "salutationTitle",
-                "type": "enum",
-                "symbols": [
-                  "MR",
-                  "MRS",
-                  "MS",
-                  "MISS",
-                  "DR"
-                ],
-                "namespace": "com.insideoutbank.members"
-              }
-            ]
-          },
-          {
             "name": "firstName",
             "type": "string"
           },
@@ -59,7 +41,8 @@
             "type": [
               "null",
               "string"
-            ]
+            ],
+            "default": "null"
           },
           {
             "name": "email",
@@ -78,14 +61,16 @@
                     "type": [
                       "null",
                       "string"
-                    ]
+                    ],
+                    "default": "null"
                   },
                   {
                     "name": "city",
                     "type": [
                       "null",
                       "string"
-                    ]
+                    ],
+                    "default": "null"
                   },
                   {
                     "name": "state",
@@ -107,14 +92,16 @@
                         ],
                         "namespace": "com.insideoutbank.members"
                       }
-                    ]
+                    ],
+                    "default": "null"
                   },
                   {
                     "name": "postcode",
                     "type": [
                       "null",
                       "string"
-                    ]
+                    ],
+                    "default": "null"
                   },
                   {
                     "name": "country",
@@ -378,25 +365,16 @@
                 ],
                 "namespace": "com.insideoutbank.members"
               }
-            ]
+            ],
+            "default": "null"
           },
           {
             "name": "correspondenceAddress",
-            "type": "com.insideoutbank.members.residentialAddress"
-          },
-          {
-            "name": "gender",
-            "type": {
-              "name": "gender",
-              "type": "enum",
-              "symbols": [
-                "M",
-                "F",
-                "U",
-                "X"
-              ],
-              "namespace": "com.insideoutbank.members"
-            }
+            "type": [
+              "null",
+              "com.insideoutbank.members.residentialAddress"
+            ],
+            "default": "null"
           },
           {
             "name": "phone",
@@ -409,66 +387,32 @@
                   "type": [
                     "null",
                     "string"
-                  ]
+                  ],
+                  "default": "null"
                 },
                 {
                   "name": "workPhone",
                   "type": [
                     "null",
                     "string"
-                  ]
+                  ],
+                  "default": "null"
                 },
                 {
                   "name": "mobilePhone",
                   "type": [
                     "null",
                     "string"
-                  ]
+                  ],
+                  "default": "null"
                 }
               ],
               "namespace": "com.insideoutbank.members"
             }
           },
           {
-            "name": "employer",
-            "type": [
-              "null",
-              {
-                "name": "employer",
-                "type": "record",
-                "fields": [
-                  {
-                    "name": "companyName",
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  {
-                    "name": "ABN",
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  {
-                    "name": "contactNumber",
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  {
-                    "name": "contactName",
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  }
-                ],
-                "namespace": "com.insideoutbank.members"
-              }
-            ]
+            "name": "isTestMember",
+            "type": "boolean"
           }
         ],
         "namespace": "com.insideoutbank.members"
@@ -489,14 +433,16 @@
             "type": [
               "null",
               "string"
-            ]
+            ],
+            "default": "null"
           },
           {
             "name": "originator",
             "type": [
               "null",
               "string"
-            ]
+            ],
+            "default": "null"
           }
         ],
         "namespace": "com.insideoutbank.members"

@@ -1733,7 +1733,7 @@
     "funamots" "^3.4.2"
     "kafkajs" "^2.2.4"
     "lambda-log" "^3.1.0"
-    "uuidv4" "^6.2.13"
+    "uuid" "^9.0.0"
     "zod" "^3.21.4"
 
 "@inside-out-bank/models@*", "@inside-out-bank/models@file:/home/mark/projects/insideout-example/packages/models":
@@ -7984,10 +7984,10 @@
   "resolved" "https://registry.npmjs.org/yocto-queue/-/yocto-queue-0.1.0.tgz"
   "version" "0.1.0"
 
-"zod-avsc@^0.2.0", "zod-avsc@^0.3.0":
-  "integrity" "sha512-I0dLpr/W3pNPe/U0vg2pUraokUHQQtuUoLpZ0M1QqKhQtuu/hN7EF4AqX9HQ6+yO+zWVRBBNreWUSDFlqcFSuQ=="
-  "resolved" "https://registry.npmjs.org/zod-avsc/-/zod-avsc-0.3.0.tgz"
-  "version" "0.3.0"
+"zod-avsc@^0.2.0", "zod-avsc@^0.4.0":
+  "integrity" "sha512-+FRuSCTxZjc88+CmTpy8oFJMQRRa1ZjsC56wSWjzvK09BSCj/fTuORqedKrlb14oVq+Wq9n7ZG/68yFdozcSfA=="
+  "resolved" "https://registry.npmjs.org/zod-avsc/-/zod-avsc-0.4.0.tgz"
+  "version" "0.4.0"
   dependencies:
     "ts-pattern" "^4.2.2"
 

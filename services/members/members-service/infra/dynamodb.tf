@@ -10,5 +10,18 @@ module "dynamodb" {
     type = "S"
   }
   point_in_time_recovery_enabled = true
-  stream_enabled = true
+  stream_enabled                 = true
+}
+
+// data block, policy to allow lambda to read from dynamodb
+data "aws_iam_policy_document" "allow_dynamodb" {
+  statement {
+    actions = [
+      "dynamodb:*"
+    ]
+    resources = [
+      module.dynamodb.table.arn,
+      "${module.dynamodb.table.arn}/*"
+    ]
+  }
 }

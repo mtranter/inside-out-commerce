@@ -55,6 +55,12 @@ module "api_function" {
   }
 }
 
+// role policy to allow lambda to speak to dynamodb
+resource "aws_iam_role_policy" "allow_dynamodb" {
+  role   = module.api_function.execution_role.id
+  policy = data.aws_iam_policy_document.allow_dynamodb.json
+}
+
 data "aws_cognito_user_pools" "this" {
   name = "${var.project_name}-${var.environment}"
 }
