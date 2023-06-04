@@ -1,4 +1,5 @@
 import { Middleware, Unauthorized } from "@ezapi/router-core";
+import log from "../../logging";
 
 export type IdTokenClaims = {
   sub: string;
@@ -19,11 +20,13 @@ export const IdTokenMiddleware = <A extends { jwt: JwtClaims }, B>(
   return Middleware.of<A, { userInfo: IdTokenClaims }, B>(
     async (req, handler) => {
       if (userInfoEndpoint === "test" || req.jwt.isTestClient) {
+        log.info("Using test user info endpoint");
         return handler({
           ...req,
           ...{ userInfo: { sub: req.jwt.sub, email: "test@test.com" } },
         });
       } else {
+        log.info("Using real user info endpoint");
         const response = await fetch(userInfoEndpoint, {
           headers: {
             Authorization: req.headers.authorization as string,
