@@ -121,6 +121,7 @@ describe("Members API", () => {
     let kafkaMessages: unknown[];
     beforeAll(async () => {
       const {consumer: _consumer, messages} = await setupKafkaConsumer();
+      await new Promise((resolve) => setTimeout(resolve, 1000))
       kafkaMessages = messages;
       consumer = _consumer
       response = await makeAuthedRequest(
