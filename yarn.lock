@@ -7984,10 +7984,10 @@
   "resolved" "https://registry.npmjs.org/yocto-queue/-/yocto-queue-0.1.0.tgz"
   "version" "0.1.0"
 
-"zod-avsc@^0.2.0", "zod-avsc@^0.4.0":
-  "integrity" "sha512-+FRuSCTxZjc88+CmTpy8oFJMQRRa1ZjsC56wSWjzvK09BSCj/fTuORqedKrlb14oVq+Wq9n7ZG/68yFdozcSfA=="
-  "resolved" "https://registry.npmjs.org/zod-avsc/-/zod-avsc-0.4.0.tgz"
-  "version" "0.4.0"
+"zod-avsc@^0.2.0", "zod-avsc@^0.5.0":
+  "integrity" "sha512-nAP+tOf5HroqtZU+QEbE3qsCIkugHmt7UlJb87Q4LZPvUMrfKC+FhFghqHismyQiuSTgLcrPps+uLRlsVXfu1g=="
+  "resolved" "https://registry.npmjs.org/zod-avsc/-/zod-avsc-0.5.0.tgz"
+  "version" "0.5.0"
   dependencies:
     "ts-pattern" "^4.2.2"
 
