@@ -127,6 +127,9 @@ describe("Members API", () => {
         user
       );
     });
+    afterAll(() => {
+      return consumer.disconnect();
+    })
     it("should return 200", () => {
       expect(response.status).toEqual(201);
     });
@@ -154,6 +157,7 @@ describe("Members API", () => {
         const member = findMember();
         expect(member).toBeDefined();
       });
+      
     });
   });
 });
