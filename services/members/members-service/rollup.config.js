@@ -13,13 +13,12 @@ const configs = entryPoints.map((entryPoint) => ({
   output: {
     dir: "dist",
     format: "cjs",
-    sourcemap: true
+    sourcemap: true,
   },
-  external: ["crypto"],
   plugins: [
     typescript(),
     commonJs(),
-    nodeResolve({ preferBuiltins: true }),
+    nodeResolve({ exportConditions: ["node"] }),
     json(),
   ],
 }));
