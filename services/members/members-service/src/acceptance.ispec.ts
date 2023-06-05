@@ -158,7 +158,7 @@ describe("Members API", () => {
           }
         });
       };
-      waitForExpect(() => {
+      return waitForExpect(() => {
         const member = findMember();
         expect(member).toBeDefined();
       }, 5000, 500);
