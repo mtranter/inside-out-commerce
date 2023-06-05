@@ -3,7 +3,7 @@
   "private": true,
   "workspaces": [
     "packages/*",
-    "services/**/"
+    "services/**/*"
   ],
   "devDependencies": {
     "@rollup/plugin-commonjs": "^24.1.0",

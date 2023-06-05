@@ -11,6 +11,26 @@ const ssm = new SSM({
   region: "ap-southeast-2",
 });
 
+type ApiConfig = {
+  authEndpoint: string;
+  clientId: string;
+  clientSecret: string;
+  apiBaseUrl: string;
+  scope: string;
+};
+type KafkaConfig = {
+  brokers: string;
+  username: string;
+  password: string;
+  groupId: string;
+  topicName: string;
+};
+type SchemaRegistryConfig = {
+  host: string;
+  username: string;
+  password: string;
+};
+
 const getSSMValue = async (name: string) =>
   await ssm
     .getParameter({
@@ -18,88 +38,88 @@ const getSSMValue = async (name: string) =>
       WithDecryption: true,
     })
     .then((r) => r.Parameter?.Value!);
-
-const makeAuthedRequest = async (
-  url: string,
-  method: string,
-  data?: unknown | undefined
-) => {
-  const jwtEndpoint =
-    "https://inside-out-bank-prod.auth.ap-southeast-2.amazoncognito.com/oauth2/token";
-  const clientIdP = getSSMValue(
-    `/inside-out-bank/cognito/prod/members_service_test_client_id`
-  );
-  const clientSecretP = getSSMValue(
-    `/inside-out-bank/cognito/prod/members_service_test_client_secret`
-  );
-  const clientId = await clientIdP;
-  const clientSecret = await clientSecretP;
-  const token = (await fetch(jwtEndpoint, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-      authorization:
-        "Basic " +
-        Buffer.from(`${clientId}:${clientSecret}`).toString("base64"),
-    },
-    body: `grant_type=client_credentials&client_id=${clientId}&scope=https://members.inside-out-bank.com/api.execute`,
-  })
-    .then((r) => r.json())
-    .catch((e) => {
-      console.error(e);
-      throw e;
-    })) as { access_token: string };
-  const idToken = token.access_token;
-  return await fetch(url, {
-    method,
-    headers: {
-      Authorization: `Bearer ${idToken}`,
-      "content-type": "application/json",
-      accept: "application/json",
-    },
-    body: data ? JSON.stringify(data) : undefined,
-  });
+const getJsonConfig = async <T>(name: string): Promise<T> => {
+  const json = await getSSMValue(name);
+  if (!name) {
+    throw new Error(`Expect SSM value for path ${name}`);
+  }
+  return JSON.parse(name) as T;
 };
+const getApiConfig = () =>
+  getJsonConfig<ApiConfig>(
+    "/inside-out-bank/prod/members-service/test-user/api-config"
+  );
+const getKafkaConfig = () =>
+  getJsonConfig<KafkaConfig>(
+    "/inside-out-bank/prod/members-service/test-user/kafka-config"
+  );
+const getSchemaRegistryConfig = () =>
+  getJsonConfig<SchemaRegistryConfig>(
+    "/inside-out-bank/prod/members-service/test-user/schema-registry-config"
+  );
 
-const setupKafkaConsumer = async () => {
-  const kafkaConfig = JSON.parse(
-    await getSSMValue("/inside-out-bank/members-service/test-user/kafka-config")
-  ) as { brokers: string; username: string; password: string };
-  const schemaRegistryConfig = JSON.parse(
-    await getSSMValue(
-      "/inside-out-bank/members-service/test-user/schema-registry-config"
-    )
-  ) as { host: string; username: string; password: string };
+const makeAuthedRequest =
+  (cfg: ApiConfig) =>
+  async (path: string, method: string, data?: unknown | undefined) => {
+    const jwtEndpoint = `${cfg.authEndpoint}/oauth2/token`;
+    const token = (await fetch(jwtEndpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        authorization:
+          "Basic " +
+          Buffer.from(`${cfg.clientId}:${cfg.clientSecret}`).toString("base64"),
+      },
+      body: `grant_type=client_credentials&client_id=${cfg.clientId}&scope=${cfg.scope}`,
+    })
+      .then((r) => r.json())
+      .catch((e) => {
+        console.error(e);
+        throw e;
+      })) as { access_token: string };
+    const idToken = token.access_token;
+    return await fetch(`${cfg.apiBaseUrl}${path}`, {
+      method,
+      headers: {
+        Authorization: `Bearer ${idToken}`,
+        "content-type": "application/json",
+        accept: "application/json",
+      },
+      body: data ? JSON.stringify(data) : undefined,
+    });
+  };
 
+const setupKafkaConsumer = async (
+  kafkaCfg: KafkaConfig,
+  schemaCfg: SchemaRegistryConfig
+) => {
   const consumer = new Kafka({
     clientId: "members-service",
-    brokers: kafkaConfig.brokers.split(","),
+    brokers: kafkaCfg.brokers.split(","),
     ssl: true,
     sasl: {
       mechanism: "plain",
-      username: kafkaConfig.username,
-      password: kafkaConfig.password,
+      username: kafkaCfg.username,
+      password: kafkaCfg.password,
     },
-  }).consumer({ groupId: "members-service-tester" });
+  }).consumer({ groupId: kafkaCfg.groupId });
   const schemaRegistry = new SchemaRegistry({
-    host: schemaRegistryConfig.host,
+    host: schemaCfg.host,
     auth: {
-      username: schemaRegistryConfig.username,
-      password: schemaRegistryConfig.password,
+      username: schemaCfg.username,
+      password: schemaCfg.password,
     },
   });
   await consumer.connect();
   await consumer.subscribe({
-    topic: "com.insideoutbank.members.MemberData",
+    topic: kafkaCfg.topicName,
     fromBeginning: false,
   });
   const messages: unknown[] = [];
   const runPromise = consumer.run({
     autoCommit: true,
     eachMessage: async ({ message }) => {
-      console.log("Got a message")
       const response = await schemaRegistry.decode(message.value!);
-      console.log(`Got message: ${JSON.stringify(response)}`)
       messages.push(response);
     },
   });
@@ -107,41 +127,59 @@ const setupKafkaConsumer = async () => {
 };
 
 describe("Members API", () => {
+  let apiConfig: ApiConfig;
+  let kafkaConfig: KafkaConfig;
+  let schemaRegistryConfig: SchemaRegistryConfig;
+  beforeAll(async () => {
+    const apiConfigP = getApiConfig();
+    const kafkaConfigP = getKafkaConfig();
+    const schemaRegsitryConfigP = getSchemaRegistryConfig();
+    const [api, kafka, schemaReg] = await Promise.all([
+      apiConfigP,
+      kafkaConfigP,
+      schemaRegsitryConfigP,
+    ]);
+    apiConfig = api;
+    kafkaConfig = kafka;
+    schemaRegistryConfig = schemaReg;
+  });
   describe("healthcheck endpoint", () => {
+    const _makeRequest = makeAuthedRequest(apiConfig);
     it("should return 200", async () => {
-      const response = await makeAuthedRequest(
-        "https://84t0e5o34j.execute-api.ap-southeast-2.amazonaws.com/live/healthcheck",
-        "GET"
-      );
+      const response = await _makeRequest("/healthcheck", "GET");
       expect(response.status).toEqual(200);
     });
   });
   describe("create member endpoint", () => {
+    const _makeRequest = makeAuthedRequest(apiConfig);
     const user = generateMock(CreateMemberSchema);
     let response: Response;
     let consumer: Consumer;
     let kafkaMessages: unknown[];
     beforeAll(async () => {
-      const {consumer: _consumer, messages} = await setupKafkaConsumer();
-      await new Promise((resolve) => setTimeout(resolve, 3000))
+      const { consumer: _consumer, messages } = await setupKafkaConsumer(
+        kafkaConfig,
+        schemaRegistryConfig
+      );
+      await new Promise((resolve) => setTimeout(resolve, 3000));
       kafkaMessages = messages;
-      consumer = _consumer
-      response = await makeAuthedRequest(
-        "https://84t0e5o34j.execute-api.ap-southeast-2.amazonaws.com/live/members",
+      consumer = _consumer;
+      response = await _makeRequest(
+        "/members",
         "POST",
         user
       );
     });
     afterAll(async () => {
       await consumer?.disconnect();
-    })
+    });
     it("should return 200", () => {
       expect(response.status).toEqual(201);
     });
     it("should have returned a member and published it to kafka", async () => {
       const returnedMember = (await response.json()) as Member;
       expect(returnedMember).toMatchObject(user);
-      const getResponse = await makeAuthedRequest(
+      const getResponse = await _makeRequest(
         `https://84t0e5o34j.execute-api.ap-southeast-2.amazonaws.com/live/members/${returnedMember.id}`,
         "GET"
       );
@@ -158,11 +196,14 @@ describe("Members API", () => {
           }
         });
       };
-      return waitForExpect(() => {
-        const member = findMember();
-        expect(member).toBeDefined();
-      }, 5000, 500);
-      
+      return waitForExpect(
+        () => {
+          const member = findMember();
+          expect(member).toBeDefined();
+        },
+        5000,
+        500
+      );
     });
   });
 });

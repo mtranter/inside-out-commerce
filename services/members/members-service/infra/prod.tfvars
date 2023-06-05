@@ -1,2 +1,3 @@
 project_name = "inside-out-bank"
-environment = "prod"
+environment  = "prod"
+service_name = "members-service"

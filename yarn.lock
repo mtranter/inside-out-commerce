@@ -1718,7 +1718,7 @@
   "resolved" "https://registry.npmjs.org/@hutson/parse-repository-url/-/parse-repository-url-3.0.2.tgz"
   "version" "3.0.2"
 
-"@inside-out-bank/dynamodb-tx-outbox@^0.0.0", "@inside-out-bank/dynamodb-tx-outbox@file:/home/mark/projects/insideout-example/services/shared/dynamodb-tx-outbox":
+"@inside-out-bank/dynamodb-tx-outbox@*", "@inside-out-bank/dynamodb-tx-outbox@file:/home/mark/projects/insideout-example/services/shared/dynamodb-tx-outbox":
   "resolved" "file:services/shared/dynamodb-tx-outbox"
   "version" "0.0.0"
   dependencies:
@@ -1738,6 +1738,7 @@
     "@ezapi/json-middleware" "^1.2.5"
     "@ezapi/router-core" "^1.2.5"
     "@ezapi/zod-middleware" "^1.2.5"
+    "@inside-out-bank/dynamodb-tx-outbox" "*"
     "@inside-out-bank/models" "*"
     "@kafkajs/confluent-schema-registry" "^3.3.0"
     "funamots" "^3.4.2"

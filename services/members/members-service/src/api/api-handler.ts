@@ -10,7 +10,7 @@ import log from "../logging";
 
 const stage = envOrThrow("API_STAGE");
 const tableName = envOrThrow("TABLE_NAME");
-const membersTopic = envOrThrow("MEMBERS_TOPIC");
+const membersTopic = envOrThrow("EVENTS_TOPIC");
 const keySchemaId = Number(envOrThrow("KEY_SCHEMA_ID"));
 const valueSchemaId = Number(envOrThrow("VALUE_SCHEMA_ID"));
 const schemaRegistryHost = envOrThrow("SCHEMA_REGISTRY_HOST");

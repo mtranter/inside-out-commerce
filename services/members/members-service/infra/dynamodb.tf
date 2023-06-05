@@ -1,6 +1,6 @@
 module "dynamodb" {
   source = "github.com/mtranter/platform-in-a-box-aws//modules/terraform-aws-piab-dynamodb-table"
-  name   = "InsideOutBank.MembersService"
+  name   = "${var.project_name}-${var.service_name}-${var.environment}"
   hash_key = {
     name = "hk"
     type = "S"
@@ -24,4 +24,9 @@ data "aws_iam_policy_document" "allow_dynamodb" {
       "${module.dynamodb.table.arn}/*"
     ]
   }
+}
+
+resource "aws_iam_policy" "allow_dynamodb" {
+  name   = "${var.project_name}-${var.environment}-${var.service_name}-${module.dynamodb.table.id}-read-write"
+  policy = data.aws_iam_policy_document.allow_dynamodb.json
 }

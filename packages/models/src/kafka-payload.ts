@@ -1,6 +1,6 @@
-import { ZodObject, ZodRawShape, z } from "zod";
+import { ZodType, z } from "zod";
 
-export const KafkaPayload = <PL extends ZodRawShape, T extends ZodObject<PL>>(
+export const KafkaPayload = <T extends ZodType>(
   t: T
 ) =>
   z.object({
@@ -15,5 +15,5 @@ export const KafkaPayload = <PL extends ZodRawShape, T extends ZodObject<PL>>(
     }),
   });
 
-const SomeType = KafkaPayload(z.object({}))
-export type KafkaPayload = z.infer<typeof SomeType>;
+const PhantomPayload = KafkaPayload(z.object({}))
+export type KafkaPayload = z.infer<typeof PhantomPayload>;
