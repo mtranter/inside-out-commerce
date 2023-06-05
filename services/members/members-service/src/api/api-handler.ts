@@ -5,7 +5,7 @@ import { envOrThrow } from "../env";
 import { routes } from "./routes";
 import { tableBuilder } from "funamots";
 import { MemberDto, handlers } from "./api-handlers";
-import { TxOutboxMessageFactory } from "../tx-outbox/tx-outbox";
+import { TxOutboxMessageFactory } from "@inside-out-bank/dynamodb-tx-outbox";
 import log from "../logging";
 
 const stage = envOrThrow("API_STAGE");
@@ -31,7 +31,6 @@ log.info("Starting API with config", {
   testClientId,
 });
 
-
 const table = tableBuilder<MemberDto>(tableName)
   .withKey("hk", "sk")
   .build({ client: new DynamoDB({}) });
@@ -49,4 +48,7 @@ const txOutboxMessageFactory = TxOutboxMessageFactory({
 });
 const _handers = handlers(txOutboxMessageFactory, table);
 
-export const handler = restApiHandler(routes(_handers, idTokenEndpoint, testClientId), stage);
+export const handler = restApiHandler(
+  routes(_handers, idTokenEndpoint, testClientId),
+  stage
+);

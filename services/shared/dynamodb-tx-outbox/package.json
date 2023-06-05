@@ -1,0 +1,25 @@
+{
+  "name": "@inside-out-bank/dynamodb-tx-outbox",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "Mark Tranter <mark.a.tranter@gmail.com>",
+  "homepage": "",
+  "license": "ISC",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "rollup -c",
+    "test": "jest ./src"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.341.0",
+    "@aws-sdk/util-dynamodb": "^3.341.0",
+    "@kafkajs/confluent-schema-registry": "^3.3.0",
+    "kafkajs": "^2.2.4",
+    "lambda-log": "^3.1.0"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.114",
+    "@types/jest": "^29.5.0",
+    "@types/lambda-log": "^3.0.0"
+  }
+}

@@ -5,7 +5,7 @@ const commonJs = require("@rollup/plugin-commonjs");
 const json = require("@rollup/plugin-json");
 
 const entryPoints = [
-  "src/api/api-handler.ts"
+  "./src/tx-outbox-handler.ts",
 ];
 const configs = entryPoints.map((entryPoint) => ({
   input: entryPoint,

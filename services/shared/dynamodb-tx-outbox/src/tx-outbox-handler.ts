@@ -1,6 +1,6 @@
 import { Kafka, Producer } from "kafkajs";
 import { _handler } from "./tx-outbox";
-import { envOrThrow } from "./../env";
+import { envOrThrow } from "./env";
 
 let producer: Producer | undefined;
 const getProducer = async (

@@ -1718,6 +1718,16 @@
   "resolved" "https://registry.npmjs.org/@hutson/parse-repository-url/-/parse-repository-url-3.0.2.tgz"
   "version" "3.0.2"
 
+"@inside-out-bank/dynamodb-tx-outbox@^0.0.0", "@inside-out-bank/dynamodb-tx-outbox@file:/home/mark/projects/insideout-example/services/shared/dynamodb-tx-outbox":
+  "resolved" "file:services/shared/dynamodb-tx-outbox"
+  "version" "0.0.0"
+  dependencies:
+    "@aws-sdk/client-dynamodb" "^3.341.0"
+    "@aws-sdk/util-dynamodb" "^3.341.0"
+    "@kafkajs/confluent-schema-registry" "^3.3.0"
+    "kafkajs" "^2.2.4"
+    "lambda-log" "^3.1.0"
+
 "@inside-out-bank/members-service@file:/home/mark/projects/insideout-example/services/members/members-service":
   "resolved" "file:services/members/members-service"
   "version" "0.0.0"

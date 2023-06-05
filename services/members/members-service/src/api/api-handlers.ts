@@ -6,7 +6,7 @@ import { IdTokenClaims, JwtClaims } from "./middleware/auth-middleware";
 import {
   TxOutboxMessage,
   TxOutboxMessageFactory,
-} from "./../tx-outbox/tx-outbox";
+} from "@inside-out-bank/dynamodb-tx-outbox";
 
 export type MemberDto = {
   hk: string;
@@ -57,7 +57,7 @@ export const handlers = (
         metadata: {
           traceId: process.env._X_AMZN_TRACE_ID!,
           originator: req.jwt.sub,
-          parentEventId: null as any
+          parentEventId: null as any,
         },
       });
     await table.transactPut([
