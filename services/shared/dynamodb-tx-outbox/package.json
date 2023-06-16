@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "> TODO: description",
   "author": "Mark Tranter <mark.a.tranter@gmail.com>",
-  "homepage": "",
+  "homepage": "https://github.com/mtranter/inside-out-bank#readme",
   "license": "ISC",
   "main": "dist/index.js",
   "scripts": {
@@ -21,5 +21,13 @@
     "@types/aws-lambda": "^8.10.114",
     "@types/jest": "^29.5.0",
     "@types/lambda-log": "^3.0.0"
+  },
+  "types": "./dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mtranter/inside-out-bank.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mtranter/inside-out-bank/issues"
   }
 }

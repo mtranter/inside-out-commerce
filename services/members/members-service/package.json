@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "> TODO: description",
   "author": "Mark Tranter <mark.a.tranter@gmail.com>",
-  "homepage": "",
+  "homepage": "https://github.com/mtranter/inside-out-bank#readme",
   "license": "ISC",
   "main": "dist/index.js",
   "scripts": {
@@ -15,10 +15,10 @@
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.341.0",
     "@aws-sdk/util-dynamodb": "^3.341.0",
-    "@ezapi/aws-rest-api-backend": "^1.2.5",
-    "@ezapi/json-middleware": "^1.2.5",
-    "@ezapi/router-core": "^1.2.5",
-    "@ezapi/zod-middleware": "^1.2.5",
+    "@ezapi/aws-rest-api-backend": "^2.0.1-beta.0",
+    "@ezapi/json-middleware": "^2.0.1-beta.0",
+    "@ezapi/router-core": "^2.0.1-beta.0",
+    "@ezapi/zod-middleware": "^2.0.1-beta.0",
     "@inside-out-bank/dynamodb-tx-outbox": "*",
     "@inside-out-bank/models": "*",
     "@kafkajs/confluent-schema-registry": "^3.3.0",
@@ -37,5 +37,12 @@
     "@types/uuid": "^9.0.1",
     "undici": "^5.22.1",
     "wait-for-expect": "^3.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mtranter/inside-out-bank.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mtranter/inside-out-bank/issues"
   }
 }

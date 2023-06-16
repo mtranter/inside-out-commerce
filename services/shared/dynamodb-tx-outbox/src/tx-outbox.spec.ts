@@ -50,7 +50,7 @@ describe("tx-outbox", () => {
           topic: msg.topic,
           messages: [
             {
-              key: Buffer.from(msg.key, "base64"),
+              key: Buffer.from(msg.key!, "base64"),
               value: Buffer.from(msg.value, "base64"),
             },
           ],

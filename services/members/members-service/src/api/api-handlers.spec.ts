@@ -1,6 +1,5 @@
-import { MemberDto, handlers } from "./api-handlers";
+import { handlers } from "./api-handlers";
 import { CreateMemberSchema, Member } from "./../schema";
-import { KafkaPayload } from "@inside-out-bank/models";
 import { TxOutboxMessageFactory } from "@inside-out-bank/dynamodb-tx-outbox";
 import { generateMock } from "@anatine/zod-mock";
 
@@ -29,32 +28,38 @@ describe("handlers", () => {
   const mockTable = {
     transactPut,
     get: ({ hk, sk }: { hk: string; sk: string }) =>
-    // @ts-ignore
+      // @ts-ignore
       Promise.resolve(db[hk + "-" + sk] as any),
   };
 
   const txOutboxMessageFactory = TxOutboxMessageFactory({
     registry: mockSchemaRegistry,
-    topic: "membersTopic",
-    keySchemaId: 1,
-    valueSchemaId: 2,
   });
   beforeEach(() => {
     db = {};
   });
   it("should work", async () => {
-    const sut = handlers(txOutboxMessageFactory, mockTable);
+    const sut = handlers(
+      {
+        topic: "membersTopic",
+        keySchemaId: 1,
+        valueSchemaId: 2,
+      },
+      txOutboxMessageFactory,
+      mockTable
+    );
     const request = {
       safeBody: generateMock(CreateMemberSchema),
       jwt: { sub: "123", client_id: "123", isTestClient: true },
       userInfo: { email: "johnsmith@gmail.com" },
+      jsonBody: {},
       pathParams: {},
       url: "/members" as const,
       method: "POST" as const,
       queryParams: {},
       headers: {},
     };
-    const result = await sut.newMemberHandler(request);
+    const result = await sut.createMember(request as any);
     expect(result.statusCode).toEqual(201);
     const createdMember = result.body as Member;
     const ids = Object.keys(db);
@@ -78,7 +83,7 @@ describe("handlers", () => {
     });
     const getRequest = {
       safeBody: generateMock(CreateMemberSchema),
-      jwt: { sub: "123", client_id: "123" },
+      jwt: { sub: "123", client_id: "123", isTestClient: true },
       userInfo: { email: "johnsmith@gmail.com" },
       pathParams: { id: createdMember.id },
       url: `/members/{id}` as const,
@@ -86,7 +91,7 @@ describe("handlers", () => {
       queryParams: {},
       headers: {},
     };
-    const fetchedMember = await sut.getMember(getRequest);
+    const fetchedMember = await sut.getMemberById(getRequest as any);
     expect(fetchedMember.statusCode).toEqual(200);
     expect(fetchedMember.body).toEqual(member);
   });

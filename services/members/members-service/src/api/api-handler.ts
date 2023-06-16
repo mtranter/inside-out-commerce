@@ -42,13 +42,17 @@ const txOutboxMessageFactory = TxOutboxMessageFactory({
       password: schemaRegistryPassword,
     },
   }),
-  topic: membersTopic,
-  keySchemaId,
-  valueSchemaId,
 });
-const _handers = handlers(txOutboxMessageFactory, table);
-
-export const handler = restApiHandler(
-  routes(_handers, idTokenEndpoint, testClientId),
-  stage
+const _handers = handlers(
+  {
+    topic: membersTopic,
+    keySchemaId,
+    valueSchemaId,
+  },
+  txOutboxMessageFactory,
+  table
 );
+
+const api = routes(idTokenEndpoint, testClientId).build(_handers);
+
+export const handler = restApiHandler(api, stage);

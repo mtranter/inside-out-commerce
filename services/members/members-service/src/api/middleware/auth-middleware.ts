@@ -1,4 +1,4 @@
-import { Middleware, Unauthorized } from "@ezapi/router-core";
+import { HttpMiddleware, Unauthorized } from "@ezapi/router-core";
 import log from "../../logging";
 
 export type IdTokenClaims = {
@@ -17,7 +17,7 @@ export type IdTokenClaims = {
 export const IdTokenMiddleware = <A extends { jwt: JwtClaims }, B>(
   userInfoEndpoint: string
 ) => {
-  return Middleware.of<A, { userInfo: IdTokenClaims }, B>(
+  return HttpMiddleware.of<A, { userInfo: IdTokenClaims }, B>(
     async (req, handler) => {
       if (userInfoEndpoint === "test" || req.jwt.isTestClient) {
         log.info("Using test user info endpoint");
@@ -47,7 +47,7 @@ export type JwtClaims = {
 };
 
 export const JwtMiddleware = <A extends {}>(testClientId: string) =>
-  Middleware.of<A, { jwt: JwtClaims }, unknown>(async (req, handler) => {
+  HttpMiddleware.of<A, { jwt: JwtClaims }, unknown>(async (req, handler) => {
     const authHeader = req.headers["Authorization"] as string;
     if (!authHeader) {
       return Unauthorized({ message: "Missing Authorization header" });

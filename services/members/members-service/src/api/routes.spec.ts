@@ -1,22 +1,21 @@
-import { BackendUtils, Ok } from "@ezapi/router-core";
-import { routes } from "./routes";
+import { Ok } from "@ezapi/router-core";
+import { RouteHandlers, routes } from "./routes";
 import { generateMock } from "@anatine/zod-mock";
 import { CreateMemberSchema } from "../schema";
 
 describe("routes", () => {
+  const mockHandlers: RouteHandlers = {
+    healthcheck: () => Ok({ status: "OK" }),
+    createMember: () => Ok("Ok"),
+    getMemberById: () => Ok("Ok"),
+  }
   it("should return a route", async () => {
-    const _routes = routes(
-      {
-        newMemberHandler: (req) => {
-          return Ok({ status: "OK" });
-        },
-        getMember: jest.fn(),
-      },
+    const sut = routes(
       "test",
       "123"
-    );
-    const handler = BackendUtils.buildHandler(_routes);
-    const result = await handler({
+    ).build(mockHandlers);
+
+    const result = await sut.run({
       method: "POST",
       url: "/members",
       body: JSON.stringify(generateMock(CreateMemberSchema)),

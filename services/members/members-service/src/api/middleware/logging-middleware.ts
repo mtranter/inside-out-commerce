@@ -1,8 +1,8 @@
-import { Middleware } from "@ezapi/router-core";
+import { HttpMiddleware, Middleware } from "@ezapi/router-core";
 import log from "./../../logging";
 
 export const LoggingMiddleware = <A extends {}, B>() =>
-  Middleware.of<A, A, B>(async (req, handler) => {
+  HttpMiddleware.of<A, A, B>(async (req, handler) => {
     log.info("Request received", { req });
     const response = await handler(req);
     log.info("Request completed", { req, response });

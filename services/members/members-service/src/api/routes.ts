@@ -1,21 +1,19 @@
-import { RouteBuilder, Ok } from "@ezapi/router-core";
+import { RouteBuilder, Ok, HandlersOf } from "@ezapi/router-core";
 import { JsonParserMiddlerware } from "@ezapi/json-middleware";
 import { ZodMiddleware } from "@ezapi/zod-middleware";
 import { CreateMemberSchema } from "./../schema";
 import { LoggingMiddleware } from "./middleware/logging-middleware";
 import { IdTokenMiddleware, JwtMiddleware } from "./middleware/auth-middleware";
-import { Handlers } from "./api-handlers";
 
-export const routes = (handers: Handlers, idTokenEndpoint: string, testCognitoClientId: string) => {
+export type RouteHandlers = HandlersOf<ReturnType<typeof routes>>;
+
+export const routes = (idTokenEndpoint: string, testCognitoClientId: string) => {
   return RouteBuilder.withMiddleware(LoggingMiddleware())
-    .withMiddleware(JsonParserMiddlerware())
-    .route("GET", "/healthcheck")
-    .handle(() => Ok({ status: "OK" }))
+    .withMiddleware(JsonParserMiddlerware)
+    .route("healthcheck", "GET", "/healthcheck")
     .withMiddleware(JwtMiddleware(testCognitoClientId))
     .withMiddleware(IdTokenMiddleware(idTokenEndpoint))
-    .route("POST", "/members", ZodMiddleware(CreateMemberSchema))
-    .handle(handers.newMemberHandler)
-    .route("GET", "/members/{id}")
-    .handle(handers.getMember)
-    .build();
+    .route("createMember", "POST", "/members", ZodMiddleware(CreateMemberSchema))
+    .route("getMemberById", "GET", "/members/{id}")   
+    
 };

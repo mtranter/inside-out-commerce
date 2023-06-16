@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "> TODO: description",
   "author": "Mark Tranter <mark.a.tranter@gmail.com>",
-  "homepage": "",
+  "homepage": "https://github.com/mtranter/inside-out-bank#readme",
   "license": "ISC",
   "main": "dist/index.js",
   "scripts": {
@@ -11,5 +11,14 @@
   },
   "dependencies": {
     "zod": "^3.21.4"
+  },
+  "types": "./dist/index.d.ts",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mtranter/inside-out-bank.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mtranter/inside-out-bank/issues"
   }
 }
