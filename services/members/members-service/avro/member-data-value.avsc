@@ -42,7 +42,7 @@
               "null",
               "string"
             ],
-            "default": "null"
+            "default": null
           },
           {
             "name": "email",
@@ -62,7 +62,7 @@
                       "null",
                       "string"
                     ],
-                    "default": "null"
+                    "default": null
                   },
                   {
                     "name": "city",
@@ -70,7 +70,7 @@
                       "null",
                       "string"
                     ],
-                    "default": "null"
+                    "default": null
                   },
                   {
                     "name": "state",
@@ -93,7 +93,7 @@
                         "namespace": "com.insideoutbank.members"
                       }
                     ],
-                    "default": "null"
+                    "default": null
                   },
                   {
                     "name": "postcode",
@@ -101,7 +101,7 @@
                       "null",
                       "string"
                     ],
-                    "default": "null"
+                    "default": null
                   },
                   {
                     "name": "country",
@@ -366,7 +366,7 @@
                 "namespace": "com.insideoutbank.members"
               }
             ],
-            "default": "null"
+            "default": null
           },
           {
             "name": "correspondenceAddress",
@@ -374,7 +374,7 @@
               "null",
               "com.insideoutbank.members.residentialAddress"
             ],
-            "default": "null"
+            "default": null
           },
           {
             "name": "phone",
@@ -388,7 +388,7 @@
                     "null",
                     "string"
                   ],
-                  "default": "null"
+                  "default": null
                 },
                 {
                   "name": "workPhone",
@@ -396,7 +396,7 @@
                     "null",
                     "string"
                   ],
-                  "default": "null"
+                  "default": null
                 },
                 {
                   "name": "mobilePhone",
@@ -404,7 +404,7 @@
                     "null",
                     "string"
                   ],
-                  "default": "null"
+                  "default": null
                 }
               ],
               "namespace": "com.insideoutbank.members"
@@ -434,7 +434,7 @@
               "null",
               "string"
             ],
-            "default": "null"
+            "default": null
           },
           {
             "name": "originator",
@@ -442,7 +442,7 @@
               "null",
               "string"
             ],
-            "default": "null"
+            "default": null
           }
         ],
         "namespace": "com.insideoutbank.members"

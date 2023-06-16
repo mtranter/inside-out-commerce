@@ -21,18 +21,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8.6.2
       - uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
+          node-version: 18
+          cache: pnpm
           registry-url: 'https://registry.npmjs.org'
-      - run: npm install -g lerna
-      - run: npm ci
-      - run: lerna bootstrap
-      - run: lerna run build
+      - run: pnpm i --frozen-lockfile
+      - run: pnpm build
         name: Build
-      - run: lerna run test
+      - run: pnpm test
         name: Test
-      - run: lerna run gen-avro
+      - run: pnpm gen-avro
         name: Generate Avro
       - name: Upload member service artifacts
         uses: actions/upload-artifact@v2
@@ -67,16 +69,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8.6.2
       - uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
+          node-version: 18
+          cache: pnpm
           registry-url: 'https://registry.npmjs.org'
-      - run: npm install -g lerna
-      - run: npm ci
-      - run: lerna bootstrap
-      - run: lerna run build
+      - run: pnpm i --frozen-lockfile
+      - run: pnpm build
         name: Build
-      - run: lerna run itest
+      - run: pnpm itest
         name: Test
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} 
