@@ -130,7 +130,7 @@ describe("Members API", () => {
   let apiConfig: ApiConfig;
   let kafkaConfig: KafkaConfig;
   let schemaRegistryConfig: SchemaRegistryConfig;
-  beforeEach(async () => {
+  beforeAll(async () => {
     const apiConfigP = getApiConfig();
     const kafkaConfigP = getKafkaConfig();
     const schemaRegsitryConfigP = getSchemaRegistryConfig();
@@ -142,21 +142,26 @@ describe("Members API", () => {
     apiConfig = api;
     kafkaConfig = kafka;
     schemaRegistryConfig = schemaReg;
+    console.log(JSON.stringify({
+      apiConfig,
+      kafkaConfig,
+      schemaRegistryConfig
+    }))
   });
   describe("healthcheck endpoint", () => {
-    const _makeRequest = makeAuthedRequest(apiConfig);
     it("should return 200", async () => {
+      const _makeRequest = makeAuthedRequest(apiConfig);
       const response = await _makeRequest("/healthcheck", "GET");
       expect(response.status).toEqual(200);
     });
   });
   describe("create member endpoint", () => {
-    const _makeRequest = makeAuthedRequest(apiConfig);
     const user = generateMock(CreateMemberSchema);
     let response: Response;
     let consumer: Consumer;
     let kafkaMessages: unknown[];
     beforeAll(async () => {
+      const _makeRequest = makeAuthedRequest(apiConfig);
       const { consumer: _consumer, messages } = await setupKafkaConsumer(
         kafkaConfig,
         schemaRegistryConfig
@@ -179,6 +184,7 @@ describe("Members API", () => {
     it("should have returned a member and published it to kafka", async () => {
       const returnedMember = (await response.json()) as Member;
       expect(returnedMember).toMatchObject(user);
+      const _makeRequest = makeAuthedRequest(apiConfig);
       const getResponse = await _makeRequest(
         `https://84t0e5o34j.execute-api.ap-southeast-2.amazonaws.com/live/members/${returnedMember.id}`,
         "GET"
