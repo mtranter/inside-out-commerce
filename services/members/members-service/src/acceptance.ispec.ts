@@ -43,7 +43,7 @@ const getJsonConfig = async <T>(name: string): Promise<T> => {
   if (!name) {
     throw new Error(`Expect SSM value for path ${name}`);
   }
-  return JSON.parse(name) as T;
+  return JSON.parse(json) as T;
 };
 const getApiConfig = () =>
   getJsonConfig<ApiConfig>(
