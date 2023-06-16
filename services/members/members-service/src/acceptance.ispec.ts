@@ -130,7 +130,7 @@ describe("Members API", () => {
   let apiConfig: ApiConfig;
   let kafkaConfig: KafkaConfig;
   let schemaRegistryConfig: SchemaRegistryConfig;
-  beforeAll(async () => {
+  beforeEach(async () => {
     const apiConfigP = getApiConfig();
     const kafkaConfigP = getKafkaConfig();
     const schemaRegsitryConfigP = getSchemaRegistryConfig();
