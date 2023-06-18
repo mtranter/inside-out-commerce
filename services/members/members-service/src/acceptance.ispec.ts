@@ -23,7 +23,7 @@ type KafkaConfig = {
   username: string;
   password: string;
   groupId: string;
-  topicName: string;
+  topic: string;
 };
 type SchemaRegistryConfig = {
   host: string;
@@ -112,7 +112,7 @@ const setupKafkaConsumer = async (
   });
   await consumer.connect();
   await consumer.subscribe({
-    topic: kafkaCfg.topicName,
+    topic: kafkaCfg.topic,
     fromBeginning: false,
   });
   const messages: unknown[] = [];
