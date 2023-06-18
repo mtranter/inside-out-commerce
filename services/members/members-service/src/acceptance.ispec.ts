@@ -186,7 +186,7 @@ describe("Members API", () => {
       expect(returnedMember).toMatchObject(user);
       const _makeRequest = makeAuthedRequest(apiConfig);
       const getResponse = await _makeRequest(
-        `https://84t0e5o34j.execute-api.ap-southeast-2.amazonaws.com/live/members/${returnedMember.id}`,
+        `/members/${returnedMember.id}`,
         "GET"
       );
       const fetchedMember = await getResponse.json();
