@@ -55,6 +55,11 @@ data "aws_ssm_parameter" "auth_endpoint" {
   name = "/${var.project_name}/${var.environment}/cognito/auth_endpoint"
 }
 
+data "aws_ssm_parameter" "kafka_cluster_endpoint" {
+  name = "/${var.project_name}/kafka/${var.environment}/cluster/endpoint"
+}
+
+
 data "aws_region" "current" {}
 
 data "aws_cognito_user_pools" "this" {

@@ -9,14 +9,14 @@ import { TxOutboxMessage } from "dynamodb-kafka-outbox/dist/tx-outbox";
 export type EventDto = {
   hk: string;
   sk: string;
-  isEvent: true
+  isEvent: true;
 } & TxOutboxMessage;
 
 export type MemberDto = {
   hk: string;
   sk: string;
-  data: Member
-}
+  data: Member;
+};
 
 export type Dto = MemberDto | EventDto;
 

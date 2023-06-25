@@ -1,5 +1,4 @@
 import { HttpMiddleware, Unauthorized } from "@ezapi/router-core";
-import log from "../../logging";
 
 export type IdTokenClaims = {
   sub: string;
@@ -14,9 +13,16 @@ export type IdTokenClaims = {
   "cognito:roles"?: string[];
   email: string;
 };
-export const IdTokenMiddleware = <A extends { jwt: JwtClaims }, B>(
-  userInfoEndpoint: string
-) => {
+
+type Log = { info: (msg: string, ctx?: any) => void };
+
+export const IdTokenMiddleware = <A extends { jwt: JwtClaims }, B>({
+  userInfoEndpoint,
+  log,
+}: {
+  userInfoEndpoint: string;
+  log: Log;
+}) => {
   return HttpMiddleware.of<A, { userInfo: IdTokenClaims }, B>(
     async (req, handler) => {
       if (userInfoEndpoint === "test" || req.jwt.isTestClient) {
@@ -46,7 +52,13 @@ export type JwtClaims = {
   isTestClient: boolean;
 };
 
-export const JwtMiddleware = <A extends {}>(testClientId: string) =>
+export const JwtMiddleware = <A extends {}>({
+  testClientId,
+  log,
+}: {
+  testClientId: string;
+  log: Log;
+}) =>
   HttpMiddleware.of<A, { jwt: JwtClaims }, unknown>(async (req, handler) => {
     const authHeader = req.headers["Authorization"] as string;
     if (!authHeader) {

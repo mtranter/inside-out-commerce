@@ -5,7 +5,7 @@
     "build": "lerna run build",
     "dev": "lerna run dev --parallel",
     "test": "lerna run test",
-    "itest": "lerna run itest",
+    "test:int": "lerna run test:int",
     "gen-avro": "lerna run gen-avro",
     "lint": "eslint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",

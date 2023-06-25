@@ -1,0 +1,24 @@
+{
+  "name": "@inside-out-bank/middleware",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "Mark Tranter <mark.a.tranter@gmail.com>",
+  "homepage": "https://github.com/mtranter/inside-out-bank#readme",
+  "license": "ISC",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@ezapi/router-core": "^2.0.1-beta.0"
+  },
+  "types": "./dist/index.d.ts",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mtranter/inside-out-bank.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mtranter/inside-out-bank/issues"
+  }
+}
