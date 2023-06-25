@@ -72,10 +72,10 @@ describe("handlers", () => {
     const eventId = ids.find((id) => id.startsWith("MEMBER_CREATED_EVENT#"));
     expect(eventId).toBeDefined();
     // @ts-ignore
-    expect(db[eventId!].data.topic).toEqual("membersTopic");
+    expect(db[eventId!].topic).toEqual("membersTopic");
     const event = JSON.parse(
       // @ts-ignore
-      Buffer.from(db[eventId!].data.value, "base64").toString("ascii")
+      Buffer.from(db[eventId!].value, "base64").toString("ascii")
     );
     expect(event).toMatchObject({
       eventId: expect.any(String),
