@@ -1,6 +1,6 @@
 import { handlers } from "./api-handlers";
 import { CreateMemberSchema, Member } from "./../schema";
-import { TxOutboxMessageFactory } from "@inside-out-bank/dynamodb-tx-outbox";
+import { TxOutboxMessageFactory } from "dynamodb-kafka-outbox";
 import { generateMock } from "@anatine/zod-mock";
 
 describe("handlers", () => {

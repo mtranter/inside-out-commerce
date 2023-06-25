@@ -2,11 +2,9 @@ import { Ok, Created, NotFound } from "@ezapi/router-core";
 import { Member } from "./../schema";
 import { Table } from "funamots";
 import { v4 as uuidv4 } from "uuid";
-import {
-  TxOutboxMessage,
-  TxOutboxMessageFactory,
-} from "@inside-out-bank/dynamodb-tx-outbox";
+import { TxOutboxMessageFactory } from "dynamodb-kafka-outbox";
 import { RouteHandlers } from "./routes";
+import { TxOutboxMessage } from "dynamodb-kafka-outbox/dist/tx-outbox";
 
 export type MemberDto = {
   hk: string;
