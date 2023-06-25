@@ -74,15 +74,15 @@ importers:
       '@ezapi/zod-middleware':
         specifier: ^2.0.1-beta.0
         version: 2.0.1-beta.0(zod@3.21.4)
-      '@inside-out-bank/dynamodb-tx-outbox':
-        specifier: '*'
-        version: link:../../shared/dynamodb-tx-outbox
       '@inside-out-bank/models':
         specifier: '*'
         version: link:../../../packages/models
       '@kafkajs/confluent-schema-registry':
         specifier: ^3.3.0
         version: 3.3.0
+      dynamodb-kafka-outbox:
+        specifier: ^1.0.0
+        version: 1.0.0
       funamots:
         specifier: ^3.4.2
         version: 3.4.2(@aws-sdk/client-dynamodb@3.341.0)
@@ -1382,6 +1382,13 @@ packages:
 
   /@aws-sdk/util-dynamodb@3.341.0:
     resolution: {integrity: sha512-UfeQi5sPwRQcuA0jrLlyyOmwCvtqGWiumKOIGnPBx67NTh6d6C9L9YGzIf+4vOHs/RUYwA4bcS3PgZqYjK6zCg==}
+    engines: {node: '>=14.0.0'}
+    dependencies:
+      tslib: 2.5.3
+    dev: false
+
+  /@aws-sdk/util-dynamodb@3.359.0:
+    resolution: {integrity: sha512-Mrx+fFJToYT37AUApxJ1wE8EiMdxcMK4x/vXndok/8ISt37jdm1P0At8ahRHas+UABTKcP7X44qU2BcObDrTxg==}
     engines: {node: '>=14.0.0'}
     dependencies:
       tslib: 2.5.3
@@ -3761,6 +3768,15 @@ packages:
   /duplexer@0.1.2:
     resolution: {integrity: sha512-jtD6YG370ZCIi/9GTaJKQxWTZD045+4R4hTk/x1UyoqadyJ9x9CgSi1RlVDQF8U2sxLLSnFkCaMihqljHIWgMg==}
     dev: true
+
+  /dynamodb-kafka-outbox@1.0.0:
+    resolution: {integrity: sha512-RLHTgJaTFMCkBYxE3jXHBlyG6p9cqPwePvc11M75zY5eutO6gvFdAnhvsvaySWi/SLTqUxU7gLWfsDu+7Lc8DQ==}
+    dependencies:
+      '@aws-sdk/util-dynamodb': 3.359.0
+      '@kafkajs/confluent-schema-registry': 3.3.0
+      kafkajs: 2.2.4
+      lambda-log: 3.1.0
+    dev: false
 
   /eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}

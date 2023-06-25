@@ -5,7 +5,7 @@ import { envOrThrow } from "../env";
 import { routes } from "./routes";
 import { tableBuilder } from "funamots";
 import { MemberDto, handlers } from "./api-handlers";
-import { TxOutboxMessageFactory } from "@inside-out-bank/dynamodb-tx-outbox";
+import { TxOutboxMessageFactory } from "dynamodb-kafka-outbox"
 import log from "../logging";
 
 const stage = envOrThrow("API_STAGE");
