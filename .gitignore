@@ -6,3 +6,4 @@ packages/*/lib
 dist/
 handler.zip
 .terraform.lock.hcl
+api.zip
