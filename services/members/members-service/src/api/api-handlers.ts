@@ -6,12 +6,19 @@ import { TxOutboxMessageFactory } from "dynamodb-kafka-outbox";
 import { RouteHandlers } from "./routes";
 import { TxOutboxMessage } from "dynamodb-kafka-outbox/dist/tx-outbox";
 
+export type EventDto = {
+  hk: string;
+  sk: string;
+  isEvent: true
+} & TxOutboxMessage;
+
 export type MemberDto = {
   hk: string;
   sk: string;
-  data: Member | TxOutboxMessage;
-  isEvent?: true;
-};
+  data: Member
+}
+
+export type Dto = MemberDto | EventDto;
 
 type Config = {
   keySchemaId: number;
@@ -22,7 +29,7 @@ type Config = {
 export const handlers = (
   { keySchemaId, valueSchemaId, topic }: Config,
   txOutboxMessageFactory: TxOutboxMessageFactory,
-  table: Pick<Table<MemberDto, "hk", "sk", {}>, "transactPut" | "get">
+  table: Pick<Table<Dto, "hk", "sk", {}>, "transactPut" | "get">
 ): RouteHandlers => ({
   healthcheck: async () => Ok({ status: "ok" }),
   getMemberById: async (req) => {
@@ -32,7 +39,7 @@ export const handlers = (
       sk: `#METADATA#`,
     });
     if (member) {
-      return Ok(member.data as Member);
+      return Ok((member as MemberDto).data as Member);
     } else {
       return NotFound({ message: `Member ${memberId} not found` });
     }
@@ -78,7 +85,7 @@ export const handlers = (
         item: {
           hk: `MEMBER_CREATED_EVENT#${eventId}`,
           sk: `#METADATA#`,
-          data: event,
+          ...event,
           isEvent: true,
         },
       },

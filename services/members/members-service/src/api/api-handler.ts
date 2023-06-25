@@ -4,7 +4,7 @@ import { SchemaRegistry } from "@kafkajs/confluent-schema-registry";
 import { envOrThrow } from "../env";
 import { routes } from "./routes";
 import { tableBuilder } from "funamots";
-import { MemberDto, handlers } from "./api-handlers";
+import { Dto, handlers } from "./api-handlers";
 import { TxOutboxMessageFactory } from "dynamodb-kafka-outbox"
 import log from "../logging";
 
@@ -31,7 +31,7 @@ log.info("Starting API with config", {
   testClientId,
 });
 
-const table = tableBuilder<MemberDto>(tableName)
+const table = tableBuilder<Dto>(tableName)
   .withKey("hk", "sk")
   .build({ client: new DynamoDB({}) });
 const txOutboxMessageFactory = TxOutboxMessageFactory({
