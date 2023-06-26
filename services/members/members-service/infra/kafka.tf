@@ -28,7 +28,7 @@ module "producer" {
 }
 
 module "tx_outbox" {
-  source                  = "github.com/mtranter/terraform-aws-dynamodb-kafka-outbox?ref=v0.2.0-beta.0"
+  source                  = "github.com/mtranter/terraform-aws-dynamodb-kafka-outbox?ref=v0.2.1-beta.0"
   instance_name           = "${var.project_name}-${var.environment}-${var.service_name}-tx-outbox"
   source_table_stream_arn = module.dynamodb.table.stream_arn
   kafka_brokers           = [split("://", data.aws_ssm_parameter.kafka_cluster_endpoint.value)[1]]
