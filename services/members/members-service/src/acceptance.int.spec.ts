@@ -1,5 +1,5 @@
 import { SSM } from "@aws-sdk/client-ssm";
-import { CreateMemberSchema, Member } from "./schema";
+import { CreateMemberSchema, Member } from "./api/schema";
 import { generateMock } from "@anatine/zod-mock";
 import { Consumer, Kafka } from "kafkajs";
 import { SchemaRegistry } from "@kafkajs/confluent-schema-registry";
