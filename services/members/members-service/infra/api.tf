@@ -1,6 +1,6 @@
 data "archive_file" "api" {
   output_path = "${path.module}/api.zip"
-  source_file = "${path.module}/../dist/api-handler.js"
+  source_file = "${path.module}/../dist/lambda.js"
   type        = "zip"
 }
 
