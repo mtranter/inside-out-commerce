@@ -1,5 +1,5 @@
 import { zodToAvro } from "zod-avsc";
-import { MemberPayload, MemberPayloadKeySchema } from "../src/event-payload";
+import { MemberPayload, MemberPayloadKeySchema } from "../src/api/schema";
 import fs from "fs";
 
 const namespace = "com.insideoutbank.members";
