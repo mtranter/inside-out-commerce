@@ -9,7 +9,7 @@ module "api_function" {
   name             = "${var.service_name}-api-${var.environment}"
   service_name     = "${var.project_name}-${var.project_name}"
   runtime          = "nodejs18.x"
-  handler          = "api-handler.handler"
+  handler          = "lambda.handler"
   filename         = data.archive_file.api.output_path
   source_code_hash = data.archive_file.api.output_base64sha256
   timeout          = 10
