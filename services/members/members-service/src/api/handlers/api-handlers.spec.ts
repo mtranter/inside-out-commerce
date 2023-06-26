@@ -1,5 +1,5 @@
 import { handlers } from "./api-handlers";
-import { CreateMemberSchema, Member } from "./../schema";
+import { CreateMemberSchema, Member } from "../schema";
 import { TxOutboxMessageFactory } from "dynamodb-kafka-outbox";
 import { generateMock } from "@anatine/zod-mock";
 
@@ -32,9 +32,6 @@ describe("handlers", () => {
       Promise.resolve(db[hk + "-" + sk] as any),
   };
 
-  const txOutboxMessageFactory = TxOutboxMessageFactory({
-    registry: mockSchemaRegistry,
-  });
   beforeEach(() => {
     db = {};
   });
@@ -45,7 +42,7 @@ describe("handlers", () => {
         keySchemaId: 1,
         valueSchemaId: 2,
       },
-      txOutboxMessageFactory,
+      mockSchemaRegistry,
       mockTable
     );
     const request = {
