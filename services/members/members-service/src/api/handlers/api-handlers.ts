@@ -93,8 +93,7 @@ export const handlers = (
           item: {
             hk: `MEMBER_CREATED_EVENT#${id}`,
             sk: `#EVENT#${eventId}`,
-            ...event,
-            isEvent: true,
+            ...event
           },
         },
       ]);
