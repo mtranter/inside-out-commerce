@@ -22,7 +22,7 @@
     "@inside-out-bank/middleware": "*",
     "@inside-out-bank/models": "*",
     "@kafkajs/confluent-schema-registry": "^3.3.0",
-    "dynamodb-kafka-outbox": "0.2.0-beta.2",
+    "dynamodb-kafka-outbox": "0.3.0-beta.0",
     "funamots": "^3.4.2",
     "kafkajs": "^2.2.4",
     "lambda-log": "^3.1.0",

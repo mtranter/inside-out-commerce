@@ -90,8 +90,8 @@ importers:
         specifier: ^3.3.0
         version: 3.3.0
       dynamodb-kafka-outbox:
-        specifier: 0.2.0-beta.2
-        version: 0.2.0-beta.2
+        specifier: 0.3.0-beta.0
+        version: 0.3.0-beta.0
       funamots:
         specifier: ^3.4.2
         version: 3.4.2(@aws-sdk/client-dynamodb@3.341.0)
@@ -3750,8 +3750,8 @@ packages:
     resolution: {integrity: sha512-jtD6YG370ZCIi/9GTaJKQxWTZD045+4R4hTk/x1UyoqadyJ9x9CgSi1RlVDQF8U2sxLLSnFkCaMihqljHIWgMg==}
     dev: true
 
-  /dynamodb-kafka-outbox@0.2.0-beta.2:
-    resolution: {integrity: sha512-Ae0gkybXBAM7PvVd3i9oYjDOaa0JY9P2MwcgqscRjEDQ5QzNWTja4YnsGT9vTcVhggKZ5M0JkDeCbGknAuMuKA==}
+  /dynamodb-kafka-outbox@0.3.0-beta.0:
+    resolution: {integrity: sha512-IaGoQBtBR43U0xRQ2M0+4CRDvw7xw8AfRez013FfQldMVU4kXE6tbK2D4cqWLh/40377Xtq/GbGj0BX3BkGqfQ==}
     dependencies:
       '@aws-sdk/util-dynamodb': 3.359.0
       '@kafkajs/confluent-schema-registry': 3.3.0
