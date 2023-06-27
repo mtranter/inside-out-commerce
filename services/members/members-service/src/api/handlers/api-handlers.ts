@@ -2,16 +2,14 @@ import { Ok, Created, NotFound } from "@ezapi/router-core";
 import { Member } from "./../schema";
 import { Table } from "funamots";
 import { v4 as uuidv4 } from "uuid";
-import { TxOutboxMessageFactory } from "dynamodb-kafka-outbox";
+import { TxOutboxMessageFactory, TxOutboxMessage } from "dynamodb-kafka-outbox";
 import { RouteHandlers } from "./../routes";
-import { TxOutboxMessage } from "dynamodb-kafka-outbox/dist/tx-outbox";
 import type { MemberPaylodT } from "./../schema";
 import { SchemaRegistry } from "@kafkajs/confluent-schema-registry";
 
 export type EventDto = {
   hk: string;
   sk: string;
-  isEvent: true;
 } & TxOutboxMessage;
 
 export type MemberDto = {
