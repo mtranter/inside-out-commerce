@@ -1,8 +1,9 @@
 {
-  "name": "inside-out-bank",
+  "name": "inside-out-commerce",
   "private": true,
   "scripts": {
     "build": "lerna run build",
+    "check": "lerna run check",
     "dev": "lerna run dev --parallel",
     "test": "lerna run test",
     "test:int": "lerna run test:int",

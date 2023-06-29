@@ -10,7 +10,7 @@ terraform {
     }
   }
   backend "s3" {
-      bucket = "inside-out-bank-tfstate"
+      bucket = "inside-out-commerce-tfstate"
       key    = "environment/terraform.tfstate"
       region = "ap-southeast-2"
   }

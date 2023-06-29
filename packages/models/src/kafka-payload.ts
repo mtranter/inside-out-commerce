@@ -1,8 +1,6 @@
 import { ZodType, z } from "zod";
 
-export const KafkaPayload = <T extends ZodType>(
-  t: T
-) =>
+export const KafkaPayload = <T extends ZodType>(t: T) =>
   z.object({
     eventId: z.string(),
     eventType: z.string(),
@@ -15,5 +13,12 @@ export const KafkaPayload = <T extends ZodType>(
     }),
   });
 
-const PhantomPayload = KafkaPayload(z.object({}))
-export type KafkaPayload = z.infer<typeof PhantomPayload>;
+class DummyWrapper<T extends ZodType> {
+  wrap(t: T) {
+    return KafkaPayload(t);
+  }
+}
+
+export type KafkaPayload<T extends ZodType> = z.infer<
+  ReturnType<DummyWrapper<T>["wrap"]>
+>;

@@ -11,3 +11,6 @@ export const LoggingMiddleware = <A extends {}, B>({
     log.info("Request completed", { req, response });
     return response;
   });
+
+
+  

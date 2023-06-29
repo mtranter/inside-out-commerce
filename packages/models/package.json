@@ -1,9 +1,9 @@
 {
-  "name": "@inside-out-bank/models",
+  "name": "@inside-out-commerce/models",
   "version": "0.0.0",
   "description": "> TODO: description",
   "author": "Mark Tranter <mark.a.tranter@gmail.com>",
-  "homepage": "https://github.com/mtranter/inside-out-bank#readme",
+  "homepage": "https://github.com/mtranter/inside-out-commerce#readme",
   "license": "ISC",
   "main": "dist/index.js",
   "scripts": {
@@ -16,9 +16,9 @@
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mtranter/inside-out-bank.git"
+    "url": "git+https://github.com/mtranter/inside-out-commerce.git"
   },
   "bugs": {
-    "url": "https://github.com/mtranter/inside-out-bank/issues"
+    "url": "https://github.com/mtranter/inside-out-commerce/issues"
   }
 }

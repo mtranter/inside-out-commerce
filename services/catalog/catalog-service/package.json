@@ -1,0 +1,51 @@
+{
+  "name": "@inside-out-commerce/catalog-service",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "Mark Tranter <mark.a.tranter@gmail.com>",
+  "homepage": "https://github.com/mtranter/inside-out-commerce#readme",
+  "license": "ISC",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "rollup -c",
+    "check": "tsc --noEmit",
+    "test": "jest ./src --coverage --silent",
+    "test:int": "jest -c ./jest.int.config.js ./src",
+    "gen-avro": "node -r ts-node/register ./scripts/gen-avro.ts"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.341.0",
+    "@aws-sdk/util-dynamodb": "^3.341.0",
+    "@ezapi/aws-rest-api-backend": "^2.0.1-beta.0",
+    "@ezapi/json-middleware": "^2.0.1-beta.0",
+    "@ezapi/router-core": "^2.0.1-beta.0",
+    "@ezapi/zod-middleware": "^2.0.1-beta.0",
+    "@inside-out-commerce/middleware": "*",
+    "@inside-out-commerce/models": "*",
+    "@kafkajs/confluent-schema-registry": "^3.3.0",
+    "dynamodb-kafka-outbox": "0.3.0-beta.0",
+    "funamots": "^3.4.2",
+    "kafkajs": "^2.2.4",
+    "lambda-log": "^3.1.0",
+    "uuid": "^9.0.0",
+    "zod": "^3.21.4"
+  },
+  "devDependencies": {
+    "@anatine/zod-mock": "^3.12.0",
+    "@aws-sdk/client-ssm": "^3.342.0",
+    "@shelf/jest-dynamodb": "^3.4.1",
+    "@types/aws-lambda": "^8.10.114",
+    "@types/jest": "^29.5.0",
+    "@types/lambda-log": "^3.0.0",
+    "@types/uuid": "^9.0.1",
+    "undici": "^5.22.1",
+    "wait-for-expect": "^3.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mtranter/inside-out-commerce.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mtranter/inside-out-commerce/issues"
+  }
+}
