@@ -31,9 +31,8 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - uses: actions/setup-java@v3
         with:
-          distribution: 'corretto'
+          distribution: 'adopt'
           java-version: '17'
-          cache: 'maven'
           java-package: jre
       - run: pnpm i --frozen-lockfile
       - run: pnpm build
