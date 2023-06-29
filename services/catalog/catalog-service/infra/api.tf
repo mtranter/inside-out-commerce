@@ -75,6 +75,30 @@ resource "aws_api_gateway_stage" "this" {
   deployment_id = aws_api_gateway_deployment.this.id
   rest_api_id   = aws_api_gateway_rest_api.this.id
   stage_name    = local.stage_name
+  xray_tracing_enabled = true
+
+  access_log_settings {
+    destination_arn = module.log_group.log_group.arn
+    format = replace(<<EOF
+{ "requestId":"$context.requestId",
+  "ip": "$context.identity.sourceIp",
+  "caller":"$context.identity.caller",
+  "user":"$context.identity.user",
+  "requestTime":"$context.requestTime",
+  "httpMethod":"$context.httpMethod",
+  "resourcePath":"$context.resourcePath",
+  "path":"$context.path",
+  "status":"$context.status",
+  "protocol":"$context.protocol",
+  "error": "$context.error.message",
+  "integrationError": "$context.integrationErrorMessage",
+  "xrayTraceId": "$context.xrayTraceId",
+  "integrationLatency": "$context.integration.latency",
+  "responseLatency": "$context.responseLatency"
+}
+EOF
+    , "\n", "")
+  }
 }
 
 module "api_integration" {
