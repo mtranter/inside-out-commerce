@@ -9,7 +9,7 @@
   "scripts": {
     "build": "rollup -c",
     "check": "tsc --noEmit",
-    "test": "jest ./src --silent --runInBand",
+    "test": "jest ./src --silent",
     "test:int": "jest -c ./jest.int.config.js ./src",
     "gen-avro": "node -r ts-node/register ./scripts/gen-avro.ts"
   },
