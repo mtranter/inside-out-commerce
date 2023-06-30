@@ -32,7 +32,6 @@ export const handlers = (
         payload: req.safeBody,
         metadata: {
           traceId: process.env._X_AMZN_TRACE_ID || "",
-          parentEventId: "",
           originator: req.jwt.sub,
         },
       };

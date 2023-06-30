@@ -11,3 +11,7 @@ output "test_client_secret" {
 output "api_url" {
   value = aws_api_gateway_stage.this.invoke_url
 }
+
+output "key_schema_id" {
+  value = module.events_topic.key_schema_id
+}
