@@ -41,7 +41,7 @@ export const handlers = (
         key: uuidv4(),
         keySchemaId,
         valueSchemaId,
-        value: eventBody,
+        value: eventBody
       });
       await repo.put(req.safeBody, event);
       return Created(req.safeBody, `/products/${req.safeBody.sku}`);

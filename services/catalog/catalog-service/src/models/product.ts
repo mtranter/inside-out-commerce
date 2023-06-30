@@ -13,7 +13,7 @@ export const ProductSchema = z.object({
 });
 
 export type Product = z.infer<typeof ProductSchema>;
-export const ProductTopicKeyPayloadSchema = KafkaPayload(z.string());
+export const ProductTopicKeyPayloadSchema = z.string();
 export const ProductTopicValuePayloadSchema = KafkaPayload(ProductSchema);
 
 export type ProductTopicKeyPayload = z.infer<typeof ProductTopicKeyPayloadSchema>;
