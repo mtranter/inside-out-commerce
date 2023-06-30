@@ -71,6 +71,11 @@ resource "aws_api_gateway_deployment" "this" {
   }
 }
 
+resource "aws_cloudwatch_log_group" "api_logs" {
+  name              = "/api/${var.project_name}-${var.service_name}-${var.environment}/${local.stage_name}" 
+  retention_in_days = 1
+}
+
 resource "aws_api_gateway_stage" "this" {
   deployment_id = aws_api_gateway_deployment.this.id
   rest_api_id   = aws_api_gateway_rest_api.this.id
@@ -78,7 +83,7 @@ resource "aws_api_gateway_stage" "this" {
   xray_tracing_enabled = true
 
   access_log_settings {
-    destination_arn = module.log_group.log_group.arn
+    destination_arn = aws_cloudwatch_log_group.api_logs.arn
     format = replace(<<EOF
 { "requestId":"$context.requestId",
   "ip": "$context.identity.sourceIp",
