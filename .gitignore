@@ -8,3 +8,4 @@ handler.zip
 .terraform.lock.hcl
 api.zip
 avro/
+coverage/
