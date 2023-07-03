@@ -6,18 +6,18 @@ import { SchemaRegistry } from "@kafkajs/confluent-schema-registry";
 import { KafkaPayload } from "@inside-out-commerce/models";
 import waitForExpect from "wait-for-expect";
 import { CreateProductRequest } from "./api/routes/routes";
-import { createSignedFetcher } from "aws-sigv4-fetch";
 
 jest.setTimeout(10000);
-const AWS_REGION = "ap-southeast-2";
 const ssm = new SSM({
-  region: AWS_REGION,
+  region: "ap-southeast-2",
 });
 
 type ApiConfig = {
+  authEndpoint: string;
   clientId: string;
   clientSecret: string;
   apiBaseUrl: string;
+  scope: string;
 };
 type KafkaConfig = {
   brokers: string;
@@ -62,18 +62,27 @@ const getSchemaRegistryConfig = () =>
 const makeAuthedRequest =
   (cfg: ApiConfig) =>
   async (path: string, method: string, data?: unknown | undefined) => {
-    const fetch = createSignedFetcher({
-      service: "execute-api",
-      region: AWS_REGION,
-      credentials: {
-        accessKeyId: cfg.clientId,
-        secretAccessKey: cfg.clientSecret,
+    const jwtEndpoint = `${cfg.authEndpoint}/oauth2/token`;
+    const token = (await fetch(jwtEndpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        authorization:
+          "Basic " +
+          Buffer.from(`${cfg.clientId}:${cfg.clientSecret}`).toString("base64"),
       },
-    });
-
+      body: `grant_type=client_credentials&client_id=${cfg.clientId}&scope=${cfg.scope}`,
+    })
+      .then((r) => r.json())
+      .catch((e) => {
+        console.error(e);
+        throw e;
+      })) as { access_token: string };
+    const idToken = token.access_token;
     return await fetch(`${cfg.apiBaseUrl}${path}`, {
       method,
       headers: {
+        Authorization: `Bearer ${idToken}`,
         "content-type": "application/json",
         accept: "application/json",
       },
