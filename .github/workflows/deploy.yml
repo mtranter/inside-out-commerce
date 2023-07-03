@@ -81,6 +81,9 @@ jobs:
   product-service-acceptance-test:
     needs: [deploy-catalog-service]
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2
@@ -91,6 +94,11 @@ jobs:
           node-version: 18
           cache: pnpm
           registry-url: 'https://registry.npmjs.org'
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::340502884936:role/InsideoutGithubActions
+          aws-region: ap-southeast-2
       - run: pnpm i --frozen-lockfile
       - run: pnpm build
         name: Build
