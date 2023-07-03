@@ -23,7 +23,6 @@ data "aws_iam_policy_document" "allow_api" {
 
 resource "aws_iam_access_key" "test_credentials" {
   user    = aws_iam_user.test_api_user.name
-  pgp_key = "keybase:some_person_that_exists"
 }
 
 resource "aws_iam_user_policy" "allow_api" {

@@ -44,8 +44,6 @@ jobs:
         name: Build
       - run: pnpm test
         name: Test
-        env:
-          TS_JEST_LOG: 'pretty'
       - run: pnpm gen-avro
         name: Generate Avro
       - name: Upload service artifacts
@@ -53,10 +51,10 @@ jobs:
         with:
           name: src
           path: |
-            services/**/dist
-            services/**/infra
-            services/**/avro
-            infra/*
+            services/*/*/dist
+            services/*/*/infra
+            services/*/*/avro
+            infra/modules/*
 
   deploy-catalog-service:
     needs: [build, deploy-global]
