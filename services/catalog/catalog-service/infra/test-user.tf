@@ -59,7 +59,6 @@ resource "aws_ssm_parameter" "api_test_config" {
     clientSecret = aws_iam_access_key.test_credentials.secret
     apiBaseUrl   = aws_api_gateway_stage.this.invoke_url
   })
-
 }
 
 // store Kafka brokers and credentials in a JSON encoded SSM Secret
