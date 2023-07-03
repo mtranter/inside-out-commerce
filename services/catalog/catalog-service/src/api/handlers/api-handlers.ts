@@ -31,8 +31,7 @@ export const handlers = (
         eventType: "com.insideout.product.created",
         payload: req.safeBody,
         metadata: {
-          traceId: process.env._X_AMZN_TRACE_ID || "",
-          originator: req.jwt.sub,
+          traceId: process.env._X_AMZN_TRACE_ID || ""
         },
       };
       const event = await txOutboxMessageFactory.createOutboxMessage({

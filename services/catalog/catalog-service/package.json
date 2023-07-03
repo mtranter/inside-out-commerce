@@ -16,10 +16,10 @@
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.341.0",
     "@aws-sdk/util-dynamodb": "^3.341.0",
-    "@ezapi/aws-rest-api-backend": "^2.0.1-beta.0",
-    "@ezapi/json-middleware": "^2.0.1-beta.0",
-    "@ezapi/router-core": "^2.0.1-beta.0",
-    "@ezapi/zod-middleware": "^2.0.1-beta.0",
+    "@ezapi/aws-rest-api-backend": "^2.1.0-beta.0",
+    "@ezapi/json-middleware": "^2.1.0-beta.0",
+    "@ezapi/router-core": "^2.1.0-beta.0",
+    "@ezapi/zod-middleware": "^2.1.0-beta.0",
     "@inside-out-commerce/middleware": "*",
     "@inside-out-commerce/models": "*",
     "@kafkajs/confluent-schema-registry": "^3.3.0",
@@ -38,6 +38,7 @@
     "@types/jest": "^29.5.0",
     "@types/lambda-log": "^3.0.0",
     "@types/uuid": "^9.0.1",
+    "aws-sigv4-fetch": "^1.3.0",
     "undici": "^5.22.1",
     "wait-for-expect": "^3.0.2"
   },

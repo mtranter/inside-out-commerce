@@ -17,8 +17,10 @@
     "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-node-resolve": "^15.0.2",
     "@rollup/plugin-typescript": "^11.1.0",
+    "@types/formidable": "^2.0.6",
     "@types/jest": "^29.5.0",
     "@types/node": "^18.15.11",
+    "admin-ui": "^3.3.13",
     "jest": "^29.5.0",
     "lerna": "^7.0.0",
     "rollup": "^3.20.6",
@@ -26,5 +28,8 @@
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4",
     "zod-avsc": "^0.5.0"
+  },
+  "dependencies": {
+    "formidable": "^3.5.0"
   }
 }

@@ -22,17 +22,10 @@ export const CreateProductRequest = z.object({
 
 export type RouteHandlers = HandlersOf<ReturnType<typeof routes>>;
 
-export const routes = (
-  idTokenEndpoint: string,
-  testCognitoClientId: string
-) => {
+export const routes = () => {
   return RouteBuilder.withMiddleware(LoggingMiddleware({ log }))
     .withMiddleware(JsonParserMiddlerware)
     .route("healthcheck", "GET", "/healthcheck")
-    .withMiddleware(JwtMiddleware({ testClientId: testCognitoClientId, log }))
-    .withMiddleware(
-      IdTokenMiddleware({ userInfoEndpoint: idTokenEndpoint, log })
-    )
     .route(
       "createProduct",
       "POST",

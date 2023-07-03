@@ -8,20 +8,15 @@ describe("routes", () => {
     getProduct: () => Ok("Ok"),
     listProductsByCategory: () => Ok("Ok"),
     listProductsBySubCategory: () => Ok("Ok"),
-  }
+  };
   it("should return a route", async () => {
-    const sut = routes(
-      "test",
-      "123"
-    ).build(mockHandlers);
+    const sut = routes().build(mockHandlers);
 
     const result = await sut.run({
       method: "GET",
       url: "/products/1",
       headers: {
         "Content-Type": "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqb2huIHNtaXRoIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.Uuiwcuj0PLPxnZdy3PWhaKvx9wPoF2w1iX7GSpo3s4E",
       },
       query: {},
     });

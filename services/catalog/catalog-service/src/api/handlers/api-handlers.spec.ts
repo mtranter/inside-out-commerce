@@ -24,8 +24,6 @@ describe("handlers", () => {
     it("should persist product and product created event", async () => {
       const request = {
         safeBody: postedProduct,
-        jwt: { sub: "123", client_id: "123", isTestClient: true },
-        userInfo: { sub: "123", email: "johnsmith@gmail.com" },
         jsonBody: {},
         pathParams: {},
         url: "/products" as const,
@@ -58,8 +56,6 @@ describe("handlers", () => {
   describe("read endpoints", () => {
     const postedProduct = buildTestProductRequest();
     const request = {
-      jwt: { sub: "123", client_id: "123", isTestClient: true },
-      userInfo: { sub: "123", email: "johnsmith@gmail.com" },
       jsonBody: {},
       pathParams: {
         sku: postedProduct.sku,

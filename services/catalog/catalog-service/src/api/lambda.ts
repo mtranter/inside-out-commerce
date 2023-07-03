@@ -24,6 +24,6 @@ const _handers = handlers(
   ProductRepo({ tableName: config.tableName, client: new DynamoDB({}) })
 );
 
-const api = routes(config.idTokenEndpoint, config.testClientId).build(_handers);
+const api = routes().build(_handers);
 
 export const handler = restApiHandler(api, config.stage);
