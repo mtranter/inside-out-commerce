@@ -145,7 +145,7 @@ describe("Product API", () => {
   describe("healthcheck endpoint", () => {
     it("should return 200", async () => {
       const _makeRequest = makeAuthedRequest(apiConfig);
-      const response = await _makeRequest("/healthcheck", "GET");
+      const response = await _makeRequest("/catalog/healthcheck", "GET");
       expect(response.status).toEqual(200);
     });
   });
@@ -163,7 +163,7 @@ describe("Product API", () => {
       await new Promise((resolve) => setTimeout(resolve, 3000));
       kafkaMessages = messages;
       consumer = _consumer;
-      response = await _makeRequest("/products", "POST", product);
+      response = await _makeRequest("/catalog", "POST", product);
     });
     afterAll(async () => {
       await consumer?.disconnect();
@@ -176,7 +176,7 @@ describe("Product API", () => {
       expect(returnedProduct).toMatchObject(product);
       const _makeRequest = makeAuthedRequest(apiConfig);
       const getResponse = await _makeRequest(
-        `/products/${returnedProduct.sku}`,
+        `/catalog/${returnedProduct.sku}`,
         "GET"
       );
       const fetchedProduct = await getResponse.json();

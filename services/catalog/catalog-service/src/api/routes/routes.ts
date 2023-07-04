@@ -29,10 +29,11 @@ export const routes = () => {
     .route(
       "createProduct",
       "POST",
-      "/products",
+      "/",
       ZodMiddleware(CreateProductRequest)
     )
-    .route("getProduct", "GET", "/products/{sku}")
-    .route("listProductsByCategory", "GET", "/products/category/{category}?{nextToken?}")
-    .route("listProductsBySubCategory", "GET", "/products/subcategory/{subCategory}?{nextToken?}")
+    .route("getProduct", "GET", "/{sku}")
+    .route("listProducts", "GET", "/?{nextToken?}")
+    .route("listProductsByCategory", "GET", "/category/{category}?{nextToken?}")
+    .route("listProductsBySubCategory", "GET", "/subcategory/{subCategory}?{nextToken?}")
 };

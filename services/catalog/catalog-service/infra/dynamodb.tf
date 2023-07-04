@@ -9,6 +9,39 @@ module "dynamodb" {
     name = "sk"
     type = "S"
   }
+  global_secondary_indexes = [{
+    name = "gsi1"
+    hash_key = {
+      name = "category"
+      type = "S"
+    }
+    range_key = {
+      name = "hk"
+      type = "S"
+    }
+    }, {
+    name = "gsi2"
+    hash_key = {
+      name = "subcategory"
+      type = "S"
+    }
+    range_key = {
+      name = "hk"
+      type = "S"
+    }
+
+    }, {
+    name = "gsi3"
+    hash_key = {
+      name = "sk"
+      type = "S"
+    }
+    range_key = {
+      name = "hk"
+      type = "S"
+    }
+
+    }]
   point_in_time_recovery_enabled = true
   stream_enabled                 = true
 }

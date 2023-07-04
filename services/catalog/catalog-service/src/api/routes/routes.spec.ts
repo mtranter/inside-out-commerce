@@ -5,6 +5,7 @@ describe("routes", () => {
   const mockHandlers: RouteHandlers = {
     healthcheck: () => Ok({ status: "OK" }),
     createProduct: () => Ok("Ok"),
+    listProducts: () => Ok("Ok"),
     getProduct: () => Ok("Ok"),
     listProductsByCategory: () => Ok("Ok"),
     listProductsBySubCategory: () => Ok("Ok"),
@@ -14,7 +15,7 @@ describe("routes", () => {
 
     const result = await sut.run({
       method: "GET",
-      url: "/products/1",
+      url: "/1",
       headers: {
         "Content-Type": "application/json",
       },

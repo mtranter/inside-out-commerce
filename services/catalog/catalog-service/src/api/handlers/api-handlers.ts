@@ -23,6 +23,12 @@ export const handlers = (
 
   return {
     healthcheck: async () => Ok({ status: "ok" }),
+    listProducts: async (req) => {
+      const { products, nextToken } = await repo.listProducts(
+        req.queryParams.nextToken
+      );
+      return Ok({ products, nextToken });
+    },
     createProduct: async (req) => {
       const eventId = uuidv4();
       const eventBody: ProductTopicValuePayload = {
@@ -31,7 +37,7 @@ export const handlers = (
         eventType: "com.insideout.product.created",
         payload: req.safeBody,
         metadata: {
-          traceId: process.env._X_AMZN_TRACE_ID || ""
+          traceId: process.env._X_AMZN_TRACE_ID || "",
         },
       };
       const event = await txOutboxMessageFactory.createOutboxMessage({
@@ -39,7 +45,7 @@ export const handlers = (
         key: uuidv4(),
         keySchemaId,
         valueSchemaId,
-        value: eventBody
+        value: eventBody,
       });
       await repo.put(req.safeBody, event);
       return Created(req.safeBody, `/products/${req.safeBody.sku}`);
@@ -52,12 +58,18 @@ export const handlers = (
       return Ok(product);
     },
     listProductsByCategory: async (req) => {
-      const products = await repo.listProductByCategory(req.pathParams.category, req.queryParams.nextToken);
+      const products = await repo.listProductByCategory(
+        req.pathParams.category,
+        req.queryParams.nextToken
+      );
       return Ok(products);
     },
     listProductsBySubCategory: async (req) => {
-      const products = await repo.listProductBySubCategory(req.pathParams.subCategory, req.queryParams.nextToken);
+      const products = await repo.listProductBySubCategory(
+        req.pathParams.subCategory,
+        req.queryParams.nextToken
+      );
       return Ok(products);
-    }
+    },
   };
 };

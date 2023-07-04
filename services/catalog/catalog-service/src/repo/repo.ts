@@ -35,6 +35,7 @@ export const buildTable = (tableName: string, client?: DynamoDB) =>
     .withKey("hk", "sk")
     .withGlobalIndex("gsi1", "category", "hk")
     .withGlobalIndex("gsi2", "subcategory", "hk")
+    .withGlobalIndex("gsi3", "sk", "hk")
     .build({ client: client ?? new DynamoDB({}) });
 
 export const ProductRepo = ({
@@ -52,6 +53,19 @@ export const ProductRepo = ({
         sk: "#PRODUCT#",
       });
       return product?.data;
+    },
+    listProducts: async (next) => {
+      const startKey = next ? decodeBase64Object(next) : undefined;
+      const result = await productsTable.indexes.gsi3.query<ProductDto>("#PRODUCT#", {
+        startKey,
+        pageSize: 100,
+      });
+      return {
+        products: result.records.map((i) => i.data),
+        nextToken: result.nextStartKey
+          ? base64EncodeObject(result.nextStartKey)
+          : undefined,
+      };
     },
     put: async (product: Product, event: TxOutboxMessage) => {
       await productsTable.transactPut([

@@ -5,6 +5,7 @@ import { routes } from "./routes";
 import { handlers } from "./handlers";
 import { config } from "./config";
 import { ProductRepo } from "./../repo";
+import { ApiBuilder } from "@ezapi/router-core";
 
 const schemaRegistry = new SchemaRegistry({
   host: config.schemaRegistryHost,
@@ -24,6 +25,6 @@ const _handers = handlers(
   ProductRepo({ tableName: config.tableName, client: new DynamoDB({}) })
 );
 
-const api = routes().build(_handers);
+const api = ApiBuilder.build({ "/catalog": routes().build(_handers) });
 
 export const handler = restApiHandler(api, config.stage);

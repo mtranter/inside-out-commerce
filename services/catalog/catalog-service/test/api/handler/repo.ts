@@ -21,6 +21,12 @@ export const mockRepo = (): MockRepo => {
     get: async (sku: string) => {
       return productsState[sku];
     },
+    listProducts: async (next?: string) => {
+      return {
+        products: Object.values(productsState),
+        nextToken: undefined,
+      };
+    },
     put: async (product, event) => {
       productsState[product.sku] = product;
       eventsState.push(event);
