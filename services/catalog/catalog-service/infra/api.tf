@@ -26,7 +26,6 @@ module "api_function" {
     SCHEMA_REGISTRY_USERNAME = data.aws_ssm_parameter.schema_registry_username.value
     SCHEMA_REGISTRY_PASSWORD = data.aws_ssm_parameter.schema_registry_password.value
     ID_TOKEN_ENDPOINT        = "https://${var.project_name}-${var.environment}.auth.${data.aws_region.current.name}.amazoncognito.com/oauth2/token"
-    TEST_CLIENT_ID           = aws_cognito_user_pool_client.this.id
 
   }
 }
