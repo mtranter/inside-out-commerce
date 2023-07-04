@@ -78,7 +78,7 @@ jobs:
           terraform apply -auto-approve -var-file ./prod.tfvars
         name: Deploy
 
-  product-service-acceptance-test:
+  catalog-service-acceptance-test:
     needs: [deploy-catalog-service]
     runs-on: ubuntu-latest
     permissions:

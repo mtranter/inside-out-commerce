@@ -11,7 +11,7 @@ terraform {
   }
   backend "s3" {
       bucket = "inside-out-commerce-tfstate"
-      key    = "services/product-service/terraform.tfstate"
+      key    = "services/catalog-service/terraform.tfstate"
       region = "ap-southeast-2"
   }
 }

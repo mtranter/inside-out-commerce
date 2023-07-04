@@ -48,15 +48,15 @@ const getJsonConfig = async <T>(name: string): Promise<T> => {
 };
 const getApiConfig = () =>
   getJsonConfig<ApiConfig>(
-    "/inside-out-commerce/prod/product-service/test-user/api-config"
+    "/inside-out-commerce/prod/catalog-service/test-user/api-config"
   );
 const getKafkaConfig = () =>
   getJsonConfig<KafkaConfig>(
-    "/inside-out-commerce/prod/product-service/test-user/kafka-config"
+    "/inside-out-commerce/prod/catalog-service/test-user/kafka-config"
   );
 const getSchemaRegistryConfig = () =>
   getJsonConfig<SchemaRegistryConfig>(
-    "/inside-out-commerce/prod/product-service/test-user/schema-registry-config"
+    "/inside-out-commerce/prod/catalog-service/test-user/schema-registry-config"
   );
 
 const makeAuthedRequest =
@@ -95,7 +95,7 @@ const setupKafkaConsumer = async (
   schemaCfg: SchemaRegistryConfig
 ) => {
   const consumer = new Kafka({
-    clientId: "product-service",
+    clientId: "catalog-service",
     brokers: kafkaCfg.brokers.split(","),
     ssl: true,
     sasl: {

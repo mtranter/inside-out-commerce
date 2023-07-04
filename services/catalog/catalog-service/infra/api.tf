@@ -118,3 +118,9 @@ module "api_integration" {
 
   depends_on = [aws_api_gateway_rest_api.this]
 }
+
+resource "aws_ssm_parameter" "schema_registry_endpoint" {
+  name  = "/${var.project_name}/${var.environment}/${var.service_name}/api_url"
+  type  = "String"
+  value = aws_api_gateway_stage.this.invoke_url
+}
