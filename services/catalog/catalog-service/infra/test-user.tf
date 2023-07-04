@@ -2,27 +2,34 @@ locals {
   consumer_group_id = "${var.service_name}-test"
 }
 
-resource "aws_cognito_user_pool_client" "this" {
-  name                                 = "TestClient"
-  user_pool_id                         = data.aws_cognito_user_pools.this.ids[0]
-  generate_secret                      = true
-  allowed_oauth_flows_user_pool_client = true
-  allowed_oauth_flows                  = ["client_credentials"]
-  allowed_oauth_scopes                 = ["${aws_cognito_resource_server.api.identifier}/${local.execute_scope}"]
-  supported_identity_providers         = ["COGNITO"]
-  explicit_auth_flows                  = ["ALLOW_USER_PASSWORD_AUTH", "ALLOW_REFRESH_TOKEN_AUTH"]
-  access_token_validity                = 5
-  id_token_validity                    = 5
-  refresh_token_validity               = 5
-  token_validity_units {
-    access_token  = "minutes"
-    id_token      = "minutes"
-    refresh_token = "days"
-  }
+// test iam user for API GW
+resource "aws_iam_user" "test_api_user" {
+  name = "${var.service_name}-test-user-${var.environment}"
+}
 
-  depends_on = [
-    aws_cognito_resource_server.api
-  ]
+
+data "aws_iam_policy_document" "allow_api" {
+  statement {
+    actions = [
+      "execute-api:Invoke"
+    ]
+
+    resources = [
+      aws_api_gateway_rest_api.this.execution_arn,
+      "${aws_api_gateway_rest_api.this.execution_arn}/*"
+    ]
+  }
+}
+
+resource "aws_iam_access_key" "test_credentials" {
+  user    = aws_iam_user.test_api_user.name
+}
+
+resource "aws_iam_user_policy" "allow_api" {
+  name = "${var.service_name}-test-user-${var.environment}-allow-api"
+  user = aws_iam_user.test_api_user.name
+
+  policy = data.aws_iam_policy_document.allow_api.json
 }
 
 module "kafka_test_user" {
@@ -47,12 +54,10 @@ resource "aws_ssm_parameter" "api_test_config" {
   type = "SecureString"
   value = jsonencode({
     authEndpoint = data.aws_ssm_parameter.auth_endpoint.value
-    clientId     = aws_cognito_user_pool_client.this.id
-    clientSecret = aws_cognito_user_pool_client.this.client_secret
-    scope        = "${aws_cognito_resource_server.api.identifier}/${local.execute_scope}"
+    clientId     = aws_iam_access_key.test_credentials.id
+    clientSecret = aws_iam_access_key.test_credentials.secret
     apiBaseUrl   = aws_api_gateway_stage.this.invoke_url
   })
-
 }
 
 // store Kafka brokers and credentials in a JSON encoded SSM Secret

@@ -14,8 +14,7 @@ const valueSchemaId = Number(envOrThrow("VALUE_SCHEMA_ID"));
 const schemaRegistryHost = envOrThrow("SCHEMA_REGISTRY_HOST");
 const schemaRegistryUsername = envOrThrow("SCHEMA_REGISTRY_USERNAME");
 const schemaRegistryPassword = envOrThrow("SCHEMA_REGISTRY_PASSWORD");
-const idTokenEndpoint = envOrThrow("ID_TOKEN_ENDPOINT");
-const testClientId = envOrThrow("TEST_CLIENT_ID");
+
 
 export const config = {
   stage,
@@ -26,6 +25,4 @@ export const config = {
   schemaRegistryHost,
   schemaRegistryUsername,
   schemaRegistryPassword,
-  idTokenEndpoint,
-  testClientId,
 };

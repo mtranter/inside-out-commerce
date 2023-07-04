@@ -17,7 +17,6 @@ type ApiConfig = {
   clientId: string;
   clientSecret: string;
   apiBaseUrl: string;
-  scope: string;
 };
 type KafkaConfig = {
   brokers: string;

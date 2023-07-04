@@ -51,14 +51,6 @@ resource "aws_cognito_resource_server" "api" {
 resource "aws_api_gateway_rest_api" "this" {
   name = "${var.project_name}-${var.service_name}-${var.environment}"
 }
-
-resource "aws_api_gateway_authorizer" "this" {
-  name          = "${var.project_name}-${var.service_name}-${var.environment}"
-  rest_api_id   = aws_api_gateway_rest_api.this.id
-  type          = "COGNITO_USER_POOLS"
-  provider_arns = [data.aws_cognito_user_pools.this.arns[0]]
-}
-
 resource "aws_api_gateway_deployment" "this" {
   rest_api_id = aws_api_gateway_rest_api.this.id
 
@@ -111,9 +103,7 @@ module "api_integration" {
   api_name      = aws_api_gateway_rest_api.this.name
   function_name = module.api_function.function.id
   authorizer = {
-    type          = "COGNITO_USER_POOLS"
-    authorizer_id = aws_api_gateway_authorizer.this.id
-    oauth_scopes  = ["${aws_cognito_resource_server.api.identifier}/${local.execute_scope}"]
+    type          = "IAM"
   }
 
   depends_on = [aws_api_gateway_rest_api.this]
