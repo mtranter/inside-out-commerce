@@ -102,7 +102,7 @@ module "api_integration" {
   api_name      = aws_api_gateway_rest_api.this.name
   function_name = module.api_function.function.id
   authorizer = {
-    type          = "IAM"
+    type          = "AWS_IAM"
   }
 
   depends_on = [aws_api_gateway_rest_api.this]
