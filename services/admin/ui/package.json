@@ -9,10 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@ezapi/router-core": "^2.1.0-beta.0",
-    "@ezapi/json-middleware": "^2.1.0-beta.0",
-    "@ezapi/nextjs-backend": "^2.1.0-beta.0",
-    "@ezapi/zod-middleware": "^2.1.0-beta.0",
+    "@ezapi/router-core": "^2.1.1-beta.0",
+    "@ezapi/json-middleware": "^2.1.1-beta.0",
+    "@ezapi/nextjs-backend": "^2.1.1-beta.0",
+    "@ezapi/zod-middleware": "^2.1.1-beta.0",
     "@types/node": "20.3.2",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",

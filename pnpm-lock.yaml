@@ -61,8 +61,8 @@ importers:
   packages/middleware:
     dependencies:
       '@ezapi/router-core':
-        specifier: ^2.1.0-beta.0
-        version: 2.1.0-beta.0
+        specifier: ^2.1.1-beta.0
+        version: 2.1.1-beta.0
 
   packages/models:
     dependencies:
@@ -73,17 +73,17 @@ importers:
   services/admin/ui:
     dependencies:
       '@ezapi/json-middleware':
-        specifier: ^2.1.0-beta.0
-        version: 2.1.0-beta.0
+        specifier: ^2.1.1-beta.0
+        version: 2.1.1-beta.0
       '@ezapi/nextjs-backend':
-        specifier: ^2.1.0-beta.0
-        version: 2.1.0-beta.0(express@4.18.2)(next@13.4.7)
+        specifier: ^2.1.1-beta.0
+        version: 2.1.1-beta.0(express@4.18.2)(next@13.4.7)
       '@ezapi/router-core':
-        specifier: ^2.1.0-beta.0
-        version: 2.1.0-beta.0
+        specifier: ^2.1.1-beta.0
+        version: 2.1.1-beta.0
       '@ezapi/zod-middleware':
-        specifier: ^2.1.0-beta.0
-        version: 2.1.0-beta.0(zod@3.21.4)
+        specifier: ^2.1.1-beta.0
+        version: 2.1.1-beta.0(zod@3.21.4)
       '@types/node':
         specifier: 20.3.2
         version: 20.3.2
@@ -137,17 +137,17 @@ importers:
         specifier: ^3.341.0
         version: 3.341.0
       '@ezapi/aws-rest-api-backend':
-        specifier: ^2.1.0-beta.0
-        version: 2.1.0-beta.0
+        specifier: ^2.1.1-beta.0
+        version: 2.1.1-beta.0
       '@ezapi/json-middleware':
-        specifier: ^2.1.0-beta.0
-        version: 2.1.0-beta.0
+        specifier: ^2.1.1-beta.0
+        version: 2.1.1-beta.0
       '@ezapi/router-core':
-        specifier: ^2.1.0-beta.0
-        version: 2.1.0-beta.0
+        specifier: ^2.1.1-beta.0
+        version: 2.1.1-beta.0
       '@ezapi/zod-middleware':
-        specifier: ^2.1.0-beta.0
-        version: 2.1.0-beta.0(zod@3.21.4)
+        specifier: ^2.1.1-beta.0
+        version: 2.1.1-beta.0(zod@3.21.4)
       '@inside-out-commerce/middleware':
         specifier: '*'
         version: link:../../../packages/middleware
@@ -3076,41 +3076,41 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: false
 
-  /@ezapi/aws-rest-api-backend@2.1.0-beta.0:
-    resolution: {integrity: sha512-+8tqLwkJ7elUPfOu7nvWafsgAWhqzEssdjNXiBH5QJ2dWH7p0Zu1CHlb/PNZShe+Jcx1iPyyE4Pu96j62KW4Fw==}
+  /@ezapi/aws-rest-api-backend@2.1.1-beta.0:
+    resolution: {integrity: sha512-D4pptLf/xiVLJIrCu+srh0VZAlRKg0G8CbHXJ/jWFzvzcyMXvYgNWY0sylP4aioDLw7J5lGnTiYNtsxpg1n2tQ==}
     dependencies:
-      '@ezapi/router-core': 2.1.0-beta.0
+      '@ezapi/router-core': 2.1.1-beta.0
     dev: false
 
-  /@ezapi/json-middleware@2.1.0-beta.0:
-    resolution: {integrity: sha512-vFVscQQi3n63KVhE7IflF5BdAHy0lTnKojRrjCp/pqR6M9NFwex1hJaSXL1b4iNJAVIyUQD6oVx2kZ+xKtzIYQ==}
+  /@ezapi/json-middleware@2.1.1-beta.0:
+    resolution: {integrity: sha512-dsE4RKtiJA4gc9Sna5UtjEjA7j8lnJqPhqWP3HXvznEtJ4YEor+2upV6Yw7fEUE7JsPYOXiMkbkIS7qshDYNGw==}
     dependencies:
       mime-match: 1.0.2
     dev: false
 
-  /@ezapi/nextjs-backend@2.1.0-beta.0(express@4.18.2)(next@13.4.7):
-    resolution: {integrity: sha512-7+UCkMD0lVvzhtkSkvhJbaks5vU2WrOzySh9cMBUONUXFe3ihpbOMAVXqY8cJEvLbFD3OXdV0Zp01ATE09Lh8g==}
+  /@ezapi/nextjs-backend@2.1.1-beta.0(express@4.18.2)(next@13.4.7):
+    resolution: {integrity: sha512-5eWJrGQCBP3GdfV5BFgKV8Xnp5t+ce2bOozmOPj0ILNH8w4OlCItLScJfa2OO0CoN6GXMr8oQwo5dbVsJiNCww==}
     peerDependencies:
       express: ^4.18.2
       next: ^13.0.0
     dependencies:
-      '@ezapi/router-core': 2.1.0-beta.0
+      '@ezapi/router-core': 2.1.1-beta.0
       express: 4.18.2
       next: 13.4.7(@babel/core@7.22.5)(react-dom@18.2.0)(react@18.2.0)
     dev: false
 
-  /@ezapi/router-core@2.1.0-beta.0:
-    resolution: {integrity: sha512-qNMPuB3eCpgUeaFK1IA4SwgCAg99D6Oix07kKbjYoRjuTgrfj8PE3sdUZzd+tfuVpfvisKzVIlOo0HTBp3ka9A==}
+  /@ezapi/router-core@2.1.1-beta.0:
+    resolution: {integrity: sha512-OGfJ3Q9gYgJDnOPng0xNh6psbOTjE3ZM7HRl1/wSrCBzOzn8vlZUicyOvD/Hv9enechwhKatqfAoQ3EJPYlSWA==}
     dependencies:
       '@types/node': 18.15.11
     dev: false
 
-  /@ezapi/zod-middleware@2.1.0-beta.0(zod@3.21.4):
-    resolution: {integrity: sha512-xWuU2mROzlvE6jSN6Wg1uHaQ7fvW0/ZyxmO5g/SpD90VdAsIVqqHyeiwNDX7KYM+KDsFU1Iouz9fddmJNx+o6w==}
+  /@ezapi/zod-middleware@2.1.1-beta.0(zod@3.21.4):
+    resolution: {integrity: sha512-SC9kfZo/l5jDlKnIJ2cxesgSbFYkRPlFNgVRQD2a5r0eO/Ad7Ui5rkn6IBvniwPgs+uuFp4bEFJ0alHF83lhMg==}
     peerDependencies:
       zod: ^3.19.1
     dependencies:
-      '@ezapi/router-core': 2.1.0-beta.0
+      '@ezapi/router-core': 2.1.1-beta.0
       zod: 3.21.4
     dev: false
 

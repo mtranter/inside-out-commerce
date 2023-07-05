@@ -1,12 +1,8 @@
 import { RouteBuilder, HandlersOf } from "@ezapi/router-core";
 import { JsonParserMiddlerware } from "@ezapi/json-middleware";
 import { ZodMiddleware } from "@ezapi/zod-middleware";
-import {z} from 'zod'
-import {
-  LoggingMiddleware,
-  IdTokenMiddleware,
-  JwtMiddleware,
-} from "@inside-out-commerce/middleware";
+import { z } from "zod";
+import { LoggingMiddleware } from "@inside-out-commerce/middleware";
 import log from "../../infra/logging";
 
 export const CreateProductRequest = z.object({
@@ -26,14 +22,13 @@ export const routes = () => {
   return RouteBuilder.withMiddleware(LoggingMiddleware({ log }))
     .withMiddleware(JsonParserMiddlerware)
     .route("healthcheck", "GET", "/healthcheck")
-    .route(
-      "createProduct",
-      "POST",
-      "/",
-      ZodMiddleware(CreateProductRequest)
-    )
+    .route("createProduct", "POST", "/", ZodMiddleware(CreateProductRequest))
     .route("getProduct", "GET", "/{sku}")
     .route("listProducts", "GET", "/?{nextToken?}")
     .route("listProductsByCategory", "GET", "/category/{category}?{nextToken?}")
-    .route("listProductsBySubCategory", "GET", "/subcategory/{subCategory}?{nextToken?}")
+    .route(
+      "listProductsBySubCategory",
+      "GET",
+      "/subcategory/{subCategory}?{nextToken?}"
+    );
 };

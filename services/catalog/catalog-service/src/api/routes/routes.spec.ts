@@ -15,7 +15,7 @@ describe("routes", () => {
 
     const result = await sut.run({
       method: "GET",
-      url: "/1",
+      url: "/healthcheck",
       headers: {
         "Content-Type": "application/json",
       },
