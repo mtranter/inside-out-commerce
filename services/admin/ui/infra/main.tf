@@ -14,6 +14,28 @@ module "cloudfront_s3_website_with_domain" {
   }
 }
 
+data "aws_acm_certificate" "acm_cert" {
+  domain   = "*.${var.hosted_zone_name}"
+  provider = aws.us
+  statuses = [
+    "ISSUED",
+  ]
+}
+
+module "cdn" {
+  source = "cloudposse/cloudfront-s3-cdn/aws"
+
+  version           = "0.90.0"
+  namespace         = var.project_name
+  stage             = var.environment
+  name              = var.service_name
+  aliases           = ["${var.subdomain}.${var.hosted_zone_name}"]
+  dns_alias_enabled = true
+  parent_zone_name  = var.hosted_zone_name
+
+  acm_certificate_arn = data.aws_acm_certificate.acm_cert.arn
+}
+
 data "aws_cognito_user_pools" "this" {
   name = "${var.project_name}-${var.environment}"
 }
