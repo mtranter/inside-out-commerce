@@ -5,7 +5,7 @@ import {
 } from "../src/models";
 import fs from "fs";
 
-const namespace = "com.insideoutcommerce.products";
+const namespace = "com.insideoutcommerce.catalog";
 
 const avroKeySchema = zodToAvro(
   "ProductEventKey",

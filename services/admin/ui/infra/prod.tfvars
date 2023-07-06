@@ -1,0 +1,5 @@
+hosted_zone_name = "devopsfunpark.com"
+subdomain = "iocommerce-admin"
+project_name = "inside-out-commerce"
+environment  = "prod"
+service_name = "catalog-service"
