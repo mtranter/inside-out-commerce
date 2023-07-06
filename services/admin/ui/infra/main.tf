@@ -2,18 +2,6 @@ locals {
   catalog_scope = "https://catalog.inside-out-commerce.com/api.execute"
 }
 
-module "cloudfront_s3_website_with_domain" {
-  source             = "chgangaraju/cloudfront-s3-website/aws"
-  version            = "1.2.5"
-  hosted_zone        = var.hosted_zone_name
-  domain_name        = "${var.subdomain}.${var.hosted_zone_name}"
-  upload_sample_file = false
-
-  providers = {
-    aws = aws
-  }
-}
-
 data "aws_acm_certificate" "acm_cert" {
   domain   = "*.${var.hosted_zone_name}"
   provider = aws.us
