@@ -32,6 +32,7 @@ module "cdn" {
   aliases           = ["${var.subdomain}.${var.hosted_zone_name}"]
   dns_alias_enabled = true
   parent_zone_name  = var.hosted_zone_name
+  cloudfront_access_logging_enabled = false
 
   acm_certificate_arn = data.aws_acm_certificate.acm_cert.arn
 }
