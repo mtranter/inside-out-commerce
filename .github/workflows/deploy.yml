@@ -106,7 +106,7 @@ jobs:
         name: Test
 
   admin-ui-deploy:
-    needs: [catalog-service-acceptance-test]
+    needs: [deploy-catalog-service]
     runs-on: ubuntu-latest
     permissions:
       id-token: write
