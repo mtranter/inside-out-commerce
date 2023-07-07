@@ -123,4 +123,6 @@ jobs:
           cd services/admin/ui/infra
           terraform init
           terraform apply -auto-approve -var-file ./prod.tfvars
-        name: Deploy
+        name: Deploy Infra
+      - run: cd ./services/admin/ui/dist && aws s3 sync ./ s3://inside-out-commerce-prod-catalog-service-origin
+        name: Deploy site
