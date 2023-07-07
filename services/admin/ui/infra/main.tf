@@ -69,8 +69,7 @@ resource "aws_iam_role" "web_identity_role" {
         "Principal": {"Federated": "cognito-identity.amazonaws.com"},
         "Action": "sts:AssumeRoleWithWebIdentity",
         "Condition": {
-            "StringEquals": {"cognito-identity.amazonaws.com:aud": "us-east-2:12345678-abcd-abcd-abcd-123456"},
-            "StringEquals": {"cognito-identity.amazonaws.com:client_id": "${aws_cognito_user_pool_client.userpool_client.id}"}
+            "StringEquals": {"cognito-identity.amazonaws.com:aud": "${aws_cognito_user_pool_client.userpool_client.id}"}
         }
     }
 }
