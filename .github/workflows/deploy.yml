@@ -105,7 +105,6 @@ jobs:
       - run: pnpm test:int
         name: Test
 
-
   admin-ui-deploy:
     needs: [catalog-service-acceptance-test]
     runs-on: ubuntu-latest
