@@ -36,7 +36,7 @@ resource "aws_iam_role_policy_attachment" "allow_dynamodb" {
 }
 
 resource "aws_cognito_resource_server" "api" {
-  identifier = "https://${local.api_subdomain}.inside-out-commerce.com"
+  identifier = "https://${local.api_subdomain}.${var.project_name}.com"
   name       = "${var.project_name}-${var.service_name}-${var.environment}"
 
   scope {
