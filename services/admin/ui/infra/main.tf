@@ -38,7 +38,7 @@ resource "aws_cognito_user_pool_client" "userpool_client" {
   callback_urls                        = ["https://${var.subdomain}.${var.hosted_zone_name}", "http://localhost:3000"]
   allowed_oauth_flows_user_pool_client = true
   allowed_oauth_flows                  = ["code"]
-  allowed_oauth_scopes                 = ["email", "openid", local.catalog_scope]
+  allowed_oauth_scopes                 = ["email", "openid", "profile", local.catalog_scope]
   supported_identity_providers         = ["COGNITO"]
   token_validity_units {
     access_token  = "minutes"
