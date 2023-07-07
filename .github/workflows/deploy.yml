@@ -112,20 +112,20 @@ jobs:
       id-token: write
       contents: read
     steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: src
       - uses: actions/checkout@v3
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
           role-to-assume: arn:aws:iam::340502884936:role/InsideoutGithubActions
           aws-region: ap-southeast-2
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: src
       - run: |
           cd services/admin/ui/infra
           terraform init
           terraform apply -auto-approve -var-file ./prod.tfvars
         name: Deploy Infra
-      - run: cd ./../dist && aws s3 sync ./ s3://inside-out-commerce-prod-catalog-service-origin
+      - run: cd services/admin/ui/dist && aws s3 sync ./ s3://inside-out-commerce-prod-catalog-service-origin
         name: Deploy site
