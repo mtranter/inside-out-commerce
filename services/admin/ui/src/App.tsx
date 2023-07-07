@@ -1,6 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { STSClient, AssumeRoleWithWebIdentityCommand, Credentials } from "@aws-sdk/client-sts";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function App() {
   const { loginWithRedirect, isAuthenticated, getIdTokenClaims } = useAuth0();
