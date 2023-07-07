@@ -31,6 +31,7 @@ data "aws_cognito_user_pools" "this" {
   name = "${var.project_name}-${var.environment}"
 }
 
+
 resource "aws_cognito_user_pool_client" "userpool_client" {
   name                                 = "admin-client"
   user_pool_id                         = data.aws_cognito_user_pools.this.ids[0]

@@ -31,5 +31,10 @@
   },
   "dependencies": {
     "formidable": "^3.5.0"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "@auth0/auth0-react@2.1.1": "patches/@auth0__auth0-react@2.1.1.patch"
+    }
   }
 }
