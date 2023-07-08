@@ -10,7 +10,7 @@ import {
   GetIdCommand,
   GetOpenIdTokenCommand,
 } from "@aws-sdk/client-cognito-identity";
-import { createSignedFetcher } from "aws-sigv4-fetch";
+import { AwsClient } from "aws4fetch";
 
 function App() {
   const { loginWithRedirect, isAuthenticated, getIdTokenClaims } = useAuth0();
@@ -44,16 +44,12 @@ function App() {
         "arn:aws:iam::340502884936:role/inside-out-commerce-prod-catalog-service-web-identity",
     });
     const response = await stsClient.send(cmd);
-    const fetch = createSignedFetcher({
-      region: "ap-southeast-2",
-      service: "execute-api",
-      credentials: {
-        accessKeyId: response.Credentials?.AccessKeyId!,
-        secretAccessKey: response.Credentials?.SecretAccessKey!,
-        sessionToken: response.Credentials?.SessionToken!,
-      },
+    const aws = new AwsClient({
+      accessKeyId: response.Credentials?.AccessKeyId!,
+      secretAccessKey: response.Credentials?.SecretAccessKey!,
+      sessionToken: response.Credentials?.SessionToken!,
     });
-    await fetch(
+    await aws.fetch(
       "https://eb8xro4rpe.execute-api.ap-southeast-2.amazonaws.com/live/catalog/healthcheck"
     )
       .then((res) => res.json())
