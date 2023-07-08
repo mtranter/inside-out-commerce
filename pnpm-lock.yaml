@@ -66,8 +66,8 @@ importers:
   packages/middleware:
     dependencies:
       '@ezapi/router-core':
-        specifier: ^2.1.1-beta.0
-        version: 2.1.1-beta.0
+        specifier: ^2.2.0-beta.0
+        version: 2.2.0-beta.0
 
   packages/models:
     dependencies:
@@ -154,17 +154,20 @@ importers:
         specifier: ^3.341.0
         version: 3.341.0
       '@ezapi/aws-rest-api-backend':
-        specifier: ^2.1.1-beta.0
-        version: 2.1.1-beta.0
+        specifier: ^2.2.0-beta.0
+        version: 2.2.0-beta.0
+      '@ezapi/cors-middleware':
+        specifier: ^2.2.0-beta.0
+        version: 2.2.0-beta.0
       '@ezapi/json-middleware':
-        specifier: ^2.1.1-beta.0
-        version: 2.1.1-beta.0
+        specifier: ^2.2.0-beta.0
+        version: 2.2.0-beta.0
       '@ezapi/router-core':
-        specifier: ^2.1.1-beta.0
-        version: 2.1.1-beta.0
+        specifier: ^2.2.0-beta.0
+        version: 2.2.0-beta.0
       '@ezapi/zod-middleware':
-        specifier: ^2.1.1-beta.0
-        version: 2.1.1-beta.0(zod@3.21.4)
+        specifier: ^2.2.0-beta.0
+        version: 2.2.0-beta.0(zod@3.21.4)
       '@inside-out-commerce/middleware':
         specifier: '*'
         version: link:../../../packages/middleware
@@ -7718,30 +7721,36 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
-  /@ezapi/aws-rest-api-backend@2.1.1-beta.0:
-    resolution: {integrity: sha512-D4pptLf/xiVLJIrCu+srh0VZAlRKg0G8CbHXJ/jWFzvzcyMXvYgNWY0sylP4aioDLw7J5lGnTiYNtsxpg1n2tQ==}
+  /@ezapi/aws-rest-api-backend@2.2.0-beta.0:
+    resolution: {integrity: sha512-j6kwo+teaQuflXZA0dp3ofxBrNoNOFe1ZHXni0q1pbmqDvYMaTH/AandM06hrmTYySDc1PIaKa+2Mh0UHdTvFw==}
     dependencies:
-      '@ezapi/router-core': 2.1.1-beta.0
+      '@ezapi/router-core': 2.2.0-beta.0
     dev: false
 
-  /@ezapi/json-middleware@2.1.1-beta.0:
-    resolution: {integrity: sha512-dsE4RKtiJA4gc9Sna5UtjEjA7j8lnJqPhqWP3HXvznEtJ4YEor+2upV6Yw7fEUE7JsPYOXiMkbkIS7qshDYNGw==}
+  /@ezapi/cors-middleware@2.2.0-beta.0:
+    resolution: {integrity: sha512-jcNyMmnEgtxMRAGRX+PdfVoDfSjJduWFq9nvaSv9tmkDS8uleuO+Sga1jHz/LVWyWzRusfw8Gbk2j83BR2/0XA==}
     dependencies:
       mime-match: 1.0.2
     dev: false
 
-  /@ezapi/router-core@2.1.1-beta.0:
-    resolution: {integrity: sha512-OGfJ3Q9gYgJDnOPng0xNh6psbOTjE3ZM7HRl1/wSrCBzOzn8vlZUicyOvD/Hv9enechwhKatqfAoQ3EJPYlSWA==}
+  /@ezapi/json-middleware@2.2.0-beta.0:
+    resolution: {integrity: sha512-REzCzrR3aSUgz7ncZcmnmp3XTbZShrL5y+IQlsKSxkpEl9RxUQaVLAWnQMaRVpMA5MN3rx1LX/WVpgFBCqCrVA==}
+    dependencies:
+      mime-match: 1.0.2
+    dev: false
+
+  /@ezapi/router-core@2.2.0-beta.0:
+    resolution: {integrity: sha512-MBi6zpM/KTn/hbemCQNxJ8GaxofIkOlRqh8SBvi1hd2+msyQ67qwuOrjP+bxKp05H7X9bGac1nWFf1E4r//ElA==}
     dependencies:
       '@types/node': 18.15.11
     dev: false
 
-  /@ezapi/zod-middleware@2.1.1-beta.0(zod@3.21.4):
-    resolution: {integrity: sha512-SC9kfZo/l5jDlKnIJ2cxesgSbFYkRPlFNgVRQD2a5r0eO/Ad7Ui5rkn6IBvniwPgs+uuFp4bEFJ0alHF83lhMg==}
+  /@ezapi/zod-middleware@2.2.0-beta.0(zod@3.21.4):
+    resolution: {integrity: sha512-VyUSrGGW6JSCEuA7eNycx3qbXyXbkPvTKxrW6sOCx0xvHPsIgi5NUE1SW4GB2OgAmHWxSpcD4ZhRgnqIx0ueKA==}
     peerDependencies:
       zod: ^3.19.1
     dependencies:
-      '@ezapi/router-core': 2.1.1-beta.0
+      '@ezapi/router-core': 2.2.0-beta.0
       zod: 3.21.4
     dev: false
 
