@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.1.1",
+    "@aws-sdk/client-cognito-identity": "^3.363.0",
+    "@aws-sdk/client-cognito-identity-provider": "^3.363.0",
     "@aws-sdk/client-sts": "^3.363.0",
     "@chakra-ui/react": "^2.7.1",
     "@emotion/react": "^11.11.1",

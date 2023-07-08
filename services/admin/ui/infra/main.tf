@@ -50,7 +50,7 @@ resource "aws_cognito_user_pool_client" "userpool_client" {
 resource "aws_cognito_identity_pool" "main" {
   identity_pool_name               = "${var.project_name}-${var.environment}-AdminIdentityPool"
   allow_unauthenticated_identities = false
-  allow_classic_flow               = false
+  allow_classic_flow               = true
 
   cognito_identity_providers {
     client_id               = aws_cognito_user_pool_client.userpool_client.id
@@ -69,7 +69,8 @@ resource "aws_iam_role" "web_identity_role" {
         "Principal": {"Federated": "cognito-identity.amazonaws.com"},
         "Action": "sts:AssumeRoleWithWebIdentity",
         "Condition": {
-            "StringEquals": {"cognito-identity.amazonaws.com:aud": "${aws_cognito_user_pool_client.userpool_client.id}"}
+            "StringEquals": {"cognito-identity.amazonaws.com:aud": "${aws_cognito_identity_pool.main.id}"},
+            "ForAnyValue:StringLike": { "cognito-identity.amazonaws.com:amr": "authenticated" }
         }
     }
 }
