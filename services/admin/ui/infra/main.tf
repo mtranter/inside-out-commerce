@@ -96,7 +96,7 @@ resource "aws_iam_role_policy" "web_identity_policy" {
                 "execute-api:Invoke"
             ],
             "Resource": [
-                "${data.aws_ssm_parameter.catalog_api_execution_arn.value}"
+                "${data.aws_ssm_parameter.catalog_api_execution_arn.value}/*"
             ]
         }
     ]
