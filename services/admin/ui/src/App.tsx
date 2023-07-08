@@ -4,19 +4,16 @@ import { useAuth0 } from "@auth0/auth0-react";
 import {
   STSClient,
   AssumeRoleWithWebIdentityCommand,
-  Credentials,
 } from "@aws-sdk/client-sts";
 import {
   CognitoIdentityClient,
   GetIdCommand,
   GetOpenIdTokenCommand,
 } from "@aws-sdk/client-cognito-identity";
-import { useState } from "react";
 import { createSignedFetcher } from "aws-sigv4-fetch";
 
 function App() {
   const { loginWithRedirect, isAuthenticated, getIdTokenClaims } = useAuth0();
-  const [credentials, setCredentials] = useState<Credentials | undefined>();
   const doHealthcheck = async () => {
     const token = await getIdTokenClaims();
     const cognitoClient = new CognitoIdentityClient({
@@ -60,7 +57,7 @@ function App() {
       "https://eb8xro4rpe.execute-api.ap-southeast-2.amazonaws.com/live/catalog/healthcheck"
     )
       .then((res) => res.json())
-      .then((res) => setCredentials(res));
+      .then((res) => console.log(res));
   };
 
   return (
