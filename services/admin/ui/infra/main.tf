@@ -76,3 +76,30 @@ resource "aws_iam_role" "web_identity_role" {
 }
 EOF
 }
+
+data "aws_ssm_parameter" "catalog_api_execution_arn" {
+  name = "/${var.project_name}/${var.environment}/catalog-service/api_execution_arn"
+}
+
+// Role policy that can execute API Gateways
+resource "aws_iam_role_policy" "web_identity_policy" {
+  name   = "${var.project_name}-${var.environment}-${var.service_name}-web-identity"
+  role   = aws_iam_role.web_identity_role.id
+  policy = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Stmt1485383687000",
+            "Effect": "Allow",
+            "Action": [
+                "execute-api:Invoke"
+            ],
+            "Resource": [
+                "${data.aws_ssm_parameter.catalog_api_execution_arn.value}"
+            ]
+        }
+    ]
+}
+EOF
+}

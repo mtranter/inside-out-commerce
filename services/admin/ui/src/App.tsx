@@ -12,6 +12,7 @@ import {
   GetOpenIdTokenCommand,
 } from "@aws-sdk/client-cognito-identity";
 import { useState } from "react";
+import { createSignedFetcher } from "aws-sigv4-fetch";
 
 function App() {
   const { loginWithRedirect, isAuthenticated, getIdTokenClaims } = useAuth0();
@@ -46,7 +47,20 @@ function App() {
         "arn:aws:iam::340502884936:role/inside-out-commerce-prod-catalog-service-web-identity",
     });
     const response = await stsClient.send(cmd);
-    setCredentials(response.Credentials);
+    const fetch = createSignedFetcher({
+      region: "ap-southeast-2",
+      service: "execute-api",
+      credentials: {
+        accessKeyId: response.Credentials?.AccessKeyId!,
+        secretAccessKey: response.Credentials?.SecretAccessKey!,
+        sessionToken: response.Credentials?.SessionToken!,
+      },
+    });
+    await fetch(
+      "https://eb8xro4rpe.execute-api.ap-southeast-2.amazonaws.com/live/catalog/healthcheck"
+    )
+      .then((res) => res.json())
+      .then((res) => setCredentials(res));
   };
 
   return (
@@ -56,7 +70,6 @@ function App() {
       {isAuthenticated ? (
         <button onClick={doHealthcheck}>Healthcheck</button>
       ) : null}
-      {credentials ? <pre>{JSON.stringify(credentials, null, 2)}</pre> : null}
     </>
   );
 }

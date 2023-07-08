@@ -31,7 +31,7 @@ module "api_function" {
 }
 
 resource "aws_iam_role_policy_attachment" "allow_dynamodb" {
-  role   = module.api_function.execution_role.id
+  role       = module.api_function.execution_role.id
   policy_arn = aws_iam_policy.allow_dynamodb.arn
 }
 
@@ -63,14 +63,14 @@ resource "aws_api_gateway_deployment" "this" {
 }
 
 resource "aws_cloudwatch_log_group" "api_logs" {
-  name              = "/api/${var.project_name}-${var.service_name}-${var.environment}/${local.stage_name}" 
+  name              = "/api/${var.project_name}-${var.service_name}-${var.environment}/${local.stage_name}"
   retention_in_days = 1
 }
 
 resource "aws_api_gateway_stage" "this" {
-  deployment_id = aws_api_gateway_deployment.this.id
-  rest_api_id   = aws_api_gateway_rest_api.this.id
-  stage_name    = local.stage_name
+  deployment_id        = aws_api_gateway_deployment.this.id
+  rest_api_id          = aws_api_gateway_rest_api.this.id
+  stage_name           = local.stage_name
   xray_tracing_enabled = true
 
   access_log_settings {
@@ -102,7 +102,7 @@ module "api_integration" {
   api_name      = aws_api_gateway_rest_api.this.name
   function_name = module.api_function.function.id
   authorizer = {
-    type          = "AWS_IAM"
+    type = "AWS_IAM"
   }
 
   depends_on = [aws_api_gateway_rest_api.this]
@@ -112,4 +112,10 @@ resource "aws_ssm_parameter" "schema_registry_endpoint" {
   name  = "/${var.project_name}/${var.environment}/${var.service_name}/api_url"
   type  = "String"
   value = aws_api_gateway_stage.this.invoke_url
+}
+
+resource "aws_ssm_parameter" "api_execution_arn" {
+  name  = "/${var.project_name}/${var.environment}/${var.service_name}/api_execution_arn"
+  type  = "String"
+  value = aws_api_gateway_rest_api.this.execution_arn
 }
