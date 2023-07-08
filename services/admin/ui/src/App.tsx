@@ -9,36 +9,31 @@ import {
 import {
   CognitoIdentityClient,
   GetIdCommand,
-  GetCredentialsForIdentityCommand,
   GetOpenIdTokenCommand,
 } from "@aws-sdk/client-cognito-identity";
 import { useState } from "react";
 
 function App() {
-  const {
-    loginWithRedirect,
-    isAuthenticated,
-    getIdTokenClaims,
-    getAccessTokenSilently,
-  } = useAuth0();
+  const { loginWithRedirect, isAuthenticated, getIdTokenClaims } = useAuth0();
   const [credentials, setCredentials] = useState<Credentials | undefined>();
   const doHealthcheck = async () => {
     const token = await getIdTokenClaims();
-    const aToken = await getAccessTokenSilently();
     const cognitoClient = new CognitoIdentityClient({
       region: "ap-southeast-2",
     });
     const getIdCmd = new GetIdCommand({
       IdentityPoolId: "ap-southeast-2:082f6e4c-68ea-46c7-ad2c-384e7a8cecb7",
       Logins: {
-        "cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_V1m1AEYXE": token?.__raw!,
+        "cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_V1m1AEYXE":
+          token?.__raw!,
       },
     });
     const getIdResponse = await cognitoClient.send(getIdCmd);
     const getCredentialsCmd = new GetOpenIdTokenCommand({
       IdentityId: getIdResponse.IdentityId,
       Logins: {
-        "cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_V1m1AEYXE": token?.__raw!,
+        "cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_V1m1AEYXE":
+          token?.__raw!,
       },
     });
     const getCredentialsResponse = await cognitoClient.send(getCredentialsCmd);
