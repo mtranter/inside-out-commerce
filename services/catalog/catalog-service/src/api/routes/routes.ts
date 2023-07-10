@@ -19,7 +19,7 @@ export const CreateProductRequest = z.object({
 
 export type RouteHandlers = HandlersOf<ReturnType<typeof routes>>;
 const corsMiddleware = CorsMiddleware({
-  allowedOrigins: ["*"],
+  allowedOrigins: "*",
   allowedMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["*"],
   exposedHeaders: ["*"],
