@@ -32,7 +32,7 @@ export const routes = () => {
     .withMiddleware(JsonParserMiddlerware)
     .withMiddleware(corsMiddleware)
     .route("healthcheck", "GET", "/healthcheck")
-    .route("createProduct", "POST", "/", ZodMiddleware(CreateProductRequest))
+    .route("createProduct", "POST", "/", ZodMiddleware(CreateProductRequest))   
     .route("getProduct", "GET", "/{sku}")
     .route("listProducts", "GET", "/?{nextToken?}")
     .route("listProductsByCategory", "GET", "/category/{category}?{nextToken?}")
