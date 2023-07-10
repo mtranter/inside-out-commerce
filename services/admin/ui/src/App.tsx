@@ -12,36 +12,37 @@ import {
 } from "@aws-sdk/client-cognito-identity";
 import { AwsClient } from "aws4fetch";
 
+console.log(import.meta.env.VITE_AWS_REGION)
+
 function App() {
   const { loginWithRedirect, isAuthenticated, getIdTokenClaims } = useAuth0();
   const doHealthcheck = async () => {
     const token = await getIdTokenClaims();
     const cognitoClient = new CognitoIdentityClient({
-      region: "ap-southeast-2",
+      region: import.meta.env.VITE_AWS_REGION,
     });
     const getIdCmd = new GetIdCommand({
-      IdentityPoolId: "ap-southeast-2:082f6e4c-68ea-46c7-ad2c-384e7a8cecb7",
+      IdentityPoolId: import.meta.env.VITE_IDENTITY_POOL_ID,
       Logins: {
-        "cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_V1m1AEYXE":
-          token?.__raw!,
+        [import.meta.env.VITE_USER_POOL_LOGIN_ID]: token?.__raw!,
       },
     });
     const getIdResponse = await cognitoClient.send(getIdCmd);
     const getCredentialsCmd = new GetOpenIdTokenCommand({
       IdentityId: getIdResponse.IdentityId,
       Logins: {
-        "cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_V1m1AEYXE":
-          token?.__raw!,
+        [import.meta.env.VITE_USER_POOL_LOGIN_ID]: token?.__raw!,
       },
     });
     const getCredentialsResponse = await cognitoClient.send(getCredentialsCmd);
 
-    const stsClient = new STSClient({ region: "ap-southeast-2" });
+    const stsClient = new STSClient({
+      region: import.meta.env.VITE_AWS_REGION,
+    });
     const cmd = new AssumeRoleWithWebIdentityCommand({
       RoleSessionName: "WebSession",
       WebIdentityToken: getCredentialsResponse.Token!,
-      RoleArn:
-        "arn:aws:iam::340502884936:role/inside-out-commerce-prod-catalog-service-web-identity",
+      RoleArn: import.meta.env.VITE_ADMIN_IAM_ROLE,
     });
     const response = await stsClient.send(cmd);
     const aws = new AwsClient({
@@ -49,9 +50,10 @@ function App() {
       secretAccessKey: response.Credentials?.SecretAccessKey!,
       sessionToken: response.Credentials?.SessionToken!,
     });
-    await aws.fetch(
-      "https://eb8xro4rpe.execute-api.ap-southeast-2.amazonaws.com/live/catalog/healthcheck"
-    )
+    await aws
+      .fetch(
+        `${import.meta.env.VITE_CATALOG_API_ROOT}/catalog/healthcheck`
+      )
       .then((res) => res.json())
       .then((res) => console.log(res));
   };

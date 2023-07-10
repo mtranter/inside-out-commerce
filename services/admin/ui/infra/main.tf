@@ -81,6 +81,11 @@ data "aws_ssm_parameter" "catalog_api_execution_arn" {
   name = "/${var.project_name}/${var.environment}/catalog-service/api_execution_arn"
 }
 
+data "aws_ssm_parameter" "api_url" {
+  name = "/${var.project_name}/${var.environment}/catalog-service/api_url"
+}
+
+
 // Role policy that can execute API Gateways
 resource "aws_iam_role_policy" "web_identity_policy" {
   name   = "${var.project_name}-${var.environment}-${var.service_name}-web-identity"

@@ -100,7 +100,7 @@ jobs:
           role-to-assume: arn:aws:iam::340502884936:role/InsideoutGithubActions
           aws-region: ap-southeast-2
       - run: pnpm i --frozen-lockfile
-      - run: pnpm build
+      - run: pnpm build --filter=!./services/admin/ui
         name: Build
       - run: pnpm test:int
         name: Test
@@ -108,6 +108,9 @@ jobs:
   admin-ui-deploy:
     needs: [deploy-catalog-service]
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: services/admin/ui
     permissions:
       id-token: write
       contents: read
@@ -118,14 +121,17 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::340502884936:role/InsideoutGithubActions
           aws-region: ap-southeast-2
-      - name: Download artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: src
       - run: |
           cd services/admin/ui/infra
           terraform init
           terraform apply -auto-approve -var-file ./prod.tfvars
+          export TF_OUTPUT=$(terraform output -json)
         name: Deploy Infra
-      - run: cd services/admin/ui/dist && aws s3 sync ./ s3://inside-out-commerce-prod-catalog-service-origin
+      - run: |
+          export VITE_IDENTITY_POOL_ID=$(echo $TF_OUTPUT | jq -r '.identity_pool_id.value')
+          export VITE_USER_POOL_ID=$(echo $TF_OUTPUT | jq -r '.user_pool_id.value')
+          export VITE_ADMIN_IAM_ROLE=$(echo $TF_OUTPUT | jq -r '.api_role_arn.value')
+          export VITE_CATALOG_API_ROOT=$(echo $TF_OUTPUT | jq -r '.catalog_api_url.value')
+          pnpm build
+      - run: cd dist && aws s3 sync ./ s3://inside-out-commerce-prod-catalog-service-origin
         name: Deploy site
