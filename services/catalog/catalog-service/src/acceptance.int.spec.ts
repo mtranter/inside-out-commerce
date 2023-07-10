@@ -7,6 +7,7 @@ import { KafkaPayload } from "@inside-out-commerce/models";
 import waitForExpect from "wait-for-expect";
 import { CreateProductRequest } from "./api/routes/routes";
 import { createSignedFetcher } from "aws-sigv4-fetch";
+import { v4 as uuid } from "uuid"
 
 jest.setTimeout(10000);
 const ssm = new SSM({
@@ -150,7 +151,11 @@ describe("Product API", () => {
     });
   });
   describe("create Product endpoint", () => {
-    const product = generateMock(CreateProductRequest);
+    const product = generateMock(CreateProductRequest, {
+      stringMap: {
+        sku: () => uuid(),
+      }
+    });
     let response: Response;
     let consumer: Consumer;
     let kafkaMessages: unknown[];

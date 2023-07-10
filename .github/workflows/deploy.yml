@@ -131,10 +131,10 @@ jobs:
           export TF_OUTPUT=$(terraform output -json)
         name: Deploy Infra
       - run: |
-          export VITE_IDENTITY_POOL_ID=$(echo $TF_OUTPUT | jq -r '.identity_pool_id.value')
-          export VITE_USER_POOL_ID=$(echo $TF_OUTPUT | jq -r '.user_pool_id.value')
-          export VITE_ADMIN_IAM_ROLE=$(echo $TF_OUTPUT | jq -r '.api_role_arn.value')
-          export VITE_CATALOG_API_ROOT=$(echo $TF_OUTPUT | jq -r '.catalog_api_url.value')
+          export VITE_IDENTITY_POOL_ID="$(echo $TF_OUTPUT | jq -r '.identity_pool_id.value')"
+          export VITE_USER_POOL_ID="$(echo $TF_OUTPUT | jq -r '.user_pool_id.value')"
+          export VITE_ADMIN_IAM_ROLE="$(echo $TF_OUTPUT | jq -r '.api_role_arn.value')"
+          export VITE_CATALOG_API_ROOT="$(echo $TF_OUTPUT | jq -r '.catalog_api_url.value')"
           pnpm install && pnpm build
       - run: cd dist && aws s3 sync ./ s3://inside-out-commerce-prod-catalog-service-origin
         name: Deploy site
