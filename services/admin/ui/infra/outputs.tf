@@ -11,5 +11,5 @@ output "api_role_arn" {
 }
 
 output "catalog_api_url" {
-    value = data.aws_ssm_parameter.api_url.value
+    value = nonsensitive(data.aws_ssm_parameter.api_url.value)
 }
