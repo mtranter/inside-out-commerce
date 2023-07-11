@@ -137,10 +137,16 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: pnpm install --frozen-lockfile
       - run: |
-          VITE_IDENTITY_POOL_ID="$(echo $TF_OUTPUT | jq -r '.identity_pool_id.value')" \
-          VITE_USER_POOL_ID="$(echo $TF_OUTPUT | jq -r '.user_pool_id.value')" \
-          VITE_ADMIN_IAM_ROLE="$(echo $TF_OUTPUT | jq -r '.api_role_arn.value')" \
-          VITE_CATALOG_API_ROOT="$(echo $TF_OUTPUT | jq -r '.caexporttalog_api_url.value')" \
+          export VITE_IDENTITY_POOL_ID="$(echo $TF_OUTPUT | jq -r '.identity_pool_id.value')"
+          export VITE_USER_POOL_ID="$(echo $TF_OUTPUT | jq -r '.user_pool_id.value')"
+          export VITE_ADMIN_IAM_ROLE="$(echo $TF_OUTPUT | jq -r '.api_role_arn.value')"
+          export VITE_CATALOG_API_ROOT="$(echo $TF_OUTPUT | jq -r '.caexporttalog_api_url.value')"
+          echo "Debugging env vars"
+          echo $VITE_IDENTITY_POOL_ID
+          echo $VITE_USER_POOL_ID
+          echo $VITE_ADMIN_IAM_ROLE
+          echo $VITE_CATALOG_API_ROOT
+          echo "Building admin ui"
           pnpm build
       - run: cd dist && aws s3 sync ./ s3://inside-out-commerce-prod-catalog-service-origin
         name: Deploy site
