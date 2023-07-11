@@ -143,7 +143,7 @@ jobs:
           export VITE_IDENTITY_POOL_ID="$(echo '${{ env.TF_OUTPUT }}' | jq -r '.identity_pool_id.value')"
           export VITE_USER_POOL_ID="$(echo '${{ env.TF_OUTPUT }}' | jq -r '.user_pool_id.value')"
           export VITE_ADMIN_IAM_ROLE="$(echo '${{ env.TF_OUTPUT }}' | jq -r '.api_role_arn.value')"
-          export VITE_CATALOG_API_ROOT="$(echo '${{ env.TF_OUTPUT }}' | jq -r '.caexporttalog_api_url.value')"
+          export VITE_CATALOG_API_ROOT="$(echo '${{ env.TF_OUTPUT }}' | jq -r '.catalog_api_url.value')"
           echo "Debugging env vars"
           echo $VITE_IDENTITY_POOL_ID
           echo $VITE_USER_POOL_ID
