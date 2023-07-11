@@ -129,7 +129,9 @@ jobs:
           terraform init
           terraform apply -auto-approve -var-file ./prod.tfvars
           export TF_OUTPUT=$(terraform output -json)
-          echo "TF_OUTPUT=$TF_OUTPUT" >> "$GITHUB_ENV"
+          echo "TF_OUTPUT<<EOF" >> $GITHUB_ENV
+          echo $TF_OUTPUT >> $GITHUB_ENV 
+          echo "EOF" >> $GITHUB_ENV
         name: Deploy Infra
       - uses: actions/setup-node@v3
         with:
@@ -138,10 +140,10 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: pnpm install --frozen-lockfile
       - run: |
-          export VITE_IDENTITY_POOL_ID="$(echo $TF_OUTPUT | jq -r '.identity_pool_id.value')"
-          export VITE_USER_POOL_ID="$(echo $TF_OUTPUT | jq -r '.user_pool_id.value')"
-          export VITE_ADMIN_IAM_ROLE="$(echo $TF_OUTPUT | jq -r '.api_role_arn.value')"
-          export VITE_CATALOG_API_ROOT="$(echo $TF_OUTPUT | jq -r '.caexporttalog_api_url.value')"
+          export VITE_IDENTITY_POOL_ID="$(echo '${{ env.TF_OUTPUT }}' | jq -r '.identity_pool_id.value')"
+          export VITE_USER_POOL_ID="$(echo '${{ env.TF_OUTPUT }}' | jq -r '.user_pool_id.value')"
+          export VITE_ADMIN_IAM_ROLE="$(echo '${{ env.TF_OUTPUT }}' | jq -r '.api_role_arn.value')"
+          export VITE_CATALOG_API_ROOT="$(echo '${{ env.TF_OUTPUT }}' | jq -r '.caexporttalog_api_url.value')"
           echo "Debugging env vars"
           echo $VITE_IDENTITY_POOL_ID
           echo $VITE_USER_POOL_ID
