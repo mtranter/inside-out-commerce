@@ -129,6 +129,7 @@ jobs:
           terraform init
           terraform apply -auto-approve -var-file ./prod.tfvars
           export TF_OUTPUT=$(terraform output -json)
+          echo "TF_OUTPUT=$TF_OUTPUT" >> "$GITHUB_ENV"
         name: Deploy Infra
       - uses: actions/setup-node@v3
         with:
