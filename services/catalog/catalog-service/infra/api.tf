@@ -24,9 +24,9 @@ resource "aws_iam_role_policy_attachment" "allow_dynamodb" {
   policy_arn = aws_iam_policy.allow_dynamodb.arn
 }
 
-esource "aws_iam_role_policy" "batch_handler_allow_sqs" {
+resource "aws_iam_role_policy" "api_allow_sqs" {
   role       = module.api_function.execution_role.id
-  policy_arn = <<EOF
+  policy = <<EOF
 {
   "Version": "2012-10-17",
   "Statement": [
