@@ -125,6 +125,9 @@ importers:
       react-icons:
         specifier: ^4.10.1
         version: 4.10.1(react@18.2.0)
+      react-infinite-scroll-hook:
+        specifier: ^4.1.1
+        version: 4.1.1(react@18.2.0)
       react-router-dom:
         specifier: ^6.14.1
         version: 6.14.1(react-dom@18.2.0)(react@18.2.0)
@@ -15425,6 +15428,24 @@ packages:
     resolution: {integrity: sha512-/ngzDP/77tlCfqthiiGNZeYFACw85fUjZtLbedmJ5DTlNDIwETxhwBzdOJ21zj4iJdvc0J3y7yOsX3PpxAJzrw==}
     peerDependencies:
       react: '*'
+    dependencies:
+      react: 18.2.0
+    dev: false
+
+  /react-infinite-scroll-hook@4.1.1(react@18.2.0):
+    resolution: {integrity: sha512-1bu2572rF3DtjFMhIOzoasLMdYW0vMWxROtl99M5FYGSxm84Ro4aNBZW6ivgE45ofus4Ymo7jIS0Be3zcuLk8g==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: '>=16.8.0'
+    dependencies:
+      react: 18.2.0
+      react-intersection-observer-hook: 2.1.1(react@18.2.0)
+    dev: false
+
+  /react-intersection-observer-hook@2.1.1(react@18.2.0):
+    resolution: {integrity: sha512-MeFGpYtcfHB9v6oGqQuHAbSwaWBpd7yZ4wMIeVtboWRdGusAF4V+/8QQ0OKZ36Ez19grYnoDVhRUCjtwI2ZVaw==}
+    peerDependencies:
+      react: '>=16.8.0'
     dependencies:
       react: 18.2.0
     dev: false

@@ -54,11 +54,11 @@ export const ProductRepo = ({
       });
       return product?.data;
     },
-    listProducts: async (next) => {
-      const startKey = next ? decodeBase64Object(next) : undefined;
+    listProducts: async (args) => {
+      const startKey = args?.next ? decodeBase64Object(args?.next) : undefined;
       const result = await productsTable.indexes.gsi3.query<ProductDto>("#PRODUCT#", {
         startKey,
-        pageSize: 100,
+        pageSize: args?.pageSize ?? 20,
       });
       return {
         products: result.records.map((i) => i.data),
@@ -91,13 +91,13 @@ export const ProductRepo = ({
       ]);
       return product;
     },
-    listProductByCategory: async (categoryId, next) => {
-      const startKey = next ? decodeBase64Object(next) : undefined;
+    listProductByCategory: async (categoryId, args) => {
+      const startKey = args?.next ? decodeBase64Object(args?.next) : undefined;
       const result = await productsTable.indexes.gsi1.query<ProductDto>(
         categoryId,
         {
           startKey,
-          pageSize: 100,
+          pageSize: args?.pageSize ?? 20,
         }
       );
       return {
@@ -107,13 +107,13 @@ export const ProductRepo = ({
           : undefined,
       };
     },
-    listProductBySubCategory: async (subCategoryId, next) => {
-      const startKey = next ? decodeBase64Object(next) : undefined;
+    listProductBySubCategory: async (subCategoryId, args) => {
+      const startKey = args?.next ? decodeBase64Object(args?.next) : undefined;
       const result = await productsTable.indexes.gsi2.query<ProductDto>(
         subCategoryId,
         {
           startKey,
-          pageSize: 100,
+          pageSize: args?.pageSize ?? 20,
         }
       );
       return {

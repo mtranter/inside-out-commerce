@@ -21,7 +21,7 @@ export const mockRepo = (): MockRepo => {
     get: async (sku: string) => {
       return productsState[sku];
     },
-    listProducts: async (next?: string) => {
+    listProducts: async (args) => {
       return {
         products: Object.values(productsState),
         nextToken: undefined,
@@ -32,7 +32,7 @@ export const mockRepo = (): MockRepo => {
       eventsState.push(event);
       return product;
     },
-    listProductByCategory: async (categoryId: string, next?: string) => {
+    listProductByCategory: async (categoryId, args) => {
       return {
         products: Object.values(productsState).filter(
           (p) => p.categoryId === categoryId
@@ -40,7 +40,7 @@ export const mockRepo = (): MockRepo => {
         nextToken: undefined,
       };
     },
-    listProductBySubCategory: async (subCategoryId: string, next?: string) => {
+    listProductBySubCategory: async (subCategoryId: string, args) => {
       return {
         products: Object.values(productsState).filter(
           (p) => p.subCategory === subCategoryId

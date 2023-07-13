@@ -35,11 +35,11 @@ export const routes = () => {
     .route("createProduct", "POST", "/", ZodMiddleware(CreateProductRequest))   
     .route("batchCreateProduct", "POST", "/batch", ZodMiddleware(z.array(CreateProductRequest)))   
     .route("getProduct", "GET", "/{sku}")
-    .route("listProducts", "GET", "/?{nextToken?}")
-    .route("listProductsByCategory", "GET", "/category/{category}?{nextToken?}")
+    .route("listProducts", "GET", "/?{nextToken?}&{pageSize?:int}")
+    .route("listProductsByCategory", "GET", "/category/{category}?{nextToken?}&{pageSize?:int}")
     .route(
       "listProductsBySubCategory",
       "GET",
-      "/subCategory/{subCategory}?{nextToken?}"
+      "/subCategory/{subCategory}?{nextToken?}&{pageSize?:int}"
     );
 };

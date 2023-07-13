@@ -44,7 +44,14 @@ export const ProductCard = (props: Props) => {
     };
 
   return (
-    <Stack rounded={"10"} boxShadow="md" backgroundColor={"whiteAlpha.800"} padding={5} spacing={{ base: "4", md: "5" }} {...rootProps}>
+    <Stack
+      rounded={"10"}
+      boxShadow="md"
+      backgroundColor={"whiteAlpha.800"}
+      padding={5}
+      spacing={{ base: "4", md: "5" }}
+      {...rootProps}
+    >
       <Box position="relative">
         <AspectRatio ratio={4 / 3}>
           <Image
@@ -66,6 +73,7 @@ export const ProductCard = (props: Props) => {
         <Stack spacing="1">
           <Text
             contentEditable={true}
+            suppressContentEditableWarning={true}
             onBlur={updatedHandler("name")}
             fontSize="lg"
             fontWeight="semibold"
@@ -74,6 +82,7 @@ export const ProductCard = (props: Props) => {
             {name}
           </Text>
           <Text
+            suppressContentEditableWarning={true}
             contentEditable={true}
             onBlur={updatedHandler("shortDescription")}
             fontWeight="medium"
@@ -85,6 +94,7 @@ export const ProductCard = (props: Props) => {
           <Text
             marginTop={1}
             contentEditable={true}
+            suppressContentEditableWarning={true}
             onBlur={updatedHandler("description")}
             fontWeight="medium"
             color={useColorModeValue("gray.700", "gray.400")}

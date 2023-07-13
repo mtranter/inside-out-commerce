@@ -15,9 +15,7 @@ export const handlers = (
   return {
     healthcheck: async () => Ok({ status: "ok" }),
     listProducts: async (req) => {
-      const { products, nextToken } = await repo.listProducts(
-        req.queryParams.nextToken
-      );
+      const { products, nextToken } = await repo.listProducts(req.queryParams);
       return Ok({ products, nextToken });
     },
     createProduct: async (req) => {
@@ -60,14 +58,14 @@ export const handlers = (
     listProductsByCategory: async (req) => {
       const products = await repo.listProductByCategory(
         req.pathParams.category,
-        req.queryParams.nextToken
+        req.queryParams
       );
       return Ok(products);
     },
     listProductsBySubCategory: async (req) => {
       const products = await repo.listProductBySubCategory(
         req.pathParams.subCategory,
-        req.queryParams.nextToken
+        req.queryParams
       );
       return Ok(products);
     },
