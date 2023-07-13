@@ -93,7 +93,6 @@ const App = () => {
       _dark={{
         bg: "gray.800",
       }}
-      border
       color="inherit"
       borderRightWidth="1px"
       w="60"
