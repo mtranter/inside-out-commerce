@@ -22,7 +22,7 @@ module "create_products_sqs_handler_function" {
   name             = "${var.service_name}-batch-create-${var.environment}"
   service_name     = "${var.project_name}-${var.project_name}"
   runtime          = "nodejs18.x"
-  handler          = "lambda.handler"
+  handler          = "batch-create-products-handler.handler"
   filename         = data.archive_file.sqs_handler.output_path
   source_code_hash = data.archive_file.sqs_handler.output_base64sha256
   timeout          = 3
