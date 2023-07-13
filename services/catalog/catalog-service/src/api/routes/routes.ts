@@ -14,7 +14,7 @@ export const CreateProductRequest = z.object({
   rrp: z.number(),
   categoryId: z.string(),
   category: z.string(),
-  subCategory: z.string(),
+  subcategory: z.string(),
 });
 
 export type RouteHandlers = HandlersOf<ReturnType<typeof routes>>;

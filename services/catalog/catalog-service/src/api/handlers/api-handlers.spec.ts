@@ -60,7 +60,7 @@ describe("handlers", () => {
       pathParams: {
         sku: postedProduct.sku,
         category: postedProduct.categoryId,
-        subCategory: postedProduct.subCategory,
+        subCategory: postedProduct.subcategory,
       },
       url: "/products/123" as const,
       method: "GET" as const,
