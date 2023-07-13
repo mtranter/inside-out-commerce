@@ -35,9 +35,9 @@ resource "aws_iam_role_policy_attachment" "batch_created_allow_dynamodb" {
   policy_arn = aws_iam_policy.allow_dynamodb.arn
 }
 
-resource "aws_lambda_event_source_mapping" "example" {
+resource "aws_lambda_event_source_mapping" "sqs_mapper" {
   event_source_arn = aws_sqs_queue.batch_create_queue.arn
-  function_name    = module.create_products_sqs_handler_function.function.name
+  function_name    = module.create_products_sqs_handler_function.function.function_name
 
   depends_on = [module.create_products_sqs_handler_function]
 }
@@ -45,7 +45,7 @@ resource "aws_lambda_event_source_mapping" "example" {
 resource "aws_lambda_permission" "allow_sqs" {
   statement_id  = "AllowExecutionFromSQS"
   action        = "lambda:InvokeFunction"
-  function_name = module.create_products_sqs_handler_function.function.name
+  function_name = module.create_products_sqs_handler_function.function.function_name
   principal     = "sqs.amazonaws.com"
   source_arn    = aws_sqs_queue.batch_create_queue.arn
 }
