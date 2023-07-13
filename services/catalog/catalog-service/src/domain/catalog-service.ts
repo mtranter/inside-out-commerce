@@ -4,6 +4,7 @@ import { CreateProductRequest } from "../api/routes/routes";
 import { z } from "zod";
 import { TxOutboxMessageFactory } from "dynamodb-kafka-outbox";
 import { ProductRepo } from "../api/handlers";
+import log from "../infra/logging";
 
 type Config = {
   keySchemaId: number;
@@ -30,13 +31,15 @@ export const CatalogService = (
         traceId: process.env._X_AMZN_TRACE_ID || "",
       },
     };
-    const event = await txOutboxMessageFactory.createOutboxMessage({
+    const outboxMsgParams = {
       topic: config.topic,
-      key: uuidv4(),
+      key: req.sku,
       keySchemaId: config.keySchemaId,
       valueSchemaId: config.valueSchemaId,
       value: eventBody,
-    });
+    };
+    log.info("outboxMsgParams", outboxMsgParams);
+    const event = await txOutboxMessageFactory.createOutboxMessage(outboxMsgParams);
     await repo.put(req, event);
   };
   return {

@@ -7,6 +7,7 @@ import { TxOutboxMessageFactory } from "dynamodb-kafka-outbox";
 import { SchemaRegistry } from "@kafkajs/confluent-schema-registry";
 import { ProductRepo } from "./repo";
 import { DynamoDB } from "@aws-sdk/client-dynamodb";
+import log from "./infra/logging";
 
 const schemaRegistry = new SchemaRegistry({
   host: config.schemaRegistryHost,
@@ -19,6 +20,7 @@ const schemaRegistry = new SchemaRegistry({
 export const _handler =
   (svc: CatalogService): SQSHandler =>
   async (event) => {
+    log.info("SQS Handler", event);
     const failureIds: string[] = [];
     const products = event.Records.map(
       (r) => JSON.parse(r.body) as z.infer<typeof CreateProductRequest>
