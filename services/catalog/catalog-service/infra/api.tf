@@ -25,7 +25,7 @@ resource "aws_iam_role_policy_attachment" "allow_dynamodb" {
 }
 
 resource "aws_iam_role_policy" "api_allow_sqs" {
-  role       = module.api_function.execution_role.id
+  role   = module.api_function.execution_role.id
   policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -58,6 +58,19 @@ resource "aws_cognito_resource_server" "api" {
 resource "aws_api_gateway_rest_api" "this" {
   name = "${var.project_name}-${var.service_name}-${var.environment}"
 }
+
+resource "aws_api_gateway_method_settings" "this" {
+  rest_api_id = aws_api_gateway_rest_api.this.id
+  stage_name  = aws_api_gateway_stage.this.stage_name
+  method_path = "*/*"
+  settings {
+    logging_level      = "INFO"
+    data_trace_enabled = true
+    metrics_enabled    = true
+  }
+}
+
+
 resource "aws_api_gateway_deployment" "this" {
   rest_api_id = aws_api_gateway_rest_api.this.id
 

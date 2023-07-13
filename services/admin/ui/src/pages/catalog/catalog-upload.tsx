@@ -34,7 +34,7 @@ export const CatalogUploadPage = () => {
   const [products, setProducts] = useState<ProductDetails[]>([]);
   const [error, setError] = useState<string | null>(null);
   const uploadProducts = async () => {
-    const res = await fetch(`${import.meta.env.VITE_CATALOG_API_ROOT}/catalog`, {
+    const res = await fetch(`${import.meta.env.VITE_CATALOG_API_ROOT}/catalog/batch`, {
       method: "POST",
       body: JSON.stringify(products),
       headers: {
