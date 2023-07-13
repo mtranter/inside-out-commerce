@@ -231,16 +231,9 @@ describe("Product API", () => {
       await consumer?.disconnect();
     });
     it("should return 200", () => {
-      expect(response.status).toEqual(201);
+      expect(response.status).toEqual(202);
     });
-    it("should have returned a product and published it to kafka", async () => {
-      const _makeRequest = makeAuthedRequest(apiConfig);
-      const getResponse = await _makeRequest(
-        `/catalog/${product.sku}`,
-        "GET"
-      );
-      const fetchedProduct = await getResponse.json();
-      expect(fetchedProduct).toEqual(product);
+    it("should have published the message to kafka", async () => {
       const findProduct = () => {
         return kafkaMessages.find((e) => {
           const event = e as KafkaPayload<typeof ProductSchema>;
