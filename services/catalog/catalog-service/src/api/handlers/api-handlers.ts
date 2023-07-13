@@ -3,8 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import { RouteHandlers } from "../routes";
 import { ProductRepo } from ".";
 import { SQS } from "@aws-sdk/client-sqs";
-import { CatalogService } from "../../domain/catalog-service";
-import { CreateProductRequest } from "../routes/routes";
+import { CatalogService, CreateProductRequest } from "../../domain/catalog-service";
 import { z } from "zod";
 
 export const handlers = (
@@ -22,6 +21,14 @@ export const handlers = (
       await service.createProduct(req.safeBody);
       return Created(req.safeBody, `/products/${req.safeBody.sku}`);
     },
+    // updateProduct: async (req) => {
+    //   await service.updateProduct(req.pathParams.sku, req.safeBody);
+    //   return Ok(req.safeBody);
+    // },
+    // deleteProduct: async (req) => {
+    //   await service.deleteProduct(req.pathParams.sku);
+    //   return Ok(req.);
+    // },
     batchCreateProduct: async (req) => {
       const batchesOf10 = req.safeBody.reduce(
         (acc, product) => {
@@ -33,7 +40,7 @@ export const handlers = (
           }
           return acc;
         },
-        [[]] as z.infer<typeof CreateProductRequest>[][]
+        [[]] as CreateProductRequest[][]
       );
       await Promise.all(
         batchesOf10.map((batch) =>

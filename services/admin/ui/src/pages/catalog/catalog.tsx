@@ -33,8 +33,8 @@ export const CatalogPage = () => {
         .json()
         .then((r) => {
           const newProducts = [...products, ...r.products];
-          setProducts(newProducts);
           setNextToken(r.nextToken);
+          setProducts(newProducts);
         })
         .catch((e) => {
           console.error(e);
@@ -44,7 +44,7 @@ export const CatalogPage = () => {
           setLoading(false);
         });
     },
-    []
+    [products, nextToken]
   );
   useEffect(() => {
     fetchProducts();
@@ -60,7 +60,7 @@ export const CatalogPage = () => {
     // We can use it to trigger 'onLoadMore' when the sentry comes near to become
     // visible, instead of becoming fully visible on the screen.
     rootMargin: "0px 0px 0px 0px",
-    delayInMs: 30000,
+    delayInMs: 1000,
   });
 
   return (

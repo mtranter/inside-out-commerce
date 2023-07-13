@@ -1,6 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
 import { ProductTopicValuePayload } from "../models";
-import { CreateProductRequest } from "../api/routes/routes";
 import { z } from "zod";
 import { TxOutboxMessageFactory } from "dynamodb-kafka-outbox";
 import { ProductRepo } from "../api/handlers";
@@ -13,6 +12,22 @@ type Config = {
   batchCreateProductQueueUrl: string;
 };
 
+export const CreateProductRequestSchema = z.object({
+  sku: z.string(),
+  name: z.string(),
+  description: z.string(),
+  shortDescription: z.string(),
+  rrp: z.number(),
+  categoryId: z.string(),
+  category: z.string(),
+  subCategory: z.string(),
+});
+export type CreateProductRequest = z.infer<typeof CreateProductRequestSchema>;
+
+export const UpdateProductRequestSchema = CreateProductRequestSchema.omit({
+  sku: true,
+}).deepPartial();
+export type UpdateProductRequest = z.infer<typeof UpdateProductRequestSchema>;
 export type CatalogService = ReturnType<typeof CatalogService>;
 
 export const CatalogService = (
@@ -20,7 +35,7 @@ export const CatalogService = (
   txOutboxMessageFactory: TxOutboxMessageFactory,
   repo: ProductRepo
 ) => {
-  const createProduct = async (req: z.infer<typeof CreateProductRequest>) => {
+  const createProduct = async (req: CreateProductRequest) => {
     const eventId = uuidv4();
     const eventBody: ProductTopicValuePayload = {
       eventId: eventId,
@@ -39,9 +54,69 @@ export const CatalogService = (
       value: eventBody,
     };
     log.info("outboxMsgParams", outboxMsgParams);
-    const event = await txOutboxMessageFactory.createOutboxMessage(outboxMsgParams);
+    const event = await txOutboxMessageFactory.createOutboxMessage(
+      outboxMsgParams
+    );
     await repo.put(req, event);
   };
+  const updateProduct = async (sku: string, req: UpdateProductRequest) => {
+    const eventId = uuidv4();
+    const existing = await repo.get(sku);
+    if (!existing) {
+      return { error: "ProductNotFound" } as const;
+    }
+    const updated = { ...existing, ...req };
+    const eventBody: ProductTopicValuePayload = {
+      eventId: eventId,
+      eventTime: Date.now(),
+      eventType: "com.insideout.product.updated",
+      payload: updated,
+      metadata: {
+        traceId: process.env._X_AMZN_TRACE_ID || "",
+      },
+    };
+    const outboxMsgParams = {
+      topic: config.topic,
+      key: sku,
+      keySchemaId: config.keySchemaId,
+      valueSchemaId: config.valueSchemaId,
+      value: eventBody,
+    };
+    log.info("outboxMsgParams", outboxMsgParams);
+    const event = await txOutboxMessageFactory.createOutboxMessage(
+      outboxMsgParams
+    );
+    await repo.put(updated, event);
+  };
+  // const deleteProduct = async (sku: string) => {
+  //   const existing = await repo.get(sku);
+  //   if (!existing) {
+  //     return { error: "ProductNotFound" } as const;
+  //   }
+  //   const eventId = uuidv4();
+  //   const eventBody: ProductTopicValuePayload = {
+  //     eventId: eventId,
+  //     eventTime: Date.now(),
+  //     eventType: "com.insideout.product.deleted",
+  //     payload: existing,
+  //     metadata: {
+  //       traceId: process.env._X_AMZN_TRACE_ID || "",
+  //     },
+  //   };
+  //   const outboxMsgParams = {
+  //     topic: config.topic,
+  //     key: sku,
+  //     keySchemaId: config.keySchemaId,
+  //     valueSchemaId: config.valueSchemaId,
+  //     value: eventBody,
+  //   };
+  //   log.info("outboxMsgParams", outboxMsgParams);
+  //   const event = await txOutboxMessageFactory.createOutboxMessage(
+  //     outboxMsgParams
+  //   );
+  //   await repo.put({ sku: sku }, event);
+  // };
+
   return {
     createProduct,
   };

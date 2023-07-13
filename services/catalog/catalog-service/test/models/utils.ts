@@ -1,6 +1,6 @@
 import { generateMock } from "@anatine/zod-mock";
 import { ProductSchema } from "../../src/models";
-import { CreateProductRequest } from "../../src/api/routes/routes";
+import { CreateProductRequestSchema } from "../../src/domain/catalog-service";
 
 export const buildTestProduct = () => generateMock(ProductSchema);
-export const buildTestProductRequest = () => generateMock(CreateProductRequest);
+export const buildTestProductRequest = () => generateMock(CreateProductRequestSchema);

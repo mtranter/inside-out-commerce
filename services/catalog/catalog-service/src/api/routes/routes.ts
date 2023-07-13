@@ -5,17 +5,8 @@ import { CorsMiddleware } from "@ezapi/cors-middleware";
 import { z } from "zod";
 import { LoggingMiddleware } from "@inside-out-commerce/middleware";
 import log from "../../infra/logging";
+import { CreateProductRequestSchema, UpdateProductRequestSchema } from "../../domain/catalog-service";
 
-export const CreateProductRequest = z.object({
-  sku: z.string(),
-  name: z.string(),
-  description: z.string(),
-  shortDescription: z.string(),
-  rrp: z.number(),
-  categoryId: z.string(),
-  category: z.string(),
-  subCategory: z.string(),
-});
 
 export type RouteHandlers = HandlersOf<ReturnType<typeof routes>>;
 const corsMiddleware = CorsMiddleware({
@@ -32,8 +23,10 @@ export const routes = () => {
     .withMiddleware(JsonParserMiddlerware)
     .withMiddleware(corsMiddleware)
     .route("healthcheck", "GET", "/healthcheck")
-    .route("createProduct", "POST", "/", ZodMiddleware(CreateProductRequest))   
-    .route("batchCreateProduct", "POST", "/batch", ZodMiddleware(z.array(CreateProductRequest)))   
+    .route("createProduct", "POST", "/", ZodMiddleware(CreateProductRequestSchema))   
+    // .route("updateProduct", "PUT", "/{sku}", ZodMiddleware(UpdateProductRequestSchema))
+    // .route("deleteProduct", "DELETE", "/{sku}")
+    .route("batchCreateProduct", "POST", "/batch", ZodMiddleware(z.array(CreateProductRequestSchema)))   
     .route("getProduct", "GET", "/{sku}")
     .route("listProducts", "GET", "/?{nextToken?}&{pageSize?:int}")
     .route("listProductsByCategory", "GET", "/category/{category}?{nextToken?}&{pageSize?:int}")

@@ -75,7 +75,7 @@ describe("DynamoDB Repo Spec", () => {
     expect(productsByCategory.products.length).toEqual(20);
     expect(productsByCategory.nextToken).toBeDefined();
     const productsByCategory2 = await sut.listProductByCategory("cat1", {
-      next: productsByCategory.nextToken,
+      nextToken: productsByCategory.nextToken,
       pageSize: 30,
     });
     expect(productsByCategory2.products.length).toEqual(30);
@@ -100,7 +100,7 @@ describe("DynamoDB Repo Spec", () => {
     expect(productsByCategory.products.length).toEqual(25);
     expect(productsByCategory.nextToken).toBeDefined();
     const productsByCategory2 = await sut.listProductBySubCategory("subcat1", {
-      next: productsByCategory.nextToken,
+      nextToken: productsByCategory.nextToken,
       pageSize: 31,
     });
     expect(productsByCategory2.products.length).toEqual(31);

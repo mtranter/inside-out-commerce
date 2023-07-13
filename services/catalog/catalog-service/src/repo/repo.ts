@@ -55,7 +55,7 @@ export const ProductRepo = ({
       return product?.data;
     },
     listProducts: async (args) => {
-      const startKey = args?.next ? decodeBase64Object(args?.next) : undefined;
+      const startKey = args?.nextToken ? decodeBase64Object(args?.nextToken) : undefined;
       const result = await productsTable.indexes.gsi3.query<ProductDto>("#PRODUCT#", {
         startKey,
         pageSize: args?.pageSize ?? 20,
@@ -92,7 +92,7 @@ export const ProductRepo = ({
       return product;
     },
     listProductByCategory: async (categoryId, args) => {
-      const startKey = args?.next ? decodeBase64Object(args?.next) : undefined;
+      const startKey = args?.nextToken ? decodeBase64Object(args?.nextToken) : undefined;
       const result = await productsTable.indexes.gsi1.query<ProductDto>(
         categoryId,
         {
@@ -108,7 +108,7 @@ export const ProductRepo = ({
       };
     },
     listProductBySubCategory: async (subCategoryId, args) => {
-      const startKey = args?.next ? decodeBase64Object(args?.next) : undefined;
+      const startKey = args?.nextToken ? decodeBase64Object(args?.nextToken) : undefined;
       const result = await productsTable.indexes.gsi2.query<ProductDto>(
         subCategoryId,
         {
