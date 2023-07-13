@@ -43,7 +43,7 @@ export const mockRepo = (): MockRepo => {
     listProductBySubCategory: async (subCategoryId: string, next?: string) => {
       return {
         products: Object.values(productsState).filter(
-          (p) => p.subcategory === subCategoryId
+          (p) => p.subCategory === subCategoryId
         ),
         nextToken: undefined,
       };

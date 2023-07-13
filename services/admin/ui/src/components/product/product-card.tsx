@@ -21,7 +21,7 @@ export const ProductSchema = z.object({
   rrp: z.number(),
   categoryId: z.string(),
   category: z.string(),
-  subcategory: z.string(),
+  subCategory: z.string(),
 });
 
 export type ProductDetails = z.infer<typeof ProductSchema>;
@@ -34,7 +34,7 @@ type Props = {
 export const ProductCard = (props: Props) => {
   const { product, rootProps } = props;
   const { name, rrp, description, shortDescription } = product;
-  const imageUrl = `/images/products/${product.categoryId}/${product.subcategory
+  const imageUrl = `/images/products/${product.categoryId}/${product.subCategory
     .replaceAll(" ", "")
     .toLowerCase()}_300.png`;
   const updatedHandler =

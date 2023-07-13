@@ -22,7 +22,7 @@ module "dynamodb" {
     }, {
     name = "gsi2"
     hash_key = {
-      name = "subcategory"
+      name = "subCategory"
       type = "S"
     }
     range_key = {

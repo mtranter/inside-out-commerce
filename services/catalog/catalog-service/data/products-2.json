@@ -7,7 +7,7 @@
     "rrp": 17.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Juice"
+    "subCategory": "Juice"
   },
   {
     "sku": "gro-0192830548",
@@ -17,7 +17,7 @@
     "rrp": 59.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Whisky"
+    "subCategory": "Whisky"
   },
   {
     "sku": "gro-0721244469",
@@ -27,7 +27,7 @@
     "rrp": 49.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Tequila"
+    "subCategory": "Tequila"
   },
   {
     "sku": "gro-7546003873",
@@ -37,7 +37,7 @@
     "rrp": 39.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Vodka"
+    "subCategory": "Vodka"
   },
   {
     "sku": "gro-8088641035",
@@ -47,7 +47,7 @@
     "rrp": 8.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Corned Beef"
+    "subCategory": "Corned Beef"
   },
   {
     "sku": "gro-7208479055",
@@ -57,7 +57,7 @@
     "rrp": 12.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Instant Noodles"
+    "subCategory": "Instant Noodles"
   },
   {
     "sku": "gro-9150390867",
@@ -67,7 +67,7 @@
     "rrp": 16.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Olive Oil"
+    "subCategory": "Olive Oil"
   },
   {
     "sku": "gro-4620119835",
@@ -77,7 +77,7 @@
     "rrp": 9.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Vegetable Oil"
+    "subCategory": "Vegetable Oil"
   },
   {
     "sku": "gro-0894972835",
@@ -87,7 +87,7 @@
     "rrp": 6.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Chip"
+    "subCategory": "Chip"
   },
   {
     "sku": "gro-6549312268",
@@ -97,7 +97,7 @@
     "rrp": 8.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Biscuit"
+    "subCategory": "Biscuit"
   },
   {
     "sku": "gro-6666996534",
@@ -107,7 +107,7 @@
     "rrp": 10.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Oatmeal"
+    "subCategory": "Oatmeal"
   },
   {
     "sku": "gro-2688167992",
@@ -117,7 +117,7 @@
     "rrp": 14.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Cookie"
+    "subCategory": "Cookie"
   },
   {
     "sku": "gro-6631151399",
@@ -127,7 +127,7 @@
     "rrp": 7.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Bread"
+    "subCategory": "Bread"
   },
   {
     "sku": "gro-3419430491",
@@ -137,7 +137,7 @@
     "rrp": 24.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Cake"
+    "subCategory": "Cake"
   },
   {
     "sku": "gro-1624111349",
@@ -147,7 +147,7 @@
     "rrp": 2.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Tomatoes"
+    "subCategory": "Tomatoes"
   },
   {
     "sku": "gro-5200639173",
@@ -157,7 +157,7 @@
     "rrp": 3.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Onions"
+    "subCategory": "Onions"
   },
   {
     "sku": "gro-4613081323",
@@ -167,7 +167,7 @@
     "rrp": 1.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Garlic"
+    "subCategory": "Garlic"
   },
   {
     "sku": "gro-1203861753",
@@ -177,7 +177,7 @@
     "rrp": 14.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Beef"
+    "subCategory": "Beef"
   },
   {
     "sku": "gro-3817838471",
@@ -187,7 +187,7 @@
     "rrp": 9.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Pork"
+    "subCategory": "Pork"
   },
   {
     "sku": "gro-0476402713",
@@ -197,7 +197,7 @@
     "rrp": 6.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Chicken"
+    "subCategory": "Chicken"
   },
   {
     "sku": "gro-3013715460",
@@ -207,7 +207,7 @@
     "rrp": 16.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Shrimp"
+    "subCategory": "Shrimp"
   },
   {
     "sku": "gro-6554665176",
@@ -217,7 +217,7 @@
     "rrp": 11.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Fish"
+    "subCategory": "Fish"
   },
   {
     "sku": "gro-4006968945",
@@ -227,7 +227,7 @@
     "rrp": 2.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Matches"
+    "subCategory": "Matches"
   },
   {
     "sku": "gro-9140877472",
@@ -237,7 +237,7 @@
     "rrp": 3.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Dishwashing Liquid"
+    "subCategory": "Dishwashing Liquid"
   },
   {
     "sku": "gro-9489585934",
@@ -247,7 +247,7 @@
     "rrp": 4.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Bleach"
+    "subCategory": "Bleach"
   },
   {
     "sku": "gro-4747841953",
@@ -257,7 +257,7 @@
     "rrp": 5.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Toilet Cleaner"
+    "subCategory": "Toilet Cleaner"
   },
   {
     "sku": "gro-5000738092",
@@ -267,7 +267,7 @@
     "rrp": 6.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Soy Sauce"
+    "subCategory": "Soy Sauce"
   },
   {
     "sku": "gro-5293028472",
@@ -277,7 +277,7 @@
     "rrp": 8.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Vinegar"
+    "subCategory": "Vinegar"
   },
   {
     "sku": "gro-4930178502",
@@ -287,7 +287,7 @@
     "rrp": 7.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Fish Sauce"
+    "subCategory": "Fish Sauce"
   },
   {
     "sku": "gro-8311002173",
@@ -297,7 +297,7 @@
     "rrp": 3.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Ketchup"
+    "subCategory": "Ketchup"
   },
   {
     "sku": "gro-9343044558",
@@ -307,7 +307,7 @@
     "rrp": 2.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Mustard"
+    "subCategory": "Mustard"
   },
   {
     "sku": "gro-0759716041",
@@ -317,7 +317,7 @@
     "rrp": 3.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Eggs"
+    "subCategory": "Eggs"
   },
   {
     "sku": "gro-7707974738",
@@ -327,7 +327,7 @@
     "rrp": 4.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Mayonnaise"
+    "subCategory": "Mayonnaise"
   },
   {
     "sku": "pet-0426274637",
@@ -337,7 +337,7 @@
     "rrp": 9.99,
     "category": "Pets",
     "categoryId": "pets",
-    "subcategory": "Leash"
+    "subCategory": "Leash"
   },
   {
     "sku": "pet-8066570715",
@@ -347,7 +347,7 @@
     "rrp": 7.99,
     "category": "Pets",
     "categoryId": "pets",
-    "subcategory": "Collar"
+    "subCategory": "Collar"
   },
   {
     "sku": "pet-2436731932",
@@ -357,7 +357,7 @@
     "rrp": 14.99,
     "category": "Pets",
     "categoryId": "pets",
-    "subcategory": "Pet Shoes"
+    "subCategory": "Pet Shoes"
   },
   {
     "sku": "pet-1985097516",
@@ -367,7 +367,7 @@
     "rrp": 12.99,
     "category": "Pets",
     "categoryId": "pets",
-    "subcategory": "Pet Bowl"
+    "subCategory": "Pet Bowl"
   },
   {
     "sku": "pet-9423898527",
@@ -377,7 +377,7 @@
     "rrp": 19.99,
     "category": "Pets",
     "categoryId": "pets",
-    "subcategory": "Bird Feeder"
+    "subCategory": "Bird Feeder"
   },
   {
     "sku": "pet-2362533516",
@@ -387,7 +387,7 @@
     "rrp": 59.99,
     "category": "Pets",
     "categoryId": "pets",
-    "subcategory": "Pet Cage"
+    "subCategory": "Pet Cage"
   },
   {
     "sku": "pet-1847162660",
@@ -397,7 +397,7 @@
     "rrp": 39.99,
     "category": "Pets",
     "categoryId": "pets",
-    "subcategory": "Pet Crate"
+    "subCategory": "Pet Crate"
   },
   {
     "sku": "pet-2577487294",
@@ -407,7 +407,7 @@
     "rrp": 14.99,
     "category": "Pets",
     "categoryId": "pets",
-    "subcategory": "Pet Litter"
+    "subCategory": "Pet Litter"
   },
   {
     "sku": "pet-0579828681",
@@ -417,7 +417,7 @@
     "rrp": 49.99,
     "category": "Pets",
     "categoryId": "pets",
-    "subcategory": "Pet Carrier"
+    "subCategory": "Pet Carrier"
   },
   {
     "sku": "pet-0644581217",
@@ -427,7 +427,7 @@
     "rrp": 199.99,
     "category": "Pets",
     "categoryId": "pets",
-    "subcategory": "Aquarium"
+    "subCategory": "Aquarium"
   },
   {
     "sku": "pet-8356914214",
@@ -437,7 +437,7 @@
     "rrp": 9.99,
     "category": "Pets",
     "categoryId": "pets",
-    "subcategory": "Pet Toy"
+    "subCategory": "Pet Toy"
   },
   {
     "sku": "pet-6072284203",
@@ -447,7 +447,7 @@
     "rrp": 29.99,
     "category": "Pets",
     "categoryId": "pets",
-    "subcategory": "Dog Food"
+    "subCategory": "Dog Food"
   },
   {
     "sku": "pet-8768702491",
@@ -457,7 +457,7 @@
     "rrp": 24.99,
     "category": "Pets",
     "categoryId": "pets",
-    "subcategory": "Cat Food"
+    "subCategory": "Cat Food"
   },
   {
     "sku": "pet-4200543942",
@@ -467,7 +467,7 @@
     "rrp": 7.99,
     "category": "Pets",
     "categoryId": "pets",
-    "subcategory": "Fish Food"
+    "subCategory": "Fish Food"
   },
   {
     "sku": "fas-7139520369",
@@ -477,7 +477,7 @@
     "rrp": 29.99,
     "category": "Fashion Women",
     "categoryId": "fashionwomen",
-    "subcategory": "Tote Bag"
+    "subCategory": "Tote Bag"
   },
   {
     "sku": "fas-4688315782",
@@ -487,7 +487,7 @@
     "rrp": 79.99,
     "category": "Fashion Women",
     "categoryId": "fashionwomen",
-    "subcategory": "Travel Bag"
+    "subCategory": "Travel Bag"
   },
   {
     "sku": "fas-0336111260",
@@ -497,7 +497,7 @@
     "rrp": 89.99,
     "category": "Fashion Women",
     "categoryId": "fashionwomen",
-    "subcategory": "Dress"
+    "subCategory": "Dress"
   },
   {
     "sku": "fas-4249776933",
@@ -507,7 +507,7 @@
     "rrp": 12.99,
     "category": "Fashion Women",
     "categoryId": "fashionwomen",
-    "subcategory": "Coin Purse"
+    "subCategory": "Coin Purse"
   },
   {
     "sku": "fas-4325647414",
@@ -517,7 +517,7 @@
     "rrp": 59.99,
     "category": "Fashion Women",
     "categoryId": "fashionwomen",
-    "subcategory": "Women Jacket"
+    "subCategory": "Women Jacket"
   },
   {
     "sku": "fas-3539935353",
@@ -527,7 +527,7 @@
     "rrp": 39.99,
     "category": "Fashion Women",
     "categoryId": "fashionwomen",
-    "subcategory": "Women Sweatshirt"
+    "subCategory": "Women Sweatshirt"
   },
   {
     "sku": "fas-4598049562",
@@ -537,7 +537,7 @@
     "rrp": 49.99,
     "category": "Fashion Women",
     "categoryId": "fashionwomen",
-    "subcategory": "Women Jeans"
+    "subCategory": "Women Jeans"
   },
   {
     "sku": "fas-7963514111",
@@ -547,7 +547,7 @@
     "rrp": 29.99,
     "category": "Fashion Women",
     "categoryId": "fashionwomen",
-    "subcategory": "Women Leggings"
+    "subCategory": "Women Leggings"
   },
   {
     "sku": "fas-2301325784",
@@ -557,7 +557,7 @@
     "rrp": 39.99,
     "category": "Fashion Women",
     "categoryId": "fashionwomen",
-    "subcategory": "Women Skirt"
+    "subCategory": "Women Skirt"
   },
   {
     "sku": "fas-1083944396",
@@ -567,7 +567,7 @@
     "rrp": 24.99,
     "category": "Fashion Women",
     "categoryId": "fashionwomen",
-    "subcategory": "Women Shorts"
+    "subCategory": "Women Shorts"
   },
   {
     "sku": "fas-0396446617",
@@ -577,7 +577,7 @@
     "rrp": 34.99,
     "category": "Fashion Women",
     "categoryId": "fashionwomen",
-    "subcategory": "Women Sandals"
+    "subCategory": "Women Sandals"
   },
   {
     "sku": "fas-3676607873",
@@ -587,7 +587,7 @@
     "rrp": 49.99,
     "category": "Fashion Women",
     "categoryId": "fashionwomen",
-    "subcategory": "Flat Shoes"
+    "subCategory": "Flat Shoes"
   },
   {
     "sku": "fas-5613489735",
@@ -597,7 +597,7 @@
     "rrp": 69.99,
     "category": "Fashion Women",
     "categoryId": "fashionwomen",
-    "subcategory": "Heels"
+    "subCategory": "Heels"
   },
   {
     "sku": "fas-6211513464",
@@ -607,7 +607,7 @@
     "rrp": 59.99,
     "category": "Fashion Women",
     "categoryId": "fashionwomen",
-    "subcategory": "Wedges"
+    "subCategory": "Wedges"
   },
   {
     "sku": "fas-2085199940",
@@ -617,7 +617,7 @@
     "rrp": 79.99,
     "category": "Fashion Women",
     "categoryId": "fashionwomen",
-    "subcategory": "Boots"
+    "subCategory": "Boots"
   },
   {
     "sku": "fas-2306670599",
@@ -627,7 +627,7 @@
     "rrp": 39.99,
     "category": "Fashion Women",
     "categoryId": "fashionwomen",
-    "subcategory": "Women Wallet"
+    "subCategory": "Women Wallet"
   },
   {
     "sku": "fas-6033557182",
@@ -637,7 +637,7 @@
     "rrp": 29.99,
     "category": "Fashion Women",
     "categoryId": "fashionwomen",
-    "subcategory": "Belt Bag"
+    "subCategory": "Belt Bag"
   },
   {
     "sku": "fas-0974104062",
@@ -647,7 +647,7 @@
     "rrp": 69.99,
     "category": "Fashion Women",
     "categoryId": "fashionwomen",
-    "subcategory": "Women Backpack"
+    "subCategory": "Women Backpack"
   },
   {
     "sku": "fas-7576246416",
@@ -657,7 +657,7 @@
     "rrp": 34.99,
     "category": "Fashion Women",
     "categoryId": "fashionwomen",
-    "subcategory": "Women Shirt"
+    "subCategory": "Women Shirt"
   },
   {
     "sku": "fas-0892282225",
@@ -667,7 +667,7 @@
     "rrp": 19.99,
     "category": "Fashion Men",
     "categoryId": "fashionmen",
-    "subcategory": "Tshirt"
+    "subCategory": "Tshirt"
   },
   {
     "sku": "fas-0244044053",
@@ -677,7 +677,7 @@
     "rrp": 29.99,
     "category": "Fashion Men",
     "categoryId": "fashionmen",
-    "subcategory": "Polo Shirt"
+    "subCategory": "Polo Shirt"
   },
   {
     "sku": "fas-6327226997",
@@ -687,7 +687,7 @@
     "rrp": 79.99,
     "category": "Fashion Men",
     "categoryId": "fashionmen",
-    "subcategory": "Men Jacket"
+    "subCategory": "Men Jacket"
   },
   {
     "sku": "fas-9789183324",
@@ -697,7 +697,7 @@
     "rrp": 99.99,
     "category": "Fashion Men",
     "categoryId": "fashionmen",
-    "subcategory": "Coat"
+    "subCategory": "Coat"
   },
   {
     "sku": "fas-8640230389",
@@ -707,7 +707,7 @@
     "rrp": 49.99,
     "category": "Fashion Men",
     "categoryId": "fashionmen",
-    "subcategory": "Hoodie"
+    "subCategory": "Hoodie"
   },
   {
     "sku": "fas-6151852099",
@@ -717,7 +717,7 @@
     "rrp": 59.99,
     "category": "Fashion Men",
     "categoryId": "fashionmen",
-    "subcategory": "Men Jeans"
+    "subCategory": "Men Jeans"
   },
   {
     "sku": "fas-6350379614",
@@ -727,7 +727,7 @@
     "rrp": 69.99,
     "category": "Fashion Men",
     "categoryId": "fashionmen",
-    "subcategory": "Formal Pants"
+    "subCategory": "Formal Pants"
   },
   {
     "sku": "fas-0244796323",
@@ -737,7 +737,7 @@
     "rrp": 39.99,
     "category": "Fashion Men",
     "categoryId": "fashionmen",
-    "subcategory": "Men Shorts"
+    "subCategory": "Men Shorts"
   },
   {
     "sku": "fas-8766282360",
@@ -747,7 +747,7 @@
     "rrp": 79.99,
     "category": "Fashion Men",
     "categoryId": "fashionmen",
-    "subcategory": "Sneakers"
+    "subCategory": "Sneakers"
   },
   {
     "sku": "fas-3860325546",
@@ -757,7 +757,7 @@
     "rrp": 89.99,
     "category": "Fashion Men",
     "categoryId": "fashionmen",
-    "subcategory": "Loafers"
+    "subCategory": "Loafers"
   },
   {
     "sku": "fas-9007320751",
@@ -767,7 +767,7 @@
     "rrp": 99.99,
     "category": "Fashion Men",
     "categoryId": "fashionmen",
-    "subcategory": "Black Shoes"
+    "subCategory": "Black Shoes"
   },
   {
     "sku": "fas-2560164162",
@@ -777,7 +777,7 @@
     "rrp": 59.99,
     "category": "Fashion Men",
     "categoryId": "fashionmen",
-    "subcategory": "Men Sandals"
+    "subCategory": "Men Sandals"
   },
   {
     "sku": "fas-7060973031",
@@ -787,7 +787,7 @@
     "rrp": 49.99,
     "category": "Fashion Men",
     "categoryId": "fashionmen",
-    "subcategory": "Messenger Bag"
+    "subCategory": "Messenger Bag"
   },
   {
     "sku": "fas-4243500061",
@@ -797,7 +797,7 @@
     "rrp": 79.99,
     "category": "Fashion Men",
     "categoryId": "fashionmen",
-    "subcategory": "Men Backpack"
+    "subCategory": "Men Backpack"
   },
   {
     "sku": "fas-0594751822",
@@ -807,7 +807,7 @@
     "rrp": 39.99,
     "category": "Fashion Men",
     "categoryId": "fashionmen",
-    "subcategory": "Men Wallet"
+    "subCategory": "Men Wallet"
   },
   {
     "sku": "fas-2723277625",
@@ -817,7 +817,7 @@
     "rrp": 29.99,
     "category": "Fashion Men",
     "categoryId": "fashionmen",
-    "subcategory": "Belt"
+    "subCategory": "Belt"
   },
   {
     "sku": "acc-5940475383",
@@ -827,7 +827,7 @@
     "rrp": 99.99,
     "category": "Accessories",
     "categoryId": "accessories",
-    "subcategory": "Watch"
+    "subCategory": "Watch"
   },
   {
     "sku": "acc-0251631225",
@@ -837,7 +837,7 @@
     "rrp": 79.99,
     "category": "Accessories",
     "categoryId": "accessories",
-    "subcategory": "Necklace"
+    "subCategory": "Necklace"
   },
   {
     "sku": "acc-5234941827",
@@ -847,7 +847,7 @@
     "rrp": 49.99,
     "category": "Accessories",
     "categoryId": "accessories",
-    "subcategory": "Earring"
+    "subCategory": "Earring"
   },
   {
     "sku": "acc-4029333052",
@@ -857,7 +857,7 @@
     "rrp": 59.99,
     "category": "Accessories",
     "categoryId": "accessories",
-    "subcategory": "Ring"
+    "subCategory": "Ring"
   },
   {
     "sku": "acc-6343709130",
@@ -867,7 +867,7 @@
     "rrp": 39.99,
     "category": "Accessories",
     "categoryId": "accessories",
-    "subcategory": "Bangle"
+    "subCategory": "Bangle"
   },
   {
     "sku": "acc-5664112491",
@@ -877,7 +877,7 @@
     "rrp": 44.99,
     "category": "Accessories",
     "categoryId": "accessories",
-    "subcategory": "Bracelet"
+    "subCategory": "Bracelet"
   },
   {
     "sku": "acc-1054093492",
@@ -887,7 +887,7 @@
     "rrp": 89.99,
     "category": "Accessories",
     "categoryId": "accessories",
-    "subcategory": "Eyeglasses"
+    "subCategory": "Eyeglasses"
   },
   {
     "sku": "acc-8302223773",
@@ -897,7 +897,7 @@
     "rrp": 79.99,
     "category": "Accessories",
     "categoryId": "accessories",
-    "subcategory": "Sunglasses"
+    "subCategory": "Sunglasses"
   },
   {
     "sku": "acc-2639816960",
@@ -907,7 +907,7 @@
     "rrp": 49.99,
     "category": "Accessories",
     "categoryId": "accessories",
-    "subcategory": "Contact Lenses"
+    "subCategory": "Contact Lenses"
   },
   {
     "sku": "acc-1814562539",
@@ -917,7 +917,7 @@
     "rrp": 14.99,
     "category": "Accessories",
     "categoryId": "accessories",
-    "subcategory": "Headband"
+    "subCategory": "Headband"
   },
   {
     "sku": "acc-3910043586",
@@ -927,7 +927,7 @@
     "rrp": 19.99,
     "category": "Accessories",
     "categoryId": "accessories",
-    "subcategory": "Cap"
+    "subCategory": "Cap"
   },
   {
     "sku": "spo-6282930236",
@@ -937,7 +937,7 @@
     "rrp": 299.99,
     "category": "Sports & Lifestyle",
     "categoryId": "sportsandlifestyle",
-    "subcategory": "Bike"
+    "subCategory": "Bike"
   },
   {
     "sku": "spo-8531658918",
@@ -947,7 +947,7 @@
     "rrp": 59.99,
     "category": "Sports & Lifestyle",
     "categoryId": "sportsandlifestyle",
-    "subcategory": "Fishing Rod"
+    "subCategory": "Fishing Rod"
   },
   {
     "sku": "spo-9213364904",
@@ -957,7 +957,7 @@
     "rrp": 4.99,
     "category": "Sports & Lifestyle",
     "categoryId": "sportsandlifestyle",
-    "subcategory": "Fishing Hook"
+    "subCategory": "Fishing Hook"
   },
   {
     "sku": "spo-9282508943",
@@ -967,7 +967,7 @@
     "rrp": 149.99,
     "category": "Sports & Lifestyle",
     "categoryId": "sportsandlifestyle",
-    "subcategory": "Tent"
+    "subCategory": "Tent"
   },
   {
     "sku": "spo-1837892536",
@@ -977,7 +977,7 @@
     "rrp": 29.99,
     "category": "Sports & Lifestyle",
     "categoryId": "sportsandlifestyle",
-    "subcategory": "Swiss Knife"
+    "subCategory": "Swiss Knife"
   },
   {
     "sku": "spo-0599056283",
@@ -987,7 +987,7 @@
     "rrp": 89.99,
     "category": "Sports & Lifestyle",
     "categoryId": "sportsandlifestyle",
-    "subcategory": "Men Sport Shoes"
+    "subCategory": "Men Sport Shoes"
   },
   {
     "sku": "spo-4039260322",
@@ -997,7 +997,7 @@
     "rrp": 79.99,
     "category": "Sports & Lifestyle",
     "categoryId": "sportsandlifestyle",
-    "subcategory": "Women Sport Shoes"
+    "subCategory": "Women Sport Shoes"
   },
   {
     "sku": "spo-9047845802",
@@ -1007,7 +1007,7 @@
     "rrp": 129.99,
     "category": "Sports & Lifestyle",
     "categoryId": "sportsandlifestyle",
-    "subcategory": "Scooter"
+    "subCategory": "Scooter"
   },
   {
     "sku": "spo-2060901784",
@@ -1017,6 +1017,6 @@
     "rrp": 89.99,
     "category": "Sports & Lifestyle",
     "categoryId": "sportsandlifestyle",
-    "subcategory": "Skateboard"
+    "subCategory": "Skateboard"
   }
 ]

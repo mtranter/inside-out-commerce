@@ -7,7 +7,7 @@
     "rrp": 499.99,
     "category": "Gadgets",
     "categoryId": "gadgets",
-    "subcategory": "Mobile Phone"
+    "subCategory": "Mobile Phone"
   },
   {
     "sku": "gad-3463776330",
@@ -17,7 +17,7 @@
     "rrp": 149.99,
     "category": "Gadgets",
     "categoryId": "gadgets",
-    "subcategory": "Computer Table"
+    "subCategory": "Computer Table"
   },
   {
     "sku": "gad-0134732211",
@@ -27,7 +27,7 @@
     "rrp": 1299.99,
     "category": "Gadgets",
     "categoryId": "gadgets",
-    "subcategory": "Laptop"
+    "subCategory": "Laptop"
   },
   {
     "sku": "gad-4395219342",
@@ -37,7 +37,7 @@
     "rrp": 1999.99,
     "category": "Gadgets",
     "categoryId": "gadgets",
-    "subcategory": "Desktop"
+    "subCategory": "Desktop"
   },
   {
     "sku": "gad-6288655485",
@@ -47,7 +47,7 @@
     "rrp": 299.99,
     "category": "Gadgets",
     "categoryId": "gadgets",
-    "subcategory": "Security Camera"
+    "subCategory": "Security Camera"
   },
   {
     "sku": "gad-2775378030",
@@ -57,7 +57,7 @@
     "rrp": 199.99,
     "category": "Gadgets",
     "categoryId": "gadgets",
-    "subcategory": "Action Camera"
+    "subCategory": "Action Camera"
   },
   {
     "sku": "gad-1803574962",
@@ -67,7 +67,7 @@
     "rrp": 399.99,
     "category": "Gadgets",
     "categoryId": "gadgets",
-    "subcategory": "Gaming Console"
+    "subCategory": "Gaming Console"
   },
   {
     "sku": "gad-1740836942",
@@ -77,7 +77,7 @@
     "rrp": 29.99,
     "category": "Gadgets",
     "categoryId": "gadgets",
-    "subcategory": "Phone Charger"
+    "subCategory": "Phone Charger"
   },
   {
     "sku": "gad-6120573154",
@@ -87,7 +87,7 @@
     "rrp": 799.99,
     "category": "Gadgets",
     "categoryId": "gadgets",
-    "subcategory": "Drone"
+    "subCategory": "Drone"
   },
   {
     "sku": "gad-4585624424",
@@ -97,7 +97,7 @@
     "rrp": 129.99,
     "category": "Gadgets",
     "categoryId": "gadgets",
-    "subcategory": "Earphone"
+    "subCategory": "Earphone"
   },
   {
     "sku": "gad-3521177056",
@@ -107,7 +107,7 @@
     "rrp": 149.99,
     "category": "Gadgets",
     "categoryId": "gadgets",
-    "subcategory": "Headset"
+    "subCategory": "Headset"
   },
   {
     "sku": "gad-7245097396",
@@ -117,7 +117,7 @@
     "rrp": 79.99,
     "category": "Gadgets",
     "categoryId": "gadgets",
-    "subcategory": "Bluetooth Speaker"
+    "subCategory": "Bluetooth Speaker"
   },
   {
     "sku": "gad-9801819164",
@@ -127,7 +127,7 @@
     "rrp": 199.99,
     "category": "Gadgets",
     "categoryId": "gadgets",
-    "subcategory": "Smart Watch"
+    "subCategory": "Smart Watch"
   },
   {
     "sku": "gad-3215200921",
@@ -137,7 +137,7 @@
     "rrp": 49.99,
     "category": "Gadgets",
     "categoryId": "gadgets",
-    "subcategory": "Basic Phone"
+    "subCategory": "Basic Phone"
   },
   {
     "sku": "gad-1320291204",
@@ -147,7 +147,7 @@
     "rrp": 199.99,
     "category": "Gadgets",
     "categoryId": "gadgets",
-    "subcategory": "Nintendo Switch"
+    "subCategory": "Nintendo Switch"
   },
   {
     "sku": "gad-8777580295",
@@ -157,7 +157,7 @@
     "rrp": 39.99,
     "category": "Gadgets",
     "categoryId": "gadgets",
-    "subcategory": "Power Bank"
+    "subCategory": "Power Bank"
   },
   {
     "sku": "gad-8344663617",
@@ -167,7 +167,7 @@
     "rrp": 89.99,
     "category": "Gadgets",
     "categoryId": "gadgets",
-    "subcategory": "Gameboy"
+    "subCategory": "Gameboy"
   },
   {
     "sku": "app-1750361488",
@@ -177,7 +177,7 @@
     "rrp": 299.99,
     "category": "Appliances",
     "categoryId": "appliances",
-    "subcategory": "Vacuum Cleaner"
+    "subCategory": "Vacuum Cleaner"
   },
   {
     "sku": "app-7359328823",
@@ -187,7 +187,7 @@
     "rrp": 699.99,
     "category": "Appliances",
     "categoryId": "appliances",
-    "subcategory": "Washing Machine"
+    "subCategory": "Washing Machine"
   },
   {
     "sku": "app-8042819439",
@@ -197,7 +197,7 @@
     "rrp": 499.99,
     "category": "Appliances",
     "categoryId": "appliances",
-    "subcategory": "Dryer"
+    "subCategory": "Dryer"
   },
   {
     "sku": "app-3272451085",
@@ -207,7 +207,7 @@
     "rrp": 249.99,
     "category": "Appliances",
     "categoryId": "appliances",
-    "subcategory": "Speaker"
+    "subCategory": "Speaker"
   },
   {
     "sku": "app-8182397542",
@@ -217,7 +217,7 @@
     "rrp": 999.99,
     "category": "Appliances",
     "categoryId": "appliances",
-    "subcategory": "Television"
+    "subCategory": "Television"
   },
   {
     "sku": "app-2621742949",
@@ -227,7 +227,7 @@
     "rrp": 1499.99,
     "category": "Appliances",
     "categoryId": "appliances",
-    "subcategory": "Refrigerator"
+    "subCategory": "Refrigerator"
   },
   {
     "sku": "app-0941923104",
@@ -237,7 +237,7 @@
     "rrp": 399.99,
     "category": "Appliances",
     "categoryId": "appliances",
-    "subcategory": "Soundbar"
+    "subCategory": "Soundbar"
   },
   {
     "sku": "app-6711240167",
@@ -247,7 +247,7 @@
     "rrp": 799.99,
     "category": "Appliances",
     "categoryId": "appliances",
-    "subcategory": "Air Conditioner"
+    "subCategory": "Air Conditioner"
   },
   {
     "sku": "app-2663789732",
@@ -257,7 +257,7 @@
     "rrp": 79.99,
     "category": "Appliances",
     "categoryId": "appliances",
-    "subcategory": "Humidifier"
+    "subCategory": "Humidifier"
   },
   {
     "sku": "app-8456929585",
@@ -267,7 +267,7 @@
     "rrp": 49.99,
     "category": "Appliances",
     "categoryId": "appliances",
-    "subcategory": "Toaster"
+    "subCategory": "Toaster"
   },
   {
     "sku": "app-2558619078",
@@ -277,7 +277,7 @@
     "rrp": 299.99,
     "category": "Appliances",
     "categoryId": "appliances",
-    "subcategory": "Coffee Machine"
+    "subCategory": "Coffee Machine"
   },
   {
     "sku": "app-5179085842",
@@ -287,7 +287,7 @@
     "rrp": 149.99,
     "category": "Appliances",
     "categoryId": "appliances",
-    "subcategory": "Microwave"
+    "subCategory": "Microwave"
   },
   {
     "sku": "app-9978790994",
@@ -297,7 +297,7 @@
     "rrp": 699.99,
     "category": "Appliances",
     "categoryId": "appliances",
-    "subcategory": "Stove"
+    "subCategory": "Stove"
   },
   {
     "sku": "app-1808152872",
@@ -307,7 +307,7 @@
     "rrp": 79.99,
     "category": "Appliances",
     "categoryId": "appliances",
-    "subcategory": "Wall Fan"
+    "subCategory": "Wall Fan"
   },
   {
     "sku": "app-5551815145",
@@ -317,7 +317,7 @@
     "rrp": 59.99,
     "category": "Appliances",
     "categoryId": "appliances",
-    "subcategory": "Stand Fan"
+    "subCategory": "Stand Fan"
   },
   {
     "sku": "hom-7634451772",
@@ -327,7 +327,7 @@
     "rrp": 129.99,
     "category": "Home & Living",
     "categoryId": "homeandliving",
-    "subcategory": "Drill"
+    "subCategory": "Drill"
   },
   {
     "sku": "hom-3724559889",
@@ -337,7 +337,7 @@
     "rrp": 19.99,
     "category": "Home & Living",
     "categoryId": "homeandliving",
-    "subcategory": "Hammer"
+    "subCategory": "Hammer"
   },
   {
     "sku": "hom-6711887134",
@@ -347,7 +347,7 @@
     "rrp": 29.99,
     "category": "Home & Living",
     "categoryId": "homeandliving",
-    "subcategory": "Shovel"
+    "subCategory": "Shovel"
   },
   {
     "sku": "hom-9003288474",
@@ -357,7 +357,7 @@
     "rrp": 9.99,
     "category": "Home & Living",
     "categoryId": "homeandliving",
-    "subcategory": "Pail"
+    "subCategory": "Pail"
   },
   {
     "sku": "hom-3234703553",
@@ -367,7 +367,7 @@
     "rrp": 149.99,
     "category": "Home & Living",
     "categoryId": "homeandliving",
-    "subcategory": "Ladder"
+    "subCategory": "Ladder"
   },
   {
     "sku": "hom-2824385956",
@@ -377,7 +377,7 @@
     "rrp": 12.99,
     "category": "Home & Living",
     "categoryId": "homeandliving",
-    "subcategory": "Lock"
+    "subCategory": "Lock"
   },
   {
     "sku": "hom-7267726131",
@@ -387,7 +387,7 @@
     "rrp": 399.99,
     "category": "Home & Living",
     "categoryId": "homeandliving",
-    "subcategory": "Dining Table"
+    "subCategory": "Dining Table"
   },
   {
     "sku": "hom-9777569025",
@@ -397,7 +397,7 @@
     "rrp": 99.99,
     "category": "Home & Living",
     "categoryId": "homeandliving",
-    "subcategory": "Cutlery"
+    "subCategory": "Cutlery"
   },
   {
     "sku": "hom-9920037548",
@@ -407,7 +407,7 @@
     "rrp": 19.99,
     "category": "Home & Living",
     "categoryId": "homeandliving",
-    "subcategory": "Chopsticks"
+    "subCategory": "Chopsticks"
   },
   {
     "sku": "hom-9222356533",
@@ -417,7 +417,7 @@
     "rrp": 699.99,
     "category": "Home & Living",
     "categoryId": "homeandliving",
-    "subcategory": "Bed"
+    "subCategory": "Bed"
   },
   {
     "sku": "hom-7070154251",
@@ -427,7 +427,7 @@
     "rrp": 999.99,
     "category": "Home & Living",
     "categoryId": "homeandliving",
-    "subcategory": "Mattress"
+    "subCategory": "Mattress"
   },
   {
     "sku": "hom-6724482497",
@@ -437,7 +437,7 @@
     "rrp": 79.99,
     "category": "Home & Living",
     "categoryId": "homeandliving",
-    "subcategory": "Curtain"
+    "subCategory": "Curtain"
   },
   {
     "sku": "hom-8120829195",
@@ -447,7 +447,7 @@
     "rrp": 29.99,
     "category": "Home & Living",
     "categoryId": "homeandliving",
-    "subcategory": "Clock"
+    "subCategory": "Clock"
   },
   {
     "sku": "hom-6051005288",
@@ -457,7 +457,7 @@
     "rrp": 24.99,
     "category": "Home & Living",
     "categoryId": "homeandliving",
-    "subcategory": "Hanger"
+    "subCategory": "Hanger"
   },
   {
     "sku": "hom-9236636043",
@@ -467,7 +467,7 @@
     "rrp": 39.99,
     "category": "Home & Living",
     "categoryId": "homeandliving",
-    "subcategory": "Pitcher"
+    "subCategory": "Pitcher"
   },
   {
     "sku": "hom-9717242012",
@@ -477,7 +477,7 @@
     "rrp": 49.99,
     "category": "Home & Living",
     "categoryId": "homeandliving",
-    "subcategory": "Pillow"
+    "subCategory": "Pillow"
   },
   {
     "sku": "hom-1345411794",
@@ -487,7 +487,7 @@
     "rrp": 149.99,
     "category": "Home & Living",
     "categoryId": "homeandliving",
-    "subcategory": "Stool"
+    "subCategory": "Stool"
   },
   {
     "sku": "hom-5953876032",
@@ -497,7 +497,7 @@
     "rrp": 79.99,
     "category": "Home & Living",
     "categoryId": "homeandliving",
-    "subcategory": "Mirror"
+    "subCategory": "Mirror"
   },
   {
     "sku": "hom-8774261295",
@@ -507,7 +507,7 @@
     "rrp": 799.99,
     "category": "Home & Living",
     "categoryId": "homeandliving",
-    "subcategory": "Sofa"
+    "subCategory": "Sofa"
   },
   {
     "sku": "hom-2365416780",
@@ -517,7 +517,7 @@
     "rrp": 39.99,
     "category": "Home & Living",
     "categoryId": "homeandliving",
-    "subcategory": "Indoor Plant"
+    "subCategory": "Indoor Plant"
   },
   {
     "sku": "sch-2220873733",
@@ -527,7 +527,7 @@
     "rrp": 19.99,
     "category": "School Supplies",
     "categoryId": "schoolsupplies",
-    "subcategory": "Ballpen"
+    "subCategory": "Ballpen"
   },
   {
     "sku": "sch-4101154395",
@@ -537,7 +537,7 @@
     "rrp": 4.99,
     "category": "School Supplies",
     "categoryId": "schoolsupplies",
-    "subcategory": "Eraser"
+    "subCategory": "Eraser"
   },
   {
     "sku": "sch-3268275849",
@@ -547,7 +547,7 @@
     "rrp": 9.99,
     "category": "School Supplies",
     "categoryId": "schoolsupplies",
-    "subcategory": "Crayons"
+    "subCategory": "Crayons"
   },
   {
     "sku": "sch-1019557818",
@@ -557,7 +557,7 @@
     "rrp": 24.99,
     "category": "School Supplies",
     "categoryId": "schoolsupplies",
-    "subcategory": "Watercolor"
+    "subCategory": "Watercolor"
   },
   {
     "sku": "sch-6022722320",
@@ -567,7 +567,7 @@
     "rrp": 14.99,
     "category": "School Supplies",
     "categoryId": "schoolsupplies",
-    "subcategory": "Pencil"
+    "subCategory": "Pencil"
   },
   {
     "sku": "sch-5536972347",
@@ -577,7 +577,7 @@
     "rrp": 9.99,
     "category": "School Supplies",
     "categoryId": "schoolsupplies",
-    "subcategory": "Permanent Marker"
+    "subCategory": "Permanent Marker"
   },
   {
     "sku": "sch-2231829014",
@@ -587,7 +587,7 @@
     "rrp": 7.99,
     "category": "School Supplies",
     "categoryId": "schoolsupplies",
-    "subcategory": "Whiteboard Marker"
+    "subCategory": "Whiteboard Marker"
   },
   {
     "sku": "sch-9605657630",
@@ -597,7 +597,7 @@
     "rrp": 5.99,
     "category": "School Supplies",
     "categoryId": "schoolsupplies",
-    "subcategory": "Highlighter"
+    "subCategory": "Highlighter"
   },
   {
     "sku": "sch-1203307811",
@@ -607,7 +607,7 @@
     "rrp": 49.99,
     "category": "School Supplies",
     "categoryId": "schoolsupplies",
-    "subcategory": "Whiteboard"
+    "subCategory": "Whiteboard"
   },
   {
     "sku": "sch-0957192601",
@@ -617,7 +617,7 @@
     "rrp": 6.99,
     "category": "School Supplies",
     "categoryId": "schoolsupplies",
-    "subcategory": "Sticky Note"
+    "subCategory": "Sticky Note"
   },
   {
     "sku": "sch-3161058779",
@@ -627,7 +627,7 @@
     "rrp": 4.99,
     "category": "School Supplies",
     "categoryId": "schoolsupplies",
-    "subcategory": "Correction Tape"
+    "subCategory": "Correction Tape"
   },
   {
     "sku": "sch-6233605897",
@@ -637,7 +637,7 @@
     "rrp": 3.99,
     "category": "School Supplies",
     "categoryId": "schoolsupplies",
-    "subcategory": "Correction Fluid"
+    "subCategory": "Correction Fluid"
   },
   {
     "sku": "sch-6700197077",
@@ -647,7 +647,7 @@
     "rrp": 7.99,
     "category": "School Supplies",
     "categoryId": "schoolsupplies",
-    "subcategory": "Whiteboard Marker"
+    "subCategory": "Whiteboard Marker"
   },
   {
     "sku": "sch-4452085463",
@@ -657,7 +657,7 @@
     "rrp": 6.99,
     "category": "School Supplies",
     "categoryId": "schoolsupplies",
-    "subcategory": "Highlighter"
+    "subCategory": "Highlighter"
   },
   {
     "sku": "sch-9385662529",
@@ -667,7 +667,7 @@
     "rrp": 12.99,
     "category": "School Supplies",
     "categoryId": "schoolsupplies",
-    "subcategory": "Notebook"
+    "subCategory": "Notebook"
   },
   {
     "sku": "sch-6472863582",
@@ -677,7 +677,7 @@
     "rrp": 69.99,
     "category": "School Supplies",
     "categoryId": "schoolsupplies",
-    "subcategory": "Whiteboard"
+    "subCategory": "Whiteboard"
   },
   {
     "sku": "sch-6435369097",
@@ -687,7 +687,7 @@
     "rrp": 8.99,
     "category": "School Supplies",
     "categoryId": "schoolsupplies",
-    "subcategory": "Binder Clip"
+    "subCategory": "Binder Clip"
   },
   {
     "sku": "sch-6217678157",
@@ -697,7 +697,7 @@
     "rrp": 5.99,
     "category": "School Supplies",
     "categoryId": "schoolsupplies",
-    "subcategory": "Correction Tape"
+    "subCategory": "Correction Tape"
   },
   {
     "sku": "sch-9456672675",
@@ -707,7 +707,7 @@
     "rrp": 3.99,
     "category": "School Supplies",
     "categoryId": "schoolsupplies",
-    "subcategory": "Correction Fluid"
+    "subCategory": "Correction Fluid"
   },
   {
     "sku": "sch-6252531835",
@@ -717,7 +717,7 @@
     "rrp": 6.99,
     "category": "School Supplies",
     "categoryId": "schoolsupplies",
-    "subcategory": "Glue"
+    "subCategory": "Glue"
   },
   {
     "sku": "sch-3524309699",
@@ -727,7 +727,7 @@
     "rrp": 14.99,
     "category": "School Supplies",
     "categoryId": "schoolsupplies",
-    "subcategory": "Yarn"
+    "subCategory": "Yarn"
   },
   {
     "sku": "sch-5067423501",
@@ -737,7 +737,7 @@
     "rrp": 24.99,
     "category": "School Supplies",
     "categoryId": "schoolsupplies",
-    "subcategory": "Paper Cutter"
+    "subCategory": "Paper Cutter"
   },
   {
     "sku": "sch-7732035890",
@@ -747,7 +747,7 @@
     "rrp": 3.99,
     "category": "School Supplies",
     "categoryId": "schoolsupplies",
-    "subcategory": "Paper Clip"
+    "subCategory": "Paper Clip"
   },
   {
     "sku": "sch-2460410997",
@@ -757,7 +757,7 @@
     "rrp": 9.99,
     "category": "School Supplies",
     "categoryId": "schoolsupplies",
-    "subcategory": "Folder"
+    "subCategory": "Folder"
   },
   {
     "sku": "hea-3465639824",
@@ -767,7 +767,7 @@
     "rrp": 12.99,
     "category": "Health & Beauty",
     "categoryId": "healthandbeauty",
-    "subcategory": "Lipstick"
+    "subCategory": "Lipstick"
   },
   {
     "sku": "hea-9500452447",
@@ -777,7 +777,7 @@
     "rrp": 8.99,
     "category": "Health & Beauty",
     "categoryId": "healthandbeauty",
-    "subcategory": "Eyeliner"
+    "subCategory": "Eyeliner"
   },
   {
     "sku": "hea-9004566873",
@@ -787,7 +787,7 @@
     "rrp": 19.99,
     "category": "Health & Beauty",
     "categoryId": "healthandbeauty",
-    "subcategory": "Makeup Brush"
+    "subCategory": "Makeup Brush"
   },
   {
     "sku": "hea-4979223337",
@@ -797,7 +797,7 @@
     "rrp": 9.99,
     "category": "Health & Beauty",
     "categoryId": "healthandbeauty",
-    "subcategory": "Shampoo"
+    "subCategory": "Shampoo"
   },
   {
     "sku": "hea-1902531764",
@@ -807,7 +807,7 @@
     "rrp": 9.99,
     "category": "Health & Beauty",
     "categoryId": "healthandbeauty",
-    "subcategory": "Conditioner"
+    "subCategory": "Conditioner"
   },
   {
     "sku": "hea-3243148759",
@@ -817,7 +817,7 @@
     "rrp": 14.99,
     "category": "Health & Beauty",
     "categoryId": "healthandbeauty",
-    "subcategory": "Soap"
+    "subCategory": "Soap"
   },
   {
     "sku": "hea-0236407519",
@@ -827,7 +827,7 @@
     "rrp": 12.99,
     "category": "Health & Beauty",
     "categoryId": "healthandbeauty",
-    "subcategory": "Facial Wash"
+    "subCategory": "Facial Wash"
   },
   {
     "sku": "hea-2142837387",
@@ -837,7 +837,7 @@
     "rrp": 19.99,
     "category": "Health & Beauty",
     "categoryId": "healthandbeauty",
-    "subcategory": "Food Supplement"
+    "subCategory": "Food Supplement"
   },
   {
     "sku": "hea-1228501841",
@@ -847,7 +847,7 @@
     "rrp": 7.99,
     "category": "Health & Beauty",
     "categoryId": "healthandbeauty",
-    "subcategory": "Medicine"
+    "subCategory": "Medicine"
   },
   {
     "sku": "hea-6129562099",
@@ -857,7 +857,7 @@
     "rrp": 14.99,
     "category": "Health & Beauty",
     "categoryId": "healthandbeauty",
-    "subcategory": "Moisturizer"
+    "subCategory": "Moisturizer"
   },
   {
     "sku": "hea-3130877735",
@@ -867,7 +867,7 @@
     "rrp": 6.99,
     "category": "Health & Beauty",
     "categoryId": "healthandbeauty",
-    "subcategory": "Toothbrush"
+    "subCategory": "Toothbrush"
   },
   {
     "sku": "hea-7443578849",
@@ -877,7 +877,7 @@
     "rrp": 4.99,
     "category": "Health & Beauty",
     "categoryId": "healthandbeauty",
-    "subcategory": "Deodorant"
+    "subCategory": "Deodorant"
   },
   {
     "sku": "hea-9278747562",
@@ -887,7 +887,7 @@
     "rrp": 39.99,
     "category": "Health & Beauty",
     "categoryId": "healthandbeauty",
-    "subcategory": "Shaver"
+    "subCategory": "Shaver"
   },
   {
     "sku": "bab-4872248589",
@@ -897,7 +897,7 @@
     "rrp": 29.99,
     "category": "Babies",
     "categoryId": "babies",
-    "subcategory": "Diaper"
+    "subCategory": "Diaper"
   },
   {
     "sku": "bab-0812888246",
@@ -907,7 +907,7 @@
     "rrp": 19.99,
     "category": "Babies",
     "categoryId": "babies",
-    "subcategory": "Milk Formula"
+    "subCategory": "Milk Formula"
   },
   {
     "sku": "bab-6711005388",
@@ -917,7 +917,7 @@
     "rrp": 14.99,
     "category": "Babies",
     "categoryId": "babies",
-    "subcategory": "Baby Girl Dress"
+    "subCategory": "Baby Girl Dress"
   },
   {
     "sku": "bab-3410896219",
@@ -927,7 +927,7 @@
     "rrp": 12.99,
     "category": "Babies",
     "categoryId": "babies",
-    "subcategory": "Baby Boy Dress"
+    "subCategory": "Baby Boy Dress"
   },
   {
     "sku": "bab-9741035399",
@@ -937,7 +937,7 @@
     "rrp": 199.99,
     "category": "Babies",
     "categoryId": "babies",
-    "subcategory": "Stroller"
+    "subCategory": "Stroller"
   },
   {
     "sku": "bab-5019626910",
@@ -947,7 +947,7 @@
     "rrp": 29.99,
     "category": "Babies",
     "categoryId": "babies",
-    "subcategory": "Sling Carrier"
+    "subCategory": "Sling Carrier"
   },
   {
     "sku": "bab-0328827180",
@@ -957,7 +957,7 @@
     "rrp": 299.99,
     "category": "Babies",
     "categoryId": "babies",
-    "subcategory": "Crib"
+    "subCategory": "Crib"
   },
   {
     "sku": "bab-3511303896",
@@ -967,7 +967,7 @@
     "rrp": 24.99,
     "category": "Babies",
     "categoryId": "babies",
-    "subcategory": "Baby Bottle"
+    "subCategory": "Baby Bottle"
   },
   {
     "sku": "gro-6180289979",
@@ -977,7 +977,7 @@
     "rrp": 12.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Coffee"
+    "subCategory": "Coffee"
   },
   {
     "sku": "gro-1071687715",
@@ -987,7 +987,7 @@
     "rrp": 19.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Tea"
+    "subCategory": "Tea"
   },
   {
     "sku": "gro-0990466557",
@@ -997,7 +997,7 @@
     "rrp": 5.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Water"
+    "subCategory": "Water"
   },
   {
     "sku": "gro-9902661477",
@@ -1007,6 +1007,6 @@
     "rrp": 29.99,
     "category": "Groceries",
     "categoryId": "groceries",
-    "subcategory": "Chocolate"
+    "subCategory": "Chocolate"
   }
 ]

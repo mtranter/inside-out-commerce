@@ -66,7 +66,7 @@ describe("handlers", () => {
       pathParams: {
         sku: postedProduct.sku,
         category: postedProduct.categoryId,
-        subCategory: postedProduct.subcategory,
+        subCategory: postedProduct.subCategory,
       },
       url: "/products/123" as const,
       method: "GET" as const,
@@ -103,7 +103,7 @@ describe("handlers", () => {
         expect(response.body).toMatchObject({ products: [postedProduct] });
       });
     });
-    describe("get product by subcategory", () => {
+    describe("get product by subCategory", () => {
       it("should return 200", async () => {
         await repo.put(postedProduct, {
           topic: "",

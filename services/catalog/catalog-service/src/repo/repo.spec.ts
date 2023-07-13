@@ -23,7 +23,7 @@ describe("DynamoDB Repo Spec", () => {
         hk: "S",
         sk: "S",
         category: "S",
-        subcategory: "S",
+        subCategory: "S",
       },
     });
   });
@@ -50,7 +50,7 @@ describe("DynamoDB Repo Spec", () => {
     expect(productsByCategory.products[0]).toEqual(putProduct);
 
     const productsBySubcategory = await sut.listProductBySubCategory(
-      putProduct.subcategory
+      putProduct.subCategory
     );
     expect(productsBySubcategory.products.length).toEqual(1);
     expect(productsBySubcategory.products[0]).toEqual(putProduct);
@@ -61,7 +61,7 @@ describe("DynamoDB Repo Spec", () => {
       const putProduct = buildTestProduct();
       putProduct.sku = randomString();
       putProduct.categoryId = "cat1";
-      putProduct.subcategory = "subcat1";
+      putProduct.subCategory = "subcat1";
       await sut.put(putProduct, {
         topic: "",
         key: `k`,
@@ -78,13 +78,13 @@ describe("DynamoDB Repo Spec", () => {
     );
     expect(productsByCategory2.products.length).toEqual(50);
   });
-  it("should page through products by subcategory", async () => {
+  it("should page through products by subCategory", async () => {
     const randomString = () => Math.random().toString(36).substring(7);
     for (let i = 0; i < 150; i++) {
       const putProduct = buildTestProduct();
       putProduct.sku = randomString();
       putProduct.categoryId = "cat1";
-      putProduct.subcategory = "subcat1";
+      putProduct.subCategory = "subcat1";
       await sut.put(putProduct, {
         topic: "",
         key: `k`,

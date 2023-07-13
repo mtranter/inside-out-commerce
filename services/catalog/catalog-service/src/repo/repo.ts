@@ -9,14 +9,14 @@ type EventDto = {
   hk: string;
   sk: string;
   category?: string;
-  subcategory?: string;
+  subCategory?: string;
 } & TxOutboxMessage;
 
 type ProductDto = {
   hk: string;
   sk: string;
   category: string;
-  subcategory: string;
+  subCategory: string;
   data: Product;
 };
 
@@ -34,7 +34,7 @@ export const buildTable = (tableName: string, client?: DynamoDB) =>
   tableBuilder<Dto>(tableName)
     .withKey("hk", "sk")
     .withGlobalIndex("gsi1", "category", "hk")
-    .withGlobalIndex("gsi2", "subcategory", "hk")
+    .withGlobalIndex("gsi2", "subCategory", "hk")
     .withGlobalIndex("gsi3", "sk", "hk")
     .build({ client: client ?? new DynamoDB({}) });
 
@@ -74,7 +74,7 @@ export const ProductRepo = ({
             hk: `PRODUCT#${product.sku}`,
             sk: "#PRODUCT#",
             category: product.categoryId,
-            subcategory: product.subcategory,
+            subCategory: product.subCategory,
             data: product,
           },
           conditionExpression: {
