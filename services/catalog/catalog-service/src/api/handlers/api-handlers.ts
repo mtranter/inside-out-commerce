@@ -1,25 +1,15 @@
-import { Ok, Created, NotFound } from "@ezapi/router-core";
+import { Ok, Created, NotFound, Accepted } from "@ezapi/router-core";
 import { v4 as uuidv4 } from "uuid";
-import { TxOutboxMessageFactory, TxOutboxMessage } from "dynamodb-kafka-outbox";
 import { RouteHandlers } from "../routes";
-import { SchemaRegistry } from "@kafkajs/confluent-schema-registry";
 import { ProductRepo } from ".";
-import { Product, ProductSchema, ProductTopicValuePayload } from "../../models";
-
-type Config = {
-  keySchemaId: number;
-  valueSchemaId: number;
-  topic: string;
-};
+import { SQS } from "@aws-sdk/client-sqs";
+import { CatalogService } from '../../domain/catalog-service';
 
 export const handlers = (
-  { keySchemaId, valueSchemaId, topic }: Config,
-  schemaRegistry: Pick<SchemaRegistry, "encode">,
-  repo: ProductRepo
+  repo: ProductRepo,
+  sqs: Pick<SQS, "sendMessageBatch">,
+  service: CatalogService
 ): RouteHandlers => {
-  const txOutboxMessageFactory = TxOutboxMessageFactory({
-    registry: schemaRegistry,
-  });
 
   return {
     healthcheck: async () => Ok({ status: "ok" }),
@@ -30,25 +20,18 @@ export const handlers = (
       return Ok({ products, nextToken });
     },
     createProduct: async (req) => {
-      const eventId = uuidv4();
-      const eventBody: ProductTopicValuePayload = {
-        eventId: eventId,
-        eventTime: Date.now(),
-        eventType: "com.insideout.product.created",
-        payload: req.safeBody,
-        metadata: {
-          traceId: process.env._X_AMZN_TRACE_ID || "",
-        },
-      };
-      const event = await txOutboxMessageFactory.createOutboxMessage({
-        topic,
-        key: uuidv4(),
-        keySchemaId,
-        valueSchemaId,
-        value: eventBody,
-      });
-      await repo.put(req.safeBody, event);
+      await service.createProduct(req.safeBody);
       return Created(req.safeBody, `/products/${req.safeBody.sku}`);
+    },
+    batchCreateProduct: async (req) => {
+      await sqs.sendMessageBatch({
+        QueueUrl: process.env.BATCH_CREATE_PRODUCT_QUEUE_URL,
+        Entries: req.safeBody.map((product) => ({
+          Id: uuidv4(),
+          MessageBody: JSON.stringify(product),
+        })),
+      });
+      return Accepted("Processing");
     },
     getProduct: async (req) => {
       const product = await repo.get(req.pathParams.sku);

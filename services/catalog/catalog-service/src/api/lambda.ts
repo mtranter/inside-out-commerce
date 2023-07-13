@@ -3,9 +3,12 @@ import { restApiHandler } from "@ezapi/aws-rest-api-backend";
 import { SchemaRegistry } from "@kafkajs/confluent-schema-registry";
 import { routes } from "./routes";
 import { handlers } from "./handlers";
-import { config } from "./config";
+import { config } from "../config";
 import { ProductRepo } from "./../repo";
 import { ApiBuilder } from "@ezapi/router-core";
+import { SQS } from "@aws-sdk/client-sqs";
+import { CatalogService } from "../domain/catalog-service";
+import { TxOutboxMessageFactory } from "dynamodb-kafka-outbox";
 
 const schemaRegistry = new SchemaRegistry({
   host: config.schemaRegistryHost,
@@ -14,15 +17,26 @@ const schemaRegistry = new SchemaRegistry({
     password: config.schemaRegistryPassword,
   },
 });
+const productRepo = ProductRepo({
+  tableName: config.tableName,
+  client: new DynamoDB({}),
+});
 
 const _handers = handlers(
-  {
-    topic: config.productsTopic,
-    keySchemaId: config.keySchemaId,
-    valueSchemaId: config.valueSchemaId,
-  },
-  schemaRegistry,
-  ProductRepo({ tableName: config.tableName, client: new DynamoDB({}) })
+  productRepo,
+  new SQS({ region: process.env.AWS_REGION || "local" }),
+  CatalogService(
+    {
+      topic: config.productsTopic,
+      keySchemaId: config.keySchemaId,
+      valueSchemaId: config.valueSchemaId,
+      batchCreateProductQueueUrl: config.batchCreateProductQueueUrl,
+    },
+    TxOutboxMessageFactory({
+      registry: schemaRegistry,
+    }),
+    productRepo
+  )
 );
 
 const api = ApiBuilder.build({ "/catalog": routes().build(_handers) });

@@ -16,24 +16,32 @@ module "api_function" {
   layers           = []
   create_dlq       = false
   tags             = {}
-  environment_vars = {
-    API_STAGE                = local.stage_name
-    TABLE_NAME               = module.dynamodb.table.id
-    EVENTS_TOPIC             = local.topic_name
-    KEY_SCHEMA_ID            = module.events_topic.key_schema_id
-    VALUE_SCHEMA_ID          = module.events_topic.value_schema_id
-    SCHEMA_REGISTRY_HOST     = data.aws_ssm_parameter.schema_registry_endpoint.value
-    SCHEMA_REGISTRY_USERNAME = data.aws_ssm_parameter.schema_registry_username.value
-    SCHEMA_REGISTRY_PASSWORD = data.aws_ssm_parameter.schema_registry_password.value
-    ID_TOKEN_ENDPOINT        = "https://${var.project_name}-${var.environment}.auth.${data.aws_region.current.name}.amazoncognito.com/oauth2/token"
-
-  }
+  environment_vars = local.lambda_env_vars
 }
 
 resource "aws_iam_role_policy_attachment" "allow_dynamodb" {
   role       = module.api_function.execution_role.id
   policy_arn = aws_iam_policy.allow_dynamodb.arn
 }
+
+esource "aws_iam_role_policy" "batch_handler_allow_sqs" {
+  role       = module.api_function.execution_role.id
+  policy_arn = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "sqs:SendMessage"
+      ],
+      "Resource": "${aws_sqs_queue.batch_create_queue.arn}"
+    }
+  ]
+}
+EOF
+}
+
 
 resource "aws_cognito_resource_server" "api" {
   identifier = "https://${local.api_subdomain}.${var.project_name}.com"

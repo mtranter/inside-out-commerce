@@ -14,6 +14,7 @@ const valueSchemaId = Number(envOrThrow("VALUE_SCHEMA_ID"));
 const schemaRegistryHost = envOrThrow("SCHEMA_REGISTRY_HOST");
 const schemaRegistryUsername = envOrThrow("SCHEMA_REGISTRY_USERNAME");
 const schemaRegistryPassword = envOrThrow("SCHEMA_REGISTRY_PASSWORD");
+const batchCreateProductQueueUrl = envOrThrow("BATCH_CREATE_PRODUCT_QUEUE_URL");
 
 
 export const config = {
@@ -25,4 +26,5 @@ export const config = {
   schemaRegistryHost,
   schemaRegistryUsername,
   schemaRegistryPassword,
+  batchCreateProductQueueUrl
 };

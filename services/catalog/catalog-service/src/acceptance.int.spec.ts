@@ -207,4 +207,61 @@ describe("Product API", () => {
       );
     });
   });
+  describe("batch create Product endpoint", () => {
+    const product = generateMock(CreateProductRequest, {
+      stringMap: {
+        sku: () => uuid(),
+      }
+    });
+    let response: Response;
+    let consumer: Consumer;
+    let kafkaMessages: unknown[];
+    beforeAll(async () => {
+      const _makeRequest = makeAuthedRequest(apiConfig);
+      const { consumer: _consumer, messages } = await setupKafkaConsumer(
+        kafkaConfig,
+        schemaRegistryConfig
+      );
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+      kafkaMessages = messages;
+      consumer = _consumer;
+      response = await _makeRequest("/catalog/batch", "POST", [product]);
+    });
+    afterAll(async () => {
+      await consumer?.disconnect();
+    });
+    it("should return 200", () => {
+      expect(response.status).toEqual(201);
+    });
+    it("should have returned a product and published it to kafka", async () => {
+      const returnedProduct = (await response.json()) as Product;
+      expect(returnedProduct).toMatchObject(product);
+      const _makeRequest = makeAuthedRequest(apiConfig);
+      const getResponse = await _makeRequest(
+        `/catalog/${returnedProduct.sku}`,
+        "GET"
+      );
+      const fetchedProduct = await getResponse.json();
+      expect(fetchedProduct).toEqual(returnedProduct);
+      const findProduct = () => {
+        return kafkaMessages.find((e) => {
+          const event = e as KafkaPayload<typeof ProductSchema>;
+          const payload = event.payload as Product;
+          if (payload) {
+            return payload.sku === returnedProduct.sku;
+          } else {
+            return false;
+          }
+        });
+      };
+      return waitForExpect(
+        () => {
+          const product = findProduct();
+          expect(product).toBeDefined();
+        },
+        5000,
+        500
+      );
+    });
+  });
 });

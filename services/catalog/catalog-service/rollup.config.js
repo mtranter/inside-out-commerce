@@ -5,7 +5,8 @@ const commonJs = require("@rollup/plugin-commonjs");
 const json = require("@rollup/plugin-json");
 
 const entryPoints = [
-  "src/api/lambda.ts"
+  "src/api/lambda.ts",
+  "src/batch-create-products-handler.ts"
 ];
 const configs = entryPoints.map((entryPoint) => ({
   input: entryPoint,

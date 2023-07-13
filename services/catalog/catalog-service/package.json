@@ -15,10 +15,11 @@
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.341.0",
+    "@aws-sdk/client-sqs": "^3.369.0",
     "@aws-sdk/util-dynamodb": "^3.341.0",
     "@ezapi/aws-rest-api-backend": "^2.2.1-beta.0",
-    "@ezapi/json-middleware": "^2.2.1-beta.0",
     "@ezapi/cors-middleware": "^2.2.1-beta.0",
+    "@ezapi/json-middleware": "^2.2.1-beta.0",
     "@ezapi/router-core": "^2.2.1-beta.0",
     "@ezapi/zod-middleware": "^2.2.1-beta.0",
     "@inside-out-commerce/middleware": "*",

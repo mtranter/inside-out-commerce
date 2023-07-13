@@ -3,20 +3,26 @@ import { handlers } from "./api-handlers";
 import { RouteHandlers } from "../routes/routes";
 import { buildTestProductRequest } from "./../../../test/models/utils";
 import { mockSchemaRegistry } from "../../../test/schema-registry";
+import { CatalogService } from "../../domain/catalog-service";
+import { TxOutboxMessageFactory } from "dynamodb-kafka-outbox";
 describe("handlers", () => {
   let repo: MockRepo;
   let sut: RouteHandlers;
+  let sendMessageBatch = jest.fn(() => Promise.resolve({} as any));
   beforeEach(() => {
     repo = mockRepo();
-    sut = handlers(
+    const catalogService = CatalogService(
       {
         topic: "productsTopic",
         keySchemaId: 1,
         valueSchemaId: 2,
+        batchCreateProductQueueUrl:
+          "http://localhost:4566/000000000000/batch-create-products-queue",
       },
-      mockSchemaRegistry,
+      TxOutboxMessageFactory({ registry: mockSchemaRegistry }),
       repo
     );
+    sut = handlers(repo, { sendMessageBatch }, catalogService);
   });
 
   describe("put product", () => {

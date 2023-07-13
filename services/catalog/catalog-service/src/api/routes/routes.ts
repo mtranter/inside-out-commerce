@@ -33,6 +33,7 @@ export const routes = () => {
     .withMiddleware(corsMiddleware)
     .route("healthcheck", "GET", "/healthcheck")
     .route("createProduct", "POST", "/", ZodMiddleware(CreateProductRequest))   
+    .route("batchCreateProduct", "POST", "/batch", ZodMiddleware(z.array(CreateProductRequest)))   
     .route("getProduct", "GET", "/{sku}")
     .route("listProducts", "GET", "/?{nextToken?}")
     .route("listProductsByCategory", "GET", "/category/{category}?{nextToken?}")
