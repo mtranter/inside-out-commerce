@@ -3,14 +3,15 @@ import { v4 as uuidv4 } from "uuid";
 import { RouteHandlers } from "../routes";
 import { ProductRepo } from ".";
 import { SQS } from "@aws-sdk/client-sqs";
-import { CatalogService } from '../../domain/catalog-service';
+import { CatalogService } from "../../domain/catalog-service";
+import { CreateProductRequest } from "../routes/routes";
+import { z } from "zod";
 
 export const handlers = (
   repo: ProductRepo,
   sqs: Pick<SQS, "sendMessageBatch">,
   service: CatalogService
 ): RouteHandlers => {
-
   return {
     healthcheck: async () => Ok({ status: "ok" }),
     listProducts: async (req) => {
@@ -24,13 +25,29 @@ export const handlers = (
       return Created(req.safeBody, `/products/${req.safeBody.sku}`);
     },
     batchCreateProduct: async (req) => {
-      await sqs.sendMessageBatch({
-        QueueUrl: process.env.BATCH_CREATE_PRODUCT_QUEUE_URL,
-        Entries: req.safeBody.map((product) => ({
-          Id: uuidv4(),
-          MessageBody: JSON.stringify(product),
-        })),
-      });
+      const batchesOf10 = req.safeBody.reduce(
+        (acc, product) => {
+          const lastBatch = acc[acc.length - 1];
+          if (lastBatch.length === 10) {
+            acc.push([product]);
+          } else {
+            lastBatch.push(product);
+          }
+          return acc;
+        },
+        [[]] as z.infer<typeof CreateProductRequest>[][]
+      );
+      await Promise.all(
+        batchesOf10.map((batch) =>
+          sqs.sendMessageBatch({
+            QueueUrl: process.env.BATCH_CREATE_PRODUCT_QUEUE_URL,
+            Entries: batch.map((product) => ({
+              Id: uuidv4(),
+              MessageBody: JSON.stringify(product),
+            })),
+          })
+        )
+      );
       return Accepted("Processing");
     },
     getProduct: async (req) => {

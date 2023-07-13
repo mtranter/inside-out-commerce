@@ -1,35 +1,5 @@
 [
   {
-    "sku": "gad-8706078346",
-    "name": "Smartphone X1",
-    "description": "The Smartphone X1 is a powerful and sleek device that offers a seamless user experience. It features a high-resolution display, a fast processor, and a premium camera for capturing stunning photos and videos. Stay connected and productive on the go with the Smartphone X1.",
-    "shortDescription": "Powerful and sleek smartphone",
-    "rrp": 499.99,
-    "category": "Gadgets",
-    "categoryId": "gadgets",
-    "subCategory": "Mobile Phone"
-  },
-  {
-    "sku": "gad-3463776330",
-    "name": "Gaming Desk",
-    "description": "Upgrade your gaming setup with the Gaming Desk. This spacious desk provides ample room for your gaming monitor, keyboard, mouse, and other accessories. It features a sturdy construction and ergonomic design to enhance your gaming experience.",
-    "shortDescription": "Spacious and ergonomic gaming desk",
-    "rrp": 149.99,
-    "category": "Gadgets",
-    "categoryId": "gadgets",
-    "subCategory": "Computer Table"
-  },
-  {
-    "sku": "gad-0134732211",
-    "name": "Laptop Pro",
-    "description": "The Laptop Pro is a high-performance laptop designed for professionals. It offers blazing-fast processing power, a brilliant display, and long battery life. Whether you're working on intensive tasks or enjoying multimedia content, the Laptop Pro delivers exceptional performance.",
-    "shortDescription": "High-performance laptop for professionals",
-    "rrp": 1299.99,
-    "category": "Gadgets",
-    "categoryId": "gadgets",
-    "subCategory": "Laptop"
-  },
-  {
     "sku": "gad-4395219342",
     "name": "Desktop Elite",
     "description": "Experience the ultimate computing power with the Desktop Elite. This powerful desktop computer is equipped with top-of-the-line components, allowing you to handle demanding tasks with ease. From gaming to content creation, the Desktop Elite is your reliable companion.",
