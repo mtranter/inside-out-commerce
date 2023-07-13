@@ -74,7 +74,7 @@ export const ProductRepo = ({
             hk: `PRODUCT#${product.sku}`,
             sk: "#PRODUCT#",
             category: product.categoryId,
-            subcategory: product.subCategory,
+            subcategory: product.subcategory,
             data: product,
           },
           conditionExpression: {

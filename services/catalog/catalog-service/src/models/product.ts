@@ -9,7 +9,7 @@ export const ProductSchema = z.object({
     rrp: z.number(),
     categoryId: z.string(),
     category: z.string(),
-    subCategory: z.string()
+    subcategory: z.string()
 });
 
 export type Product = z.infer<typeof ProductSchema>;

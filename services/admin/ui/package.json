@@ -15,15 +15,21 @@
     "@aws-sdk/client-cognito-identity": "^3.363.0",
     "@aws-sdk/client-cognito-identity-provider": "^3.363.0",
     "@aws-sdk/client-sts": "^3.363.0",
+    "@chakra-ui/icons": "^2.0.19",
     "@chakra-ui/react": "^2.7.1",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "aws-amplify": "^5.3.3",
     "aws4fetch": "^1.0.17",
     "framer-motion": "^10.12.18",
+    "localforage": "^1.10.0",
+    "match-sorter": "^6.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.14.1"
+    "react-icons": "^4.10.1",
+    "react-router-dom": "^6.14.1",
+    "sort-by": "^1.2.0",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",
