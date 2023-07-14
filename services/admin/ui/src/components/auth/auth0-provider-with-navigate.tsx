@@ -27,7 +27,7 @@ export const Auth0ProviderWithNavigate: React.FC<Auth0ProviderWithNavigateProps>
         audience: import.meta.env.VITE_USER_POOL_CLIENT_ID,
         redirect_uri: window.location.origin,
         scope:
-          "openid profile email https://catalog.inside-out-commerce.com/api.execute",
+          `openid profile email ${import.meta.env.VITE_CATALOG_SCOPE_ID}`,
       }}
     >
       {children}

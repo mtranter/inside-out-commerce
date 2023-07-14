@@ -113,3 +113,7 @@ EOF
 data "aws_ssm_parameter" "auth_endpoint" {
   name = "/${var.project_name}/${var.environment}/cognito/auth_endpoint"
 }
+
+data "aws_ssm_parameter" "catalog_scope_id" {
+  name  = "/${var.project_name}/${var.environment}/catalog-service/api_scope_id"
+}

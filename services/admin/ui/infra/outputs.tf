@@ -21,3 +21,7 @@ output "catalog_api_url" {
 output "auth_url" {
     value = nonsensitive(data.aws_ssm_parameter.auth_endpoint.value)
 }
+
+output "catalog_scope_id" {
+  value = nonsensitive(aws_ssm_parameter.catalog_scope_id.value)
+}

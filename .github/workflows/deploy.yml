@@ -146,6 +146,7 @@ jobs:
           export VITE_CATALOG_API_ROOT="$(echo '${{ env.TF_OUTPUT }}' | jq -r '.catalog_api_url.value')"
           export VITE_USER_POOL_CLIENT_ID="$(echo '${{ env.TF_OUTPUT }}' | jq -r '.user_pool_client_id.value')"
           export VITE_AUTH_DOMAIN="$(echo '${{ env.TF_OUTPUT }}' | jq -r '.auth_url.value')"
+          export VITE_CATALOG_SCOPE_ID="$(echo '${{ env.TF_OUTPUT }}' | jq -r '.catalog_scope_id.value')"
           pnpm build
       - run: cd dist && aws s3 sync ./ s3://inside-out-commerce-prod-catalog-service-origin
         name: Deploy site
