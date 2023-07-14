@@ -23,5 +23,5 @@ output "auth_url" {
 }
 
 output "catalog_scope_id" {
-  value = nonsensitive(aws_ssm_parameter.catalog_scope_id.value)
+  value = nonsensitive(data.aws_ssm_parameter.catalog_scope_id.value)
 }
