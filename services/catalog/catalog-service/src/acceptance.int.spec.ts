@@ -5,9 +5,9 @@ import { Consumer, Kafka } from "kafkajs";
 import { SchemaRegistry } from "@kafkajs/confluent-schema-registry";
 import { KafkaPayload } from "@inside-out-commerce/models";
 import waitForExpect from "wait-for-expect";
-import { CreateProductRequest } from "./api/routes/routes";
 import { createSignedFetcher } from "aws-sigv4-fetch";
 import { v4 as uuid } from "uuid"
+import { CreateProductRequestSchema } from "./domain/catalog-service";
 
 jest.setTimeout(10000);
 const ssm = new SSM({
@@ -151,7 +151,7 @@ describe("Product API", () => {
     });
   });
   describe("create Product endpoint", () => {
-    const product = generateMock(CreateProductRequest, {
+    const product = generateMock(CreateProductRequestSchema, {
       stringMap: {
         sku: () => uuid(),
       }
@@ -208,7 +208,7 @@ describe("Product API", () => {
     });
   });
   describe("batch create Product endpoint", () => {
-    const product = generateMock(CreateProductRequest, {
+    const product = generateMock(CreateProductRequestSchema, {
       stringMap: {
         sku: () => uuid(),
       }
