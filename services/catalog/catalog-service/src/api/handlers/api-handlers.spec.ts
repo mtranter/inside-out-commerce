@@ -25,7 +25,7 @@ describe("handlers", () => {
     sut = handlers(repo, { sendMessageBatch }, catalogService);
   });
 
-  describe("put product", () => {
+  describe("create product", () => {
     const postedProduct = buildTestProductRequest();
     it("should persist product and product created event", async () => {
       const request = {
@@ -57,6 +57,69 @@ describe("handlers", () => {
         eventType: "com.insideout.product.created",
         payload: postedProduct,
       });
+    });
+  });
+  describe("update product", () => {
+    const postedProduct = buildTestProductRequest();
+    it("should persist product and product created event", async () => {
+      repo._putProduct(postedProduct);
+      const newName = "Test Update Product";
+      const request = {
+        safeBody: {
+          name: newName,
+        },
+        jsonBody: {},
+        pathParams: {
+          sku: postedProduct.sku,
+        },
+        url: "/products" as const,
+        method: "POST" as const,
+        queryParams: {},
+        headers: {},
+      };
+      const response = await sut.updateProduct(request);
+      expect(response.statusCode).toEqual(200);
+
+      const saved = repo.productsState[postedProduct.sku];
+      expect(saved.name).toEqual(newName);
+
+      const events = repo.eventsState;
+      expect(events.length).toEqual(1);
+      const event = events[0];
+      expect(event).toBeDefined();
+      expect(event.topic).toEqual("productsTopic");
+      const eventValue = JSON.parse(
+        Buffer.from(event.value, "base64").toString("ascii")
+      );
+      expect(eventValue).toMatchObject({
+        eventId: expect.any(String),
+        eventType: "com.insideout.product.updated",
+        payload: { ...postedProduct, ...request.safeBody },
+      });
+    });
+    it("should return 404 for non existent product", async () => {
+      const newName = "Test Update Product";
+      const request = {
+        safeBody: {
+          name: newName,
+        },
+        jsonBody: {},
+        pathParams: {
+          sku: postedProduct.sku,
+        },
+        url: "/products" as const,
+        method: "POST" as const,
+        queryParams: {},
+        headers: {},
+      };
+      const response = await sut.updateProduct(request);
+      expect(response.statusCode).toEqual(404);
+
+      const saved = repo.productsState[postedProduct.sku];
+      expect(saved).toBeUndefined()
+
+      const events = repo.eventsState;
+      expect(events.length).toEqual(0);
     });
   });
   describe("read endpoints", () => {

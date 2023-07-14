@@ -1,10 +1,12 @@
 import { TxOutboxMessage } from "dynamodb-kafka-outbox";
 import { Product } from "../../../src/models";
-import { ProductRepo } from "./../../../src/api/handlers/repo";
+import { ProductRepo } from "../../../src/repo";
+
 
 export type MockRepo = ProductRepo & {
   productsState: Record<string, Product>;
   eventsState: TxOutboxMessage[];
+  _putProduct: (product: Product) => void;
   reset: () => void;
 };
 export const mockRepo = (): MockRepo => {
@@ -14,6 +16,9 @@ export const mockRepo = (): MockRepo => {
   return {
     eventsState,
     productsState,
+    _putProduct: (product) => {
+      productsState[product.sku] = product;
+    },
     reset: () => {
       productsState = {};
       eventsState = [];
@@ -32,6 +37,11 @@ export const mockRepo = (): MockRepo => {
       eventsState.push(event);
       return product;
     },
+    delete: async (sku, event) => {
+      delete productsState[sku];
+      eventsState.push(event);
+    },
+    
     listProductByCategory: async (categoryId, args) => {
       return {
         products: Object.values(productsState).filter(

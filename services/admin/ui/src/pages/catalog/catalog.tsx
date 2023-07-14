@@ -20,7 +20,7 @@ export const CatalogPage = () => {
       setLoading(true);
       const res = await fetch(
         `${import.meta.env.VITE_CATALOG_API_ROOT}/catalog${
-          nextToken ? `?nextToken=${nextToken}` : ""
+          nextToken ? `?nextToken=${encodeURIComponent(nextToken)}` : ""
         }`,
         {
           method: "GET",
@@ -60,7 +60,6 @@ export const CatalogPage = () => {
     // We can use it to trigger 'onLoadMore' when the sentry comes near to become
     // visible, instead of becoming fully visible on the screen.
     rootMargin: "0px 0px 0px 0px",
-    delayInMs: 1000,
   });
 
   return (

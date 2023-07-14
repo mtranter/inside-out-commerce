@@ -2,8 +2,8 @@ import { v4 as uuidv4 } from "uuid";
 import { ProductTopicValuePayload } from "../models";
 import { z } from "zod";
 import { TxOutboxMessageFactory } from "dynamodb-kafka-outbox";
-import { ProductRepo } from "../api/handlers";
 import log from "../infra/logging";
+import { ProductRepo } from "../repo";
 
 type Config = {
   keySchemaId: number;
@@ -87,37 +87,41 @@ export const CatalogService = (
       outboxMsgParams
     );
     await repo.put(updated, event);
+    return true;
   };
-  // const deleteProduct = async (sku: string) => {
-  //   const existing = await repo.get(sku);
-  //   if (!existing) {
-  //     return { error: "ProductNotFound" } as const;
-  //   }
-  //   const eventId = uuidv4();
-  //   const eventBody: ProductTopicValuePayload = {
-  //     eventId: eventId,
-  //     eventTime: Date.now(),
-  //     eventType: "com.insideout.product.deleted",
-  //     payload: existing,
-  //     metadata: {
-  //       traceId: process.env._X_AMZN_TRACE_ID || "",
-  //     },
-  //   };
-  //   const outboxMsgParams = {
-  //     topic: config.topic,
-  //     key: sku,
-  //     keySchemaId: config.keySchemaId,
-  //     valueSchemaId: config.valueSchemaId,
-  //     value: eventBody,
-  //   };
-  //   log.info("outboxMsgParams", outboxMsgParams);
-  //   const event = await txOutboxMessageFactory.createOutboxMessage(
-  //     outboxMsgParams
-  //   );
-  //   await repo.put({ sku: sku }, event);
-  // };
+  const deleteProduct = async (sku: string) => {
+    const existing = await repo.get(sku);
+    if (!existing) {
+      return { error: "ProductNotFound" } as const;
+    }
+    const eventId = uuidv4();
+    const eventBody: ProductTopicValuePayload = {
+      eventId: eventId,
+      eventTime: Date.now(),
+      eventType: "com.insideout.product.deleted",
+      payload: existing,
+      metadata: {
+        traceId: process.env._X_AMZN_TRACE_ID || "",
+      },
+    };
+    const outboxMsgParams = {
+      topic: config.topic,
+      key: sku,
+      keySchemaId: config.keySchemaId,
+      valueSchemaId: config.valueSchemaId,
+      value: eventBody,
+    };
+    log.info("outboxMsgParams", outboxMsgParams);
+    const event = await txOutboxMessageFactory.createOutboxMessage(
+      outboxMsgParams
+    );
+    await repo.delete(sku, event);
+    return true;
+  };
 
   return {
     createProduct,
+    updateProduct,
+    deleteProduct,
   };
 };

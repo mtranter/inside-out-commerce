@@ -105,4 +105,33 @@ describe("DynamoDB Repo Spec", () => {
     });
     expect(productsByCategory2.products.length).toEqual(31);
   });
+  it("should delete product and persist event", async () => {
+    const putProduct = buildTestProduct();
+    await sut.put(putProduct, {
+      topic: "",
+      key: "k",
+      value: "v",
+      isTxOutboxEvent: true,
+    });
+    const result = await sut.get(putProduct.sku);
+    expect(result).toEqual(putProduct);
+    const results = await table.scan();
+    expect(results.records.length).toEqual(2);
+    await sut.delete(putProduct.sku, {
+      topic: "",
+      key: "k",
+      value: "v",
+      isTxOutboxEvent: true,
+    });
+    const results2 = await table.scan();
+    expect(results2.records.length).toEqual(2);
+    const result2 = await sut.get(putProduct.sku);
+    expect(result2).toBeUndefined();
+    const event1 = results2.records[0];
+    expect(event1).toBeDefined();
+    expect(event1.hk).toEqual(`EVENT#${putProduct.sku}`);
+    const event2 = results2.records[1];
+    expect(event2).toBeDefined();
+    expect(event2.hk).toEqual(`EVENT#${putProduct.sku}`);
+  });
 });

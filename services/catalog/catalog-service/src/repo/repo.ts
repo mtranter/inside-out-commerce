@@ -3,7 +3,6 @@ import { DynamoObject, tableBuilder } from "funamots";
 import { TxOutboxMessage } from "dynamodb-kafka-outbox/dist/tx-outbox";
 import { Product } from "./../models";
 import { attributeNotExists } from "funamots/dist/lib/conditions";
-import type { ProductRepo as IProductRepo } from "./../api/handlers";
 
 type EventDto = {
   hk: string;
@@ -38,13 +37,31 @@ export const buildTable = (tableName: string, client?: DynamoDB) =>
     .withGlobalIndex("gsi3", "sk", "hk")
     .build({ client: client ?? new DynamoDB({}) });
 
+export type ProductRepo = {
+  get: (sku: string) => Promise<Product | undefined>;
+  put: (product: Product, event: TxOutboxMessage) => Promise<Product>;
+  delete: (sku: string, event: TxOutboxMessage) => Promise<void>;
+  listProducts: (args?: {
+    nextToken?: string;
+    pageSize?: number;
+  }) => Promise<{ products: Product[]; nextToken?: string }>;
+  listProductByCategory: (
+    categoryId: string,
+    args?: { nextToken?: string; pageSize?: number }
+  ) => Promise<{ products: Product[]; nextToken?: string }>;
+  listProductBySubCategory: (
+    subCategoryId: string,
+    args?: { nextToken?: string; pageSize?: number }
+  ) => Promise<{ products: Product[]; nextToken?: string }>;
+};
+
 export const ProductRepo = ({
   tableName,
   client,
 }: {
   tableName: string;
   client?: DynamoDB;
-}): IProductRepo => {
+}): ProductRepo => {
   const productsTable = buildTable(tableName, client);
   return {
     get: async (sku: string) => {
@@ -55,11 +72,16 @@ export const ProductRepo = ({
       return product?.data;
     },
     listProducts: async (args) => {
-      const startKey = args?.nextToken ? decodeBase64Object(args?.nextToken) : undefined;
-      const result = await productsTable.indexes.gsi3.query<ProductDto>("#PRODUCT#", {
-        startKey,
-        pageSize: args?.pageSize ?? 20,
-      });
+      const startKey = args?.nextToken
+        ? decodeBase64Object(args?.nextToken)
+        : undefined;
+      const result = await productsTable.indexes.gsi3.query<ProductDto>(
+        "#PRODUCT#",
+        {
+          startKey,
+          pageSize: args?.pageSize ?? 20,
+        }
+      );
       return {
         products: result.records.map((i) => i.data),
         nextToken: result.nextStartKey
@@ -91,8 +113,20 @@ export const ProductRepo = ({
       ]);
       return product;
     },
+    delete: async (sku: string, event: TxOutboxMessage) => {
+      await productsTable.transactWrite({
+        deletes: [{ item: { hk: `PRODUCT#${sku}`, sk: "#PRODUCT#" } }],
+        puts: [
+          {
+            item: { hk: `EVENT#${sku}`, sk: `#EVENT#${Date.now()}`, ...event },
+          },
+        ],
+      });
+    },
     listProductByCategory: async (categoryId, args) => {
-      const startKey = args?.nextToken ? decodeBase64Object(args?.nextToken) : undefined;
+      const startKey = args?.nextToken
+        ? decodeBase64Object(args?.nextToken)
+        : undefined;
       const result = await productsTable.indexes.gsi1.query<ProductDto>(
         categoryId,
         {
@@ -108,7 +142,9 @@ export const ProductRepo = ({
       };
     },
     listProductBySubCategory: async (subCategoryId, args) => {
-      const startKey = args?.nextToken ? decodeBase64Object(args?.nextToken) : undefined;
+      const startKey = args?.nextToken
+        ? decodeBase64Object(args?.nextToken)
+        : undefined;
       const result = await productsTable.indexes.gsi2.query<ProductDto>(
         subCategoryId,
         {

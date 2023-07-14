@@ -1,10 +1,12 @@
 import { Ok, Created, NotFound, Accepted } from "@ezapi/router-core";
 import { v4 as uuidv4 } from "uuid";
 import { RouteHandlers } from "../routes";
-import { ProductRepo } from ".";
 import { SQS } from "@aws-sdk/client-sqs";
-import { CatalogService, CreateProductRequest } from "../../domain/catalog-service";
-import { z } from "zod";
+import {
+  CatalogService,
+  CreateProductRequest,
+} from "../../domain/catalog-service";
+import { ProductRepo } from "../../repo";
 
 export const handlers = (
   repo: ProductRepo,
@@ -21,14 +23,25 @@ export const handlers = (
       await service.createProduct(req.safeBody);
       return Created(req.safeBody, `/products/${req.safeBody.sku}`);
     },
-    // updateProduct: async (req) => {
-    //   await service.updateProduct(req.pathParams.sku, req.safeBody);
-    //   return Ok(req.safeBody);
-    // },
-    // deleteProduct: async (req) => {
-    //   await service.deleteProduct(req.pathParams.sku);
-    //   return Ok(req.);
-    // },
+    updateProduct: async (req) => {
+      const response = await service.updateProduct(
+        req.pathParams.sku,
+        req.safeBody
+      );
+      if (response === true) {
+        return Ok(req.safeBody);
+      } else {
+        return NotFound(`Product with sku ${req.pathParams.sku} not found`);
+      }
+    },
+    deleteProduct: async (req) => {
+      const response = await service.deleteProduct(req.pathParams.sku);
+      if (response === true) {
+        return Ok({success: true});
+      } else {
+        return NotFound(`Product with sku ${req.pathParams.sku} not found`);
+      }
+    },
     batchCreateProduct: async (req) => {
       const batchesOf10 = req.safeBody.reduce(
         (acc, product) => {

@@ -11,6 +11,7 @@ import {
   STSClient,
 } from "@aws-sdk/client-sts";
 import { AwsClient, FetchOptions } from "aws4fetch";
+import { useCallback } from "react";
 
 const getAwsWebCredentials = async (idToken: string) => {
   const cognitoClient = new CognitoIdentityClient({
@@ -52,7 +53,7 @@ let credentials: Credentials = {
 export const useIamFetch = (): { fetch: FetchFn } => {
   const { getIdTokenClaims } = useAuth0();
   return {
-    fetch: async (url: RequestInfo, options?: FetchOptions) => {
+    fetch: useCallback(async (url: RequestInfo, options?: FetchOptions) => {
       if (credentials.Expiration! < new Date()) {
         credentials = await getAwsWebCredentials(
           (await getIdTokenClaims())!.__raw!
@@ -64,6 +65,6 @@ export const useIamFetch = (): { fetch: FetchFn } => {
         sessionToken: credentials.SessionToken!,
       });
       return aws.fetch(url, options);
-    },
+    }, [getIdTokenClaims]),
   };
 };

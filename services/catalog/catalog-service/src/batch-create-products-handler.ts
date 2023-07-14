@@ -1,8 +1,7 @@
 import { SQSHandler } from "aws-lambda";
-import { CreateProductRequest } from "./api/routes/routes";
 import { config } from "./config";
 import { z } from "zod";
-import { CatalogService } from "./domain/catalog-service";
+import { CatalogService, CreateProductRequest } from "./domain/catalog-service";
 import { TxOutboxMessageFactory } from "dynamodb-kafka-outbox";
 import { SchemaRegistry } from "@kafkajs/confluent-schema-registry";
 import { ProductRepo } from "./repo";
@@ -23,7 +22,7 @@ export const _handler =
     log.info("SQS Handler", event);
     const failureIds: string[] = [];
     const products = event.Records.map(
-      (r) => JSON.parse(r.body) as z.infer<typeof CreateProductRequest>
+      (r) => JSON.parse(r.body) as CreateProductRequest
     );
     for (const product of products) {
       try {
