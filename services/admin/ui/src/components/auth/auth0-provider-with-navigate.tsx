@@ -14,18 +14,17 @@ export const Auth0ProviderWithNavigate: React.FC<Auth0ProviderWithNavigateProps>
     navigate(appState?.returnTo || window.location.pathname);
   };
 
-  console.log(import.meta.env.VITE_USER_POOL_LOGIN_ID)
   return (
     <Auth0Provider
-      domain="https://inside-out-commerce-prod.auth.ap-southeast-2.amazoncognito.com"
-      clientId="378ri5r4qmg0d44c9d5k58rb7h"
+      domain={import.meta.env.VITE_AUTH_DOMAIN}
+      clientId={import.meta.env.VITE_USER_POOL_CLIENT_ID}
       issuer={`https://${import.meta.env.VITE_USER_POOL_LOGIN_ID}`}
       useRefreshTokens={true}
       cacheLocation={"localstorage"}
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       onRedirectCallback={(a,u) => onRedirectCallback(a!, u)}
       authorizationParams={{
-        audience: "378ri5r4qmg0d44c9d5k58rb7h",
+        audience: import.meta.env.VITE_USER_POOL_CLIENT_ID,
         redirect_uri: window.location.origin,
         scope:
           "openid profile email https://catalog.inside-out-commerce.com/api.execute",

@@ -1,6 +1,7 @@
 import {
   AspectRatio,
   Box,
+  Button,
   Image,
   Skeleton,
   Stack,
@@ -8,10 +9,10 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-// import { Rating } from "./Rating";
-// import { FavouriteButton } from "./favourite-button";
 import { PriceTag } from "./price-tag";
 import { z } from "zod";
+import { DeleteButton } from "./delete-button";
+import { useState } from "react";
 
 export const ProductSchema = z.object({
   sku: z.string(),
@@ -29,9 +30,11 @@ export type ProductDetails = z.infer<typeof ProductSchema>;
 type Props = {
   product: ProductDetails;
   rootProps?: StackProps;
+  onDelete: () => void;
 };
 
 export const ProductCard = (props: Props) => {
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const { product, rootProps } = props;
   const { name, rrp, description, shortDescription } = product;
   const imageUrl = `/images/products/${product.categoryId}/${product.subCategory
@@ -42,6 +45,7 @@ export const ProductCard = (props: Props) => {
     (event: React.FocusEvent<HTMLParagraphElement>) => {
       product[property] = event.currentTarget.innerText as never;
     };
+
 
   return (
     <Stack
@@ -62,18 +66,31 @@ export const ProductCard = (props: Props) => {
             borderRadius={{ base: "md", md: "xl" }}
           />
         </AspectRatio>
-        {/* <FavouriteButton
+        <DeleteButton
           position="absolute"
           top="4"
           right="4"
           aria-label={`Add ${name} to your favourites`}
-        /> */}
+          onClick={() => setShowDeleteConfirm(true)}
+        />
       </Box>
-      <Stack>
-        <Stack spacing="1">
+      <Stack position={"relative"}>
+        <Stack
+          justifyContent="center"
+          spacing="5"
+          position={"absolute"}
+          height={"100%"}
+          width={"100%"}
+          visibility={showDeleteConfirm ? "visible" : "hidden"}
+        >
+          <Button bgColor={"brand.500"} color="white" onClick={() => props.onDelete()}>Delete</Button>
+          <Button onClick={() => setShowDeleteConfirm(false)}>Cancel</Button>
+
+        </Stack>
+        <Stack spacing="1" visibility={showDeleteConfirm ? "hidden" : "visible"}>
           <Text
-            contentEditable={true}
-            suppressContentEditableWarning={true}
+            // contentEditable={true}
+            // suppressContentEditableWarning={true}
             onBlur={updatedHandler("name")}
             fontSize="lg"
             fontWeight="semibold"
@@ -82,8 +99,8 @@ export const ProductCard = (props: Props) => {
             {name}
           </Text>
           <Text
-            suppressContentEditableWarning={true}
-            contentEditable={true}
+            // suppressContentEditableWarning={true}
+            // contentEditable={true}
             onBlur={updatedHandler("shortDescription")}
             fontWeight="medium"
             color={useColorModeValue("gray.600", "gray.200")}
@@ -93,8 +110,8 @@ export const ProductCard = (props: Props) => {
           <hr />
           <Text
             marginTop={1}
-            contentEditable={true}
-            suppressContentEditableWarning={true}
+            // contentEditable={true}
+            // suppressContentEditableWarning={true}
             onBlur={updatedHandler("description")}
             fontWeight="medium"
             color={useColorModeValue("gray.700", "gray.400")}

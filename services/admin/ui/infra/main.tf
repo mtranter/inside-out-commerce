@@ -108,3 +108,8 @@ resource "aws_iam_role_policy" "web_identity_policy" {
 }
 EOF
 }
+
+
+data "aws_ssm_parameter" "auth_endpoint" {
+  name = "/${var.project_name}/${var.environment}/cognito/auth_endpoint"
+}

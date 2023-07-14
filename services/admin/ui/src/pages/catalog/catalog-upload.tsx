@@ -65,6 +65,10 @@ export const CatalogUploadPage = () => {
     const file = e.target!.files![0];
     handleFile(file);
   };
+
+  const removeProduct = (sku: string) => {
+    setProducts(products.filter((p) => p.sku !== sku));
+  };
   return (
     <div>
       {error && (
@@ -230,7 +234,7 @@ export const CatalogUploadPage = () => {
         >
           <ProductGrid>
             {products.map((product) => (
-              <ProductCard key={product.sku} product={product} />
+              <ProductCard key={product.sku} product={product} onDelete={() => removeProduct(product.sku)} />
             ))}
           </ProductGrid>
         </Box>

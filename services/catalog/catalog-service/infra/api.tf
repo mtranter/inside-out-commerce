@@ -140,3 +140,9 @@ resource "aws_ssm_parameter" "api_execution_arn" {
   type  = "String"
   value = aws_api_gateway_rest_api.this.execution_arn
 }
+
+resource "aws_ssm_parameter" "api_scope_id" {
+  name  = "/${var.project_name}/${var.environment}/${var.service_name}/api_scope_id"
+  type  = "String"
+  value = aws_cognito_resource_server.api.scope_identifiers[0]
+}

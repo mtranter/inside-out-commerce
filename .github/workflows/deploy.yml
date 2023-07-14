@@ -33,11 +33,11 @@ jobs:
         with:
           node-version: 18
           cache: pnpm
-          registry-url: 'https://registry.npmjs.org'
+          registry-url: "https://registry.npmjs.org"
       - uses: actions/setup-java@v3
         with:
-          distribution: 'adopt'
-          java-version: '17'
+          distribution: "adopt"
+          java-version: "17"
           java-package: jre
       - run: pnpm i --frozen-lockfile
       - run: pnpm --filter='!./services/admin/ui' build
@@ -93,7 +93,7 @@ jobs:
         with:
           node-version: 18
           cache: pnpm
-          registry-url: 'https://registry.npmjs.org'
+          registry-url: "https://registry.npmjs.org"
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
@@ -137,19 +137,15 @@ jobs:
         with:
           node-version: 18
           cache: pnpm
-          registry-url: 'https://registry.npmjs.org'
+          registry-url: "https://registry.npmjs.org"
       - run: pnpm install --frozen-lockfile
       - run: |
           export VITE_IDENTITY_POOL_ID="$(echo '${{ env.TF_OUTPUT }}' | jq -r '.identity_pool_id.value')"
           export VITE_USER_POOL_ID="$(echo '${{ env.TF_OUTPUT }}' | jq -r '.user_pool_id.value')"
           export VITE_ADMIN_IAM_ROLE="$(echo '${{ env.TF_OUTPUT }}' | jq -r '.api_role_arn.value')"
           export VITE_CATALOG_API_ROOT="$(echo '${{ env.TF_OUTPUT }}' | jq -r '.catalog_api_url.value')"
-          echo "Debugging env vars"
-          echo $VITE_IDENTITY_POOL_ID
-          echo $VITE_USER_POOL_ID
-          echo $VITE_ADMIN_IAM_ROLE
-          echo $VITE_CATALOG_API_ROOT
-          echo "Building admin ui"
+          export VITE_USER_POOL_CLIENT_ID="$(echo '${{ env.TF_OUTPUT }}' | jq -r '.user_pool_client_id.value')"
+          export VITE_AUTH_DOMAIN="$(echo '${{ env.TF_OUTPUT }}' | jq -r '.auth_url.value')"
           pnpm build
       - run: cd dist && aws s3 sync ./ s3://inside-out-commerce-prod-catalog-service-origin
         name: Deploy site
