@@ -1,6 +1,6 @@
 import { TxOutboxMessage } from "dynamodb-kafka-outbox";
-import { Product } from "../../../src/models";
-import { ProductRepo } from "../../../src/repo";
+import { Product } from "../../src/models";
+import { ProductRepo } from "../../src/repo";
 
 
 export type MockRepo = ProductRepo & {

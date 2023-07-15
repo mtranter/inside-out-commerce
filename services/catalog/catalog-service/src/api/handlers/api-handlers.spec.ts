@@ -1,4 +1,4 @@
-import { MockRepo, mockRepo } from "../../../test/api/handler/repo";
+import { MockRepo, mockRepo } from "../../../test/repo/repo";
 import { handlers } from "./api-handlers";
 import { RouteHandlers } from "../routes/routes";
 import { buildTestProductRequest } from "./../../../test/models/utils";

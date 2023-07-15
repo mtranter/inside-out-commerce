@@ -2,11 +2,11 @@ import { Ok, Created, NotFound, Accepted } from "@ezapi/router-core";
 import { v4 as uuidv4 } from "uuid";
 import { RouteHandlers } from "../routes";
 import { SQS } from "@aws-sdk/client-sqs";
-import {
-  CatalogService,
-  CreateProductRequest,
-} from "../../domain/catalog-service";
+import { CatalogService, CreateProductRequest } from "../../domain";
 import { ProductRepo } from "../../repo";
+
+const productNotFoundResponse = (sku: string) =>
+  NotFound(`Product with sku ${sku} not found`);
 
 export const handlers = (
   repo: ProductRepo,
@@ -31,15 +31,15 @@ export const handlers = (
       if (response === true) {
         return Ok(req.safeBody);
       } else {
-        return NotFound(`Product with sku ${req.pathParams.sku} not found`);
+        return productNotFoundResponse(req.pathParams.sku);
       }
     },
     deleteProduct: async (req) => {
       const response = await service.deleteProduct(req.pathParams.sku);
       if (response === true) {
-        return Ok({success: true});
+        return Ok({ success: true });
       } else {
-        return NotFound(`Product with sku ${req.pathParams.sku} not found`);
+        return productNotFoundResponse(req.pathParams.sku);
       }
     },
     batchCreateProduct: async (req) => {
@@ -71,7 +71,7 @@ export const handlers = (
     getProduct: async (req) => {
       const product = await repo.get(req.pathParams.sku);
       if (!product) {
-        return NotFound(`Product with sku ${req.pathParams.sku} not found`);
+        return productNotFoundResponse(req.pathParams.sku);
       }
       return Ok(product);
     },

@@ -34,13 +34,16 @@ export const CatalogUploadPage = () => {
   const [products, setProducts] = useState<ProductDetails[]>([]);
   const [error, setError] = useState<string | null>(null);
   const uploadProducts = async () => {
-    const res = await fetch(`${import.meta.env.VITE_CATALOG_API_ROOT}/catalog/batch`, {
-      method: "POST",
-      body: JSON.stringify(products),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const res = await fetch(
+      `${import.meta.env.VITE_CATALOG_API_ROOT}/catalog/batch`,
+      {
+        method: "POST",
+        body: JSON.stringify(products),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     if (res.ok) {
       setProducts([]);
     } else {
@@ -84,9 +87,7 @@ export const CatalogUploadPage = () => {
           <Box>
             <AlertIcon />
             <AlertTitle>Error</AlertTitle>
-            <AlertDescription>
-              {error}
-            </AlertDescription>
+            <AlertDescription>{error}</AlertDescription>
           </Box>
           <CloseButton
             alignSelf="flex-start"
@@ -100,7 +101,9 @@ export const CatalogUploadPage = () => {
       )}
       {products.length > 0 ? (
         <Flex maxW={"200px"} m="auto" justifyContent="space-between">
-          <Button colorScheme="brand" onClick={() => uploadProducts()}>Save</Button>
+          <Button colorScheme="brand" onClick={() => uploadProducts()}>
+            Save
+          </Button>
           <Button
             colorScheme="brand"
             variant="outline"
@@ -136,6 +139,7 @@ export const CatalogUploadPage = () => {
             backgroundColor={isHovered ? "white" : "gray.50"}
             boxShadow={isHovered ? "dark-lg" : "none"}
             rounded="md"
+            cursor={"pointer"}
             onClick={() => uploadRef.current?.click()}
             onDragOver={(e) => {
               e.preventDefault();
@@ -234,9 +238,25 @@ export const CatalogUploadPage = () => {
         >
           <ProductGrid>
             {products.map((product) => (
-              <ProductCard key={product.sku} product={product} onDelete={() => removeProduct(product.sku)} />
+              <ProductCard
+                key={product.sku}
+                product={product}
+                onDelete={() => removeProduct(product.sku)}
+              />
             ))}
           </ProductGrid>
+          <Flex maxW={"200px"} m="auto" mt="10" justifyContent="space-between">
+            <Button colorScheme="brand" onClick={() => uploadProducts()}>
+              Save
+            </Button>
+            <Button
+              colorScheme="brand"
+              variant="outline"
+              onClick={() => setProducts([])}
+            >
+              Cancel
+            </Button>
+          </Flex>
         </Box>
       ) : null}
     </div>
