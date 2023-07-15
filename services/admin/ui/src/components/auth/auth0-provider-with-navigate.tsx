@@ -9,8 +9,7 @@ interface Auth0ProviderWithNavigateProps {
 export const Auth0ProviderWithNavigate: React.FC<Auth0ProviderWithNavigateProps> = ({ children }) => {
   const navigate = useNavigate();
 
-  const onRedirectCallback = (appState: { returnTo?: string }, user?: User) => {
-    console.log("onRedirectCallback", appState, user);
+  const onRedirectCallback = (appState: { returnTo?: string }) => {
     navigate(appState?.returnTo || window.location.pathname);
   };
 

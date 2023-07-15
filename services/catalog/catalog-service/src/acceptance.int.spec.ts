@@ -7,7 +7,7 @@ import { KafkaPayload } from "@inside-out-commerce/models";
 import waitForExpect from "wait-for-expect";
 import { createSignedFetcher } from "aws-sigv4-fetch";
 import { v4 as uuid } from "uuid"
-import { CreateProductRequestSchema } from "./domain/catalog-service";
+import { CreateProductRequestSchema } from "./domain";
 
 jest.setTimeout(10000);
 const ssm = new SSM({
