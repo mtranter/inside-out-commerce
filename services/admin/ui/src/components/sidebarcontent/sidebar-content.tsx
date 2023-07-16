@@ -7,8 +7,6 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import { AiFillGift } from "react-icons/ai";
-import { BsGearFill } from "react-icons/bs";
 import { GrCatalog } from "react-icons/gr";
 import { MdHome, MdKeyboardArrowRight } from "react-icons/md";
 import { NavItem } from "./nav-item";

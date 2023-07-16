@@ -1,4 +1,4 @@
-import { Auth0Provider, User } from "@auth0/auth0-react";
+import { Auth0Provider } from "@auth0/auth0-react";
 import React, { ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -21,7 +21,7 @@ export const Auth0ProviderWithNavigate: React.FC<Auth0ProviderWithNavigateProps>
       useRefreshTokens={true}
       cacheLocation={"localstorage"}
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      onRedirectCallback={(a,u) => onRedirectCallback(a!, u)}
+      onRedirectCallback={(a) => onRedirectCallback(a!)}
       authorizationParams={{
         audience: import.meta.env.VITE_USER_POOL_CLIENT_ID,
         redirect_uri: window.location.origin,

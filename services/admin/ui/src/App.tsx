@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { FaBell } from "react-icons/fa";
-import { FiMenu, FiSearch } from "react-icons/fi";
+import { FiMenu } from "react-icons/fi";
 import {
   Avatar,
   Box,
@@ -10,9 +10,7 @@ import {
   Flex,
   Icon,
   IconButton,
-  Input,
   InputGroup,
-  InputLeftElement,
   useDisclosure,
 } from "@chakra-ui/react";
 import { Outlet } from "react-router-dom";
