@@ -10,7 +10,7 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@ezapi/router-core": "^2.2.1-beta.0"
+    "@ezapi/router-core": "^2.2.3-beta.0"
   },
   "types": "./dist/index.d.ts",
   "devDependencies": {},

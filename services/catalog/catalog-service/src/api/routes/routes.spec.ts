@@ -7,7 +7,7 @@ describe("routes", () => {
     createProduct: () => Ok("Ok"),
     batchCreateProduct: () => Ok("Ok"),
     listProducts: () => Ok("Ok"),
-    updateProduct: () => Ok("Ok"),    
+    updateProduct: () => Ok("Ok"),
     deleteProduct: () => Ok("Ok"),
     getProduct: () => Ok("Ok"),
     listProductsByCategory: () => Ok("Ok"),
@@ -25,5 +25,27 @@ describe("routes", () => {
       query: {},
     });
     expect(result?.statusCode).toEqual(200);
+  });
+  it("pageSize should be an int", async () => {
+    const sut = routes().build({
+      ...mockHandlers,
+
+      listProducts: async (req) => {
+        return Ok(JSON.stringify(req.queryParams.pageSize));
+      },
+    });
+
+    const result = await sut.run({
+      method: "GET",
+      url: "/",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      query: {
+        pageSize: "1"
+      },
+    });
+    expect(result?.statusCode).toEqual(200);
+    expect(JSON.parse(result?.body!.toString()!)).toEqual("1");
   });
 });
