@@ -24,6 +24,24 @@ resource "aws_iam_role_policy_attachment" "allow_dynamodb" {
   policy_arn = aws_iam_policy.allow_dynamodb.arn
 }
 
+data "aws_iam_policy_document" "allow_api" {
+  statement {
+    actions = [
+      "execute-api:Invoke"
+    ]
+
+    resources = [
+      aws_api_gateway_rest_api.this.execution_arn,
+      "${aws_api_gateway_rest_api.this.execution_arn}/*"
+    ]
+  }
+}
+
+resource "aws_iam_policy" "allow_api" {
+  name   = "${var.project_name}-${var.environment}-${var.service_name}-allow-api"
+  policy = data.aws_iam_policy_document.allow_api.json
+}
+
 resource "aws_iam_role_policy" "api_allow_sqs" {
   role   = module.api_function.execution_role.id
   policy = <<EOF

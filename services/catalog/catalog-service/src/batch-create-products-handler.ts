@@ -12,13 +12,14 @@ export const _handler =
       product: JSON.parse(r.body) as CreateProductRequest,
       msgId: r.messageId,
     }));
-    for (const { product, msgId } of products) {
-      try {
-        await svc.createProduct(product);
-      } catch (e) {
-        failureIds.push(msgId);
-      }
-    }
+    await Promise.all(
+      products.map(({ product, msgId }) => {
+        return svc.createProduct(product).catch((e) => {
+          log.error("Error creating product", e);
+          failureIds.push(msgId);
+        });
+      })
+    );
     return {
       batchItemFailures: failureIds.map((id) => ({
         itemIdentifier: id,

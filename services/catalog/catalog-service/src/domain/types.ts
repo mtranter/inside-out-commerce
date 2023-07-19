@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { CatalogService } from "./catalog-service";
 
 export type Config = {
   keySchemaId: number;

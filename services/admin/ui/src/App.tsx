@@ -21,7 +21,7 @@ const App = () => {
   const { isLoading, isAuthenticated, user } = useAuth0();
   const sidebar = useDisclosure();
 
-  const App = () => (
+  const Shell = () => (
     <Box
       as="section"
       bg="gray.50"
@@ -111,7 +111,7 @@ const App = () => {
 
   const Loading = () => <div>Loading...</div>;
 
-  return isLoading ? <Loading /> : isAuthenticated ? <App /> : <Login />;
+  return isLoading ? <Loading /> : isAuthenticated ? <Shell /> : <Login />;
 };
 
 export default App;

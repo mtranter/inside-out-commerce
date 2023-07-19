@@ -7,20 +7,6 @@ resource "aws_iam_user" "test_api_user" {
   name = "${var.service_name}-test-user-${var.environment}"
 }
 
-
-data "aws_iam_policy_document" "allow_api" {
-  statement {
-    actions = [
-      "execute-api:Invoke"
-    ]
-
-    resources = [
-      aws_api_gateway_rest_api.this.execution_arn,
-      "${aws_api_gateway_rest_api.this.execution_arn}/*"
-    ]
-  }
-}
-
 resource "aws_iam_access_key" "test_credentials" {
   user    = aws_iam_user.test_api_user.name
 }
